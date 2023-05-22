@@ -42,6 +42,7 @@
             this.btnValider = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblNomEpreuve = new System.Windows.Forms.Label();
+            this.btnImporterOrdreDePassage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -53,6 +54,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -66,6 +68,7 @@
             // 
             // splitContainer2
             // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
@@ -78,6 +81,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnImporterOrdreDePassage);
             this.splitContainer2.Panel2.Controls.Add(this.btnDesinscrire);
             this.splitContainer2.Panel2.Controls.Add(this.dateTimePicker);
             this.splitContainer2.Panel2.Controls.Add(this.button3);
@@ -89,7 +93,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.button1);
             this.splitContainer2.Panel2.Controls.Add(this.lblNomEpreuve);
             this.splitContainer2.Size = new System.Drawing.Size(713, 685);
-            this.splitContainer2.SplitterDistance = 283;
+            this.splitContainer2.SplitterDistance = 184;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
@@ -193,12 +197,13 @@
             // 
             this.btnValider.AutoSize = true;
             this.btnValider.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnValider.Enabled = false;
             this.btnValider.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnValider.Location = new System.Drawing.Point(269, 280);
+            this.btnValider.Location = new System.Drawing.Point(223, 390);
             this.btnValider.Name = "btnValider";
-            this.btnValider.Size = new System.Drawing.Size(117, 47);
+            this.btnValider.Size = new System.Drawing.Size(234, 47);
             this.btnValider.TabIndex = 16;
-            this.btnValider.Text = "Valider";
+            this.btnValider.Text = "Lancer un round";
             this.btnValider.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -225,13 +230,25 @@
             this.lblNomEpreuve.TabIndex = 12;
             this.lblNomEpreuve.Text = "Nom de l\'epreuve :";
             // 
-            // Main
+            // btnImporterOrdreDePassage
+            // 
+            this.btnImporterOrdreDePassage.AutoSize = true;
+            this.btnImporterOrdreDePassage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImporterOrdreDePassage.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.btnImporterOrdreDePassage.Location = new System.Drawing.Point(147, 308);
+            this.btnImporterOrdreDePassage.Name = "btnImporterOrdreDePassage";
+            this.btnImporterOrdreDePassage.Size = new System.Drawing.Size(387, 47);
+            this.btnImporterOrdreDePassage.TabIndex = 22;
+            this.btnImporterOrdreDePassage.Text = "Importer l\'ordre de passage";
+            this.btnImporterOrdreDePassage.UseVisualStyleBackColor = true;
+            // 
+            // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 685);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "Main";
+            this.Name = "Lobby";
             this.Text = "Main";
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -262,5 +279,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblNomEpreuve;
         private System.Windows.Forms.Button btnSupprEquipe;
+        private System.Windows.Forms.Button btnImporterOrdreDePassage;
     }
 }

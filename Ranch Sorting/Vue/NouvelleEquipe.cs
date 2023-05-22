@@ -44,7 +44,7 @@ namespace Ranch_Sorting.Vue
 
         private void btnValider_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
