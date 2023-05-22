@@ -52,5 +52,21 @@ namespace Ranch_Sorting.Vue
             NouvelleEquipe nouvelleEquipe = new NouvelleEquipe();
             nouvelleEquipe.Show();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnImporterOrdreDePassage_Click(object sender, EventArgs e)
+        {
+            btnLancerUnRound.Enabled = true;    
+        }
+
+        private void btnLancerUnRound_Click(object sender, EventArgs e)
+        {
+            Round round = new Round();
+            round.Show();   
+        }
     }
 }
