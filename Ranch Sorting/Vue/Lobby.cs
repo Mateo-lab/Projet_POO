@@ -49,7 +49,8 @@ namespace Ranch_Sorting.Vue
 
         private void btnAjouterEquipe_Click(object sender, EventArgs e)
         {
-
+            NouvelleEquipe nouvelleEquipe = new NouvelleEquipe();
+            nouvelleEquipe.Show();
         }
     }
 }

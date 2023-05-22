@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 743);
+            this.ClientSize = new System.Drawing.Size(932, 490);
             this.Name = "Round";
             this.Text = "Round";
             this.ResumeLayout(false);
