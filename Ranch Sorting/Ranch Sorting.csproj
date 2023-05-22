@@ -89,6 +89,9 @@
     <EmbeddedResource Include="Vue\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vue\NouvelleEquipe.resx">
+      <DependentUpon>NouvelleEquipe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vue\Round.resx">
       <DependentUpon>Round.cs</DependentUpon>
     </EmbeddedResource>
