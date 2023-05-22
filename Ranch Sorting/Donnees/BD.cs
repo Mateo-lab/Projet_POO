@@ -11,8 +11,6 @@ using System.ComponentModel;
 
 namespace Ranch_Sorting_App.Donnees
 {
-
-
     public class BD
     {
         private OleDbConnection _oleConnection;

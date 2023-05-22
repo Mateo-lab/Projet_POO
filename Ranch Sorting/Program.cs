@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ranch_Sorting.Controleur;
+
 
 
 namespace Ranch_Sorting
@@ -18,6 +20,9 @@ namespace Ranch_Sorting
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Controle ctrl = new Controle(); // création du contrôleur
+
             Application.Run(new Lobby());
         }
     }
