@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Ranch_Sorting.Vue
 {
-    public partial class Main : Form
+    public partial class Lobby : Form
     {
-        public Main()
+        public Lobby()
         {
             InitializeComponent();
         }
@@ -43,6 +43,11 @@ namespace Ranch_Sorting.Vue
         }
 
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void btnAjouterEquipe_Click(object sender, EventArgs e)
         {
 
         }

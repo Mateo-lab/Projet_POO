@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Ranch_Sorting.Vue;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//Ma bite
 
 namespace Ranch_Sorting
 {
@@ -18,7 +18,7 @@ namespace Ranch_Sorting
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Lobby());
         }
     }
 }

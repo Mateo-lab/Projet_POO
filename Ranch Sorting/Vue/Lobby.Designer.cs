@@ -1,6 +1,6 @@
 ﻿namespace Ranch_Sorting.Vue
 {
-    partial class Main
+    partial class Lobby
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnSupprEquipe = new System.Windows.Forms.Button();
             this.btnAjouterEquipe = new System.Windows.Forms.Button();
             this.btnDesinscrire = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -41,7 +42,6 @@
             this.btnValider = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblNomEpreuve = new System.Windows.Forms.Label();
-            this.btnSupprEquipe = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -93,6 +93,18 @@
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
+            // btnSupprEquipe
+            // 
+            this.btnSupprEquipe.AutoSize = true;
+            this.btnSupprEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSupprEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnSupprEquipe.Location = new System.Drawing.Point(412, 54);
+            this.btnSupprEquipe.Name = "btnSupprEquipe";
+            this.btnSupprEquipe.Size = new System.Drawing.Size(231, 38);
+            this.btnSupprEquipe.TabIndex = 8;
+            this.btnSupprEquipe.Text = "Supprimer une equipe";
+            this.btnSupprEquipe.UseVisualStyleBackColor = true;
+            // 
             // btnAjouterEquipe
             // 
             this.btnAjouterEquipe.AutoSize = true;
@@ -104,6 +116,7 @@
             this.btnAjouterEquipe.TabIndex = 7;
             this.btnAjouterEquipe.Text = "Ajouter une equipe";
             this.btnAjouterEquipe.UseVisualStyleBackColor = true;
+            this.btnAjouterEquipe.Click += new System.EventHandler(this.btnAjouterEquipe_Click);
             // 
             // btnDesinscrire
             // 
@@ -211,18 +224,6 @@
             this.lblNomEpreuve.Size = new System.Drawing.Size(201, 28);
             this.lblNomEpreuve.TabIndex = 12;
             this.lblNomEpreuve.Text = "Nom de l\'epreuve :";
-            // 
-            // btnSupprEquipe
-            // 
-            this.btnSupprEquipe.AutoSize = true;
-            this.btnSupprEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSupprEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnSupprEquipe.Location = new System.Drawing.Point(412, 54);
-            this.btnSupprEquipe.Name = "btnSupprEquipe";
-            this.btnSupprEquipe.Size = new System.Drawing.Size(231, 38);
-            this.btnSupprEquipe.TabIndex = 8;
-            this.btnSupprEquipe.Text = "Supprimer une equipe";
-            this.btnSupprEquipe.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
