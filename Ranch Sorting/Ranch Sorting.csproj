@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -78,6 +80,12 @@
     <Compile Include="Vue\Round.Designer.cs">
       <DependentUpon>Round.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vue\SupprimerUneEquipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vue\SupprimerUneEquipe.Designer.cs">
+      <DependentUpon>SupprimerUneEquipe.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -95,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vue\Round.resx">
       <DependentUpon>Round.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vue\SupprimerUneEquipe.resx">
+      <DependentUpon>SupprimerUneEquipe.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

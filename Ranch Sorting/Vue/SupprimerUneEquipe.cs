@@ -11,16 +11,19 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Ranch_Sorting.Vue
 {
-    public partial class NouvelleEquipe : Form
+    public partial class SupprimerUneEquipe : Form
     {
         Lobby parent;
-        public NouvelleEquipe(Lobby parent_)
+        public SupprimerUneEquipe(Lobby parent_)
         {
             InitializeComponent();
             parent = parent_;
         }
 
-        
+        private void SupprimerUneEquipe_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnQuitter_Click(object sender, EventArgs e)
         {
@@ -31,7 +34,7 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
-                parent.Controleur.AjouterEquipe(txtBoxNomEquipe.Text, txtBoxNomPremierCavalier.Text, txtBoxNomPremierCheval.Text, txtBoxNomDeuxiemeCavalier.Text, txtBoxNomDeuxiemeCheval.Text);
+                parent.Controleur.SupprimerEquipe(txtBoxEquipeASupprimer.Text);
                 parent.getData();
             }
             catch (Exception exc)
@@ -39,15 +42,12 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            DialogResult dr = MessageBox.Show("Voulez vous ajoutez une autre equipe ?", "Ajout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("Voulez vous supprimer un autre equipe ?", "Ajout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.No)
                 this.Close();
             else
             {
-                txtBoxNomPremierCheval.Clear();   
-                txtBoxNomPremierCavalier.Clear();
-                txtBoxNomDeuxiemeCheval.Clear();
-                txtBoxNomDeuxiemeCavalier.Clear();
+                txtBoxEquipeASupprimer.Clear();
             }
         }
     }

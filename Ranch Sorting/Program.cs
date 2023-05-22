@@ -22,8 +22,20 @@ namespace Ranch_Sorting
             Application.SetCompatibleTextRenderingDefault(false);
 
             Controle ctrl = new Controle(); // création du contrôleur
-
-            Application.Run(new Lobby());
+            Lobby fenetrePrincipale = new Lobby // création de la fenêtre principale
+            {
+                //Il faut que la fenêtre principale connaisse le contrôleur 
+                //Elle pourra le faire connaître aux autres vues
+                Controleur = ctrl // initialisation du contrôleur de la fenêtre principale
+            };
+            try
+            {
+                Application.Run(fenetrePrincipale);  // affichage de la fenêtre principale
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

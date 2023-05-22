@@ -61,7 +61,6 @@
             this.label2.Size = new System.Drawing.Size(264, 28);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nom du deuxieme cheval :";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -72,7 +71,6 @@
             this.label3.Size = new System.Drawing.Size(277, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "Nom du deuxieme cavalier :";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -93,7 +91,6 @@
             this.lblNomEquipe.Size = new System.Drawing.Size(284, 28);
             this.lblNomEquipe.TabIndex = 4;
             this.lblNomEquipe.Text = "Nom de la nouvelle equipe : ";
-            this.lblNomEquipe.Click += new System.EventHandler(this.lblNomEquipe_Click);
             // 
             // txtBoxNomPremierCavalier
             // 
