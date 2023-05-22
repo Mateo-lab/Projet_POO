@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranch Sorting", "Ranch Sorting\Ranch Sorting.csproj", "{DDE0708A-4618-4EA8-B377-F75F161AFDCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDE0708A-4618-4EA8-B377-F75F161AFDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE0708A-4618-4EA8-B377-F75F161AFDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE0708A-4618-4EA8-B377-F75F161AFDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE0708A-4618-4EA8-B377-F75F161AFDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63399D84-17AE-42A3-A89B-36A7251DD25C}
+	EndGlobalSection
+EndGlobal
