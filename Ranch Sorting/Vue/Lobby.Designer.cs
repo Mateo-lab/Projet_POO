@@ -1,6 +1,6 @@
 ﻿namespace Ranch_Sorting.Vue
 {
-    partial class Main
+    partial class Lobby
     {
         /// <summary>
         /// Required designer variable.
@@ -104,6 +104,7 @@
             this.btnAjouterEquipe.TabIndex = 7;
             this.btnAjouterEquipe.Text = "Ajouter une equipe";
             this.btnAjouterEquipe.UseVisualStyleBackColor = true;
+            this.btnAjouterEquipe.Click += new System.EventHandler(this.btnAjouterEquipe_Click);
             // 
             // btnDesinscrire
             // 

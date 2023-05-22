@@ -90,9 +90,9 @@
             this.lblNomEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomEquipe.Location = new System.Drawing.Point(298, 62);
             this.lblNomEquipe.Name = "lblNomEquipe";
-            this.lblNomEquipe.Size = new System.Drawing.Size(278, 28);
+            this.lblNomEquipe.Size = new System.Drawing.Size(284, 28);
             this.lblNomEquipe.TabIndex = 4;
-            this.lblNomEquipe.Text = "Non de la nouvelle equipe : ";
+            this.lblNomEquipe.Text = "Nom de la nouvelle equipe : ";
             this.lblNomEquipe.Click += new System.EventHandler(this.lblNomEquipe_Click);
             // 
             // txtBoxNomPremierCavalier
@@ -154,6 +154,7 @@
             this.btnQuitter.TabIndex = 11;
             this.btnQuitter.Text = "Quitter";
             this.btnQuitter.UseVisualStyleBackColor = true;
+            this.btnQuitter.Click += new System.EventHandler(this.btnQuitter_Click);
             // 
             // NouvelleEquipe
             // 

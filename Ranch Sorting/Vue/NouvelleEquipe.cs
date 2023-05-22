@@ -36,5 +36,10 @@ namespace Ranch_Sorting.Vue
         {
 
         }
+
+        private void btnQuitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
