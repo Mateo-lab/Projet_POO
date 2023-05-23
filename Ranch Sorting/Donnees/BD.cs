@@ -9,6 +9,7 @@ using System.Data;
 using System.IO;
 using System.ComponentModel;
 using Ranch_Sorting.Modeles;
+using Ranch_Sorting.Vue;
 
 namespace Ranch_Sorting_App.Donnees
 {
@@ -80,6 +81,45 @@ namespace Ranch_Sorting_App.Donnees
         public void SupprimerEquipe(string nomEquipe)
         {
             string req = "DELETE FROM Equipes WHERE [Nom équipe] = '" + nomEquipe + "'";
+            ExecuteNonQueryRequest(req);
+        }
+
+        
+        public List<Lieu> ObtienLieu()
+        {
+            List<Lieu> listeDesLieux = new List<Lieu>(); // Liste des lieux qui sera retournée par la méthode 
+            string req = "SELECT * FROM Lieux"; // Requete SQL pour obtenir les lieux
+            IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
+
+            while (reader.Read())
+            {
+                // Ajoute les lieux dans la liste des lieux 
+                // champs : NomLieu, Adresse, NomProprietaire
+
+                listeDesLieux.Add(new Lieu(reader.GetString(0), reader.GetString(1), reader.GetString(2))); // Ajoute les lieux dans la liste des lieux 
+
+            }
+            reader.Close(); // Ferme le reader
+            return listeDesLieux; // Retourne la liste des lieux
+        }
+        public List<string> ObtienNomLieux()
+        {
+            string req = "SELECT [Nom Lieu] FROM Lieux";
+            IDataReader reader = ExecuteReaderRequest(req);
+
+            List<string> listeDesNomDesLieux = new List<string>();
+
+            while (reader.Read())
+            {
+                string nomLieu = reader.GetString(0);
+                listeDesNomDesLieux.Add(nomLieu);
+            }
+            reader.Close();
+            return listeDesNomDesLieux;
+        }
+        public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
+        {
+            string req = "INSERT INTO Lieux VALUES ('" + nomLieu + "', '" + adresse + "', '" + nomProprietaire + "')";
             ExecuteNonQueryRequest(req);
         }
     }

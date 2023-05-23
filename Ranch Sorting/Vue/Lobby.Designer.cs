@@ -139,7 +139,7 @@
             this.btnSupprEquipe.AutoSize = true;
             this.btnSupprEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSupprEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnSupprEquipe.Location = new System.Drawing.Point(309, 44);
+            this.btnSupprEquipe.Location = new System.Drawing.Point(386, 70);
             this.btnSupprEquipe.Margin = new System.Windows.Forms.Padding(2);
             this.btnSupprEquipe.Name = "btnSupprEquipe";
             this.btnSupprEquipe.Size = new System.Drawing.Size(190, 31);
@@ -153,7 +153,7 @@
             this.btnAjouterEquipe.AutoSize = true;
             this.btnAjouterEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAjouterEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnAjouterEquipe.Location = new System.Drawing.Point(50, 44);
+            this.btnAjouterEquipe.Location = new System.Drawing.Point(127, 70);
             this.btnAjouterEquipe.Margin = new System.Windows.Forms.Padding(2);
             this.btnAjouterEquipe.Name = "btnAjouterEquipe";
             this.btnAjouterEquipe.Size = new System.Drawing.Size(167, 31);
@@ -167,7 +167,7 @@
             this.btnImporterOrdreDePassage.AutoSize = true;
             this.btnImporterOrdreDePassage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnImporterOrdreDePassage.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnImporterOrdreDePassage.Location = new System.Drawing.Point(110, 250);
+            this.btnImporterOrdreDePassage.Location = new System.Drawing.Point(162, 263);
             this.btnImporterOrdreDePassage.Margin = new System.Windows.Forms.Padding(2);
             this.btnImporterOrdreDePassage.Name = "btnImporterOrdreDePassage";
             this.btnImporterOrdreDePassage.Size = new System.Drawing.Size(314, 40);
@@ -181,7 +181,7 @@
             this.btnDesinscrire.AutoSize = true;
             this.btnDesinscrire.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDesinscrire.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDesinscrire.Location = new System.Drawing.Point(292, 186);
+            this.btnDesinscrire.Location = new System.Drawing.Point(344, 199);
             this.btnDesinscrire.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesinscrire.Name = "btnDesinscrire";
             this.btnDesinscrire.Size = new System.Drawing.Size(194, 31);
@@ -192,7 +192,7 @@
             // dateTimePicker
             // 
             this.dateTimePicker.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.dateTimePicker.Location = new System.Drawing.Point(251, 66);
+            this.dateTimePicker.Location = new System.Drawing.Point(303, 79);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(240, 29);
@@ -203,7 +203,7 @@
             this.button3.AutoSize = true;
             this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.button3.Location = new System.Drawing.Point(44, 186);
+            this.button3.Location = new System.Drawing.Point(96, 199);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(166, 31);
@@ -215,7 +215,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(46, 71);
+            this.lblDate.Location = new System.Drawing.Point(98, 84);
             this.lblDate.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(189, 21);
@@ -226,7 +226,7 @@
             // 
             this.cmbBoxLieu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.cmbBoxLieu.FormattingEnabled = true;
-            this.cmbBoxLieu.Location = new System.Drawing.Point(251, 116);
+            this.cmbBoxLieu.Location = new System.Drawing.Point(303, 129);
             this.cmbBoxLieu.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBoxLieu.Name = "cmbBoxLieu";
             this.cmbBoxLieu.Size = new System.Drawing.Size(240, 29);
@@ -236,7 +236,7 @@
             // 
             this.lblNomLieu.AutoSize = true;
             this.lblNomLieu.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomLieu.Location = new System.Drawing.Point(46, 123);
+            this.lblNomLieu.Location = new System.Drawing.Point(98, 136);
             this.lblNomLieu.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblNomLieu.Name = "lblNomLieu";
             this.lblNomLieu.Size = new System.Drawing.Size(114, 21);
@@ -246,7 +246,7 @@
             // txtBoxNomEquipe
             // 
             this.txtBoxNomEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxNomEquipe.Location = new System.Drawing.Point(251, 22);
+            this.txtBoxNomEquipe.Location = new System.Drawing.Point(303, 35);
             this.txtBoxNomEquipe.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomEquipe.Name = "txtBoxNomEquipe";
             this.txtBoxNomEquipe.Size = new System.Drawing.Size(240, 29);
@@ -258,7 +258,7 @@
             this.btnLancerUnRound.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLancerUnRound.Enabled = false;
             this.btnLancerUnRound.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnLancerUnRound.Location = new System.Drawing.Point(167, 317);
+            this.btnLancerUnRound.Location = new System.Drawing.Point(219, 330);
             this.btnLancerUnRound.Margin = new System.Windows.Forms.Padding(2);
             this.btnLancerUnRound.Name = "btnLancerUnRound";
             this.btnLancerUnRound.Size = new System.Drawing.Size(191, 40);
@@ -273,19 +273,20 @@
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(407, 150);
+            this.button1.Location = new System.Drawing.Point(459, 163);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 25);
             this.button1.TabIndex = 14;
             this.button1.Text = "Nouveau lieu";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblNomEpreuve
             // 
             this.lblNomEpreuve.AutoSize = true;
             this.lblNomEpreuve.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomEpreuve.Location = new System.Drawing.Point(46, 27);
+            this.lblNomEpreuve.Location = new System.Drawing.Point(98, 40);
             this.lblNomEpreuve.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblNomEpreuve.Name = "lblNomEpreuve";
             this.lblNomEpreuve.Size = new System.Drawing.Size(158, 21);

@@ -37,6 +37,17 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienEquipe();
         }
+
+        public List<Lieu> GetLieu()
+        {
+            //if ( _bd == null) return null;
+            return _bd.ObtienLieu();
+        }
+
+        public List<string> GetNomLieux()
+        {
+            return _bd.ObtienNomLieux();
+        }
         public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval21)
         {
             _bd.AjouterEquipe(nomEquipe, nomCavalier1, nomCheval1, nomCavalier2, nomCheval21);
@@ -44,6 +55,11 @@ namespace Ranch_Sorting.Controleur
         public void SupprimerEquipe(string nomEquipe)
         {
             _bd.SupprimerEquipe(nomEquipe);
+        }
+
+        public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
+        {
+            _bd.AjouterLieu(nomLieu, adresse, nomProprietaire);
         }
     }
 }

@@ -50,5 +50,55 @@ namespace Ranch_Sorting.Vue
                 txtBoxNomDeuxiemeCavalier.Clear();
             }
         }
+
+        private void txtBoxNomEquipe_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxNomDeuxiemeCheval_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxNomDeuxiemeCavalier_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxNomPremierCheval_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxNomPremierCavalier_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNomEquipe_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

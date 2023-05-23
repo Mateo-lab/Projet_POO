@@ -1,4 +1,5 @@
 ﻿using Ranch_Sorting.Controleur;
+using Ranch_Sorting.Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +53,23 @@ namespace Ranch_Sorting.Vue
             }
         }
 
+        public void ClearComboBox()
+        {
+            cmbBoxLieu.Items.Clear();
+        }
+        public void AddComboBoxNomLieu()
+        {
+            try
+            {
+                //List<string> nomLieux = controleur.GetNomLieux();
+                cmbBoxLieu.Items.AddRange(controleur.GetNomLieux().ToArray());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+        }
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -112,6 +130,7 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             getData();
+            AddComboBoxNomLieu();
 
         }
 
@@ -120,5 +139,13 @@ namespace Ranch_Sorting.Vue
             SupprimerUneEquipe supprimerUneEquipe = new SupprimerUneEquipe(this);
             supprimerUneEquipe.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NouveauLieu nouveauLieu = new NouveauLieu(this);
+            nouveauLieu.Show();
+        }
+
+       
     }
 }
