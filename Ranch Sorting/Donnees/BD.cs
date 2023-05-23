@@ -23,7 +23,8 @@ namespace Ranch_Sorting_App.Donnees
             string repCourant = Directory.GetCurrentDirectory();  // répertoire de l'exécutable
 
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;";
-            connectionString += @"Data Source =" + repCourant + @"/../../BD/BaseDeDonnéesProjet.mdb";
+            connectionString += @"Data Source =" + repCourant + @"/../../BD/BaseDeDonnéesProjet.mdb
+";
 
             //Instanciation de l'objet assurant la connexion à la BD
             _oleConnection = new OleDbConnection(connectionString);
