@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Ranch_Sorting.Vue
 {
@@ -146,6 +147,81 @@ namespace Ranch_Sorting.Vue
             nouveauLieu.Show();
         }
 
-       
+        private void btnInscription_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nomEpreuve = txtBoxNomEpreuve.Text;
+                string dateEpreuve = dateTimePicker.Value.ToString("yyyy-MM-dd");
+                string nomEquipe = txtBoxInscription.Text;
+                string dateInscription = DateTime.Now.ToString("yyyy-MM-dd");
+                bool payé = checkBoxPayé.CheckState == CheckState.Checked ? true : false; // si la case est cochée, payé = true, sinon payé = false 
+                
+
+                Controleur.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);   
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            checkBoxPayé.CheckState = CheckState.Unchecked;
+            
+        }
+
+        private void btnCreerEpreuve_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nomEpreuve = txtBoxNomEpreuve.Text;
+                string dateEpreuve = dateTimePicker.Value.ToString("yyyy-MM-dd");
+                string nomLieu = cmbBoxLieu.Text;
+
+                Controleur.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu);
+
+                txtBoxNomEpreuve.Enabled = false;
+                dateTimePicker.Enabled = false;
+                cmbBoxLieu.Enabled = false;
+                btnCreerEpreuve.Enabled = false;
+                txtBoxInscription.Enabled = true;
+                checkBoxPayé.Enabled = true;
+                btnInscription.Enabled = true;
+                btnDesinscrire.Enabled = true;
+            }
+
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBoxNomEpreuve.Enabled = true;
+                dateTimePicker.Enabled = true;
+                cmbBoxLieu.Enabled = true;
+                btnCreerEpreuve.Enabled = true;
+                txtBoxInscription.Enabled = false;
+                checkBoxPayé.Enabled = false;
+                btnInscription.Enabled = false;
+                btnDesinscrire.Enabled = false;
+            }
+            
+
+        }
+
+        private void btnDesinscrire_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Controleur.SupprimerUneInscription(txtBoxInscription.Text);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            DialogResult dr = MessageBox.Show("L'equipe désinscrite", "Désinscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (dr == DialogResult.No)
+                this.Close();
+            else
+            {
+                txtBoxInscription.Text = "";
+            }
+        }
     }
 }

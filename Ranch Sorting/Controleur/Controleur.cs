@@ -56,10 +56,22 @@ namespace Ranch_Sorting.Controleur
         {
             _bd.SupprimerEquipe(nomEquipe);
         }
-
         public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
         {
             _bd.AjouterLieu(nomLieu, adresse, nomProprietaire);
+        }
+        public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu)
+        {
+            _bd.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu);
+        }
+        public void AjouterUneInscription(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool payé )
+        {
+            _bd.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);
+        }
+
+        public void SupprimerUneInscription(string nomEquipe)
+        {
+            _bd.SupprimerUneInscription(nomEquipe);
         }
     }
 }

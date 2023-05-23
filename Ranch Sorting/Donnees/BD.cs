@@ -122,5 +122,24 @@ namespace Ranch_Sorting_App.Donnees
             string req = "INSERT INTO Lieux VALUES ('" + nomLieu + "', '" + adresse + "', '" + nomProprietaire + "')";
             ExecuteNonQueryRequest(req);
         }
+
+        public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu)
+        {
+            string req = "INSERT INTO Epreuves VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomLieu + "')";
+            ExecuteNonQueryRequest(req);
+        }
+
+        public void AjouterUneInscription(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool payé)
+        {
+            string req = "INSERT INTO Inscriptions VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomEquipe + "', '" + dateInscription + "', " + payé + ")";
+            ExecuteNonQueryRequest(req);
+        }
+
+        public void SupprimerUneInscription( string nomEquipe)
+        {
+            string req = "DELETE FROM Inscriptions WHERE [Nom équipe] = '" + nomEquipe + "'";
+            ExecuteNonQueryRequest(req);
+        }
+
     }
 }

@@ -34,14 +34,17 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.btnSupprEquipe = new System.Windows.Forms.Button();
             this.btnAjouterEquipe = new System.Windows.Forms.Button();
+            this.btnCreerEpreuve = new System.Windows.Forms.Button();
+            this.checkBoxPayé = new System.Windows.Forms.CheckBox();
+            this.txtBoxInscription = new System.Windows.Forms.TextBox();
             this.btnImporterOrdreDePassage = new System.Windows.Forms.Button();
             this.btnDesinscrire = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnInscription = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.cmbBoxLieu = new System.Windows.Forms.ComboBox();
             this.lblNomLieu = new System.Windows.Forms.Label();
-            this.txtBoxNomEquipe = new System.Windows.Forms.TextBox();
+            this.txtBoxNomEpreuve = new System.Windows.Forms.TextBox();
             this.btnLancerUnRound = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblNomEpreuve = new System.Windows.Forms.Label();
@@ -73,8 +76,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1314, 730);
-            this.splitContainer1.SplitterDistance = 634;
+            this.splitContainer1.Size = new System.Drawing.Size(1347, 706);
+            this.splitContainer1.SplitterDistance = 649;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -117,19 +120,22 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnCreerEpreuve);
+            this.splitContainer2.Panel2.Controls.Add(this.checkBoxPayé);
+            this.splitContainer2.Panel2.Controls.Add(this.txtBoxInscription);
             this.splitContainer2.Panel2.Controls.Add(this.btnImporterOrdreDePassage);
             this.splitContainer2.Panel2.Controls.Add(this.btnDesinscrire);
             this.splitContainer2.Panel2.Controls.Add(this.dateTimePicker);
-            this.splitContainer2.Panel2.Controls.Add(this.button3);
+            this.splitContainer2.Panel2.Controls.Add(this.btnInscription);
             this.splitContainer2.Panel2.Controls.Add(this.lblDate);
             this.splitContainer2.Panel2.Controls.Add(this.cmbBoxLieu);
             this.splitContainer2.Panel2.Controls.Add(this.lblNomLieu);
-            this.splitContainer2.Panel2.Controls.Add(this.txtBoxNomEquipe);
+            this.splitContainer2.Panel2.Controls.Add(this.txtBoxNomEpreuve);
             this.splitContainer2.Panel2.Controls.Add(this.btnLancerUnRound);
             this.splitContainer2.Panel2.Controls.Add(this.button1);
             this.splitContainer2.Panel2.Controls.Add(this.lblNomEpreuve);
-            this.splitContainer2.Size = new System.Drawing.Size(677, 730);
-            this.splitContainer2.SplitterDistance = 195;
+            this.splitContainer2.Size = new System.Drawing.Size(695, 706);
+            this.splitContainer2.SplitterDistance = 188;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -162,12 +168,49 @@
             this.btnAjouterEquipe.UseVisualStyleBackColor = true;
             this.btnAjouterEquipe.Click += new System.EventHandler(this.btnAjouterEquipe_Click);
             // 
+            // btnCreerEpreuve
+            // 
+            this.btnCreerEpreuve.AutoSize = true;
+            this.btnCreerEpreuve.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreerEpreuve.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.btnCreerEpreuve.Location = new System.Drawing.Point(176, 176);
+            this.btnCreerEpreuve.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCreerEpreuve.Name = "btnCreerEpreuve";
+            this.btnCreerEpreuve.Size = new System.Drawing.Size(290, 40);
+            this.btnCreerEpreuve.TabIndex = 25;
+            this.btnCreerEpreuve.Text = "Creer la Nouvelle epreuve";
+            this.btnCreerEpreuve.UseVisualStyleBackColor = true;
+            this.btnCreerEpreuve.Click += new System.EventHandler(this.btnCreerEpreuve_Click);
+            // 
+            // checkBoxPayé
+            // 
+            this.checkBoxPayé.AutoSize = true;
+            this.checkBoxPayé.Enabled = false;
+            this.checkBoxPayé.Location = new System.Drawing.Point(498, 245);
+            this.checkBoxPayé.Name = "checkBoxPayé";
+            this.checkBoxPayé.Size = new System.Drawing.Size(135, 17);
+            this.checkBoxPayé.TabIndex = 24;
+            this.checkBoxPayé.Text = "L\'equipe a-t-elle payé ?";
+            this.checkBoxPayé.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxInscription
+            // 
+            this.txtBoxInscription.Enabled = false;
+            this.txtBoxInscription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxInscription.Location = new System.Drawing.Point(161, 234);
+            this.txtBoxInscription.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBoxInscription.Name = "txtBoxInscription";
+            this.txtBoxInscription.Size = new System.Drawing.Size(314, 29);
+            this.txtBoxInscription.TabIndex = 23;
+            this.txtBoxInscription.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // btnImporterOrdreDePassage
             // 
             this.btnImporterOrdreDePassage.AutoSize = true;
             this.btnImporterOrdreDePassage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImporterOrdreDePassage.Enabled = false;
             this.btnImporterOrdreDePassage.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnImporterOrdreDePassage.Location = new System.Drawing.Point(162, 263);
+            this.btnImporterOrdreDePassage.Location = new System.Drawing.Point(161, 361);
             this.btnImporterOrdreDePassage.Margin = new System.Windows.Forms.Padding(2);
             this.btnImporterOrdreDePassage.Name = "btnImporterOrdreDePassage";
             this.btnImporterOrdreDePassage.Size = new System.Drawing.Size(314, 40);
@@ -180,14 +223,16 @@
             // 
             this.btnDesinscrire.AutoSize = true;
             this.btnDesinscrire.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDesinscrire.Enabled = false;
             this.btnDesinscrire.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDesinscrire.Location = new System.Drawing.Point(344, 199);
+            this.btnDesinscrire.Location = new System.Drawing.Point(386, 283);
             this.btnDesinscrire.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesinscrire.Name = "btnDesinscrire";
             this.btnDesinscrire.Size = new System.Drawing.Size(194, 31);
             this.btnDesinscrire.TabIndex = 21;
             this.btnDesinscrire.Text = "Desinscrire une equipe";
             this.btnDesinscrire.UseVisualStyleBackColor = true;
+            this.btnDesinscrire.Click += new System.EventHandler(this.btnDesinscrire_Click);
             // 
             // dateTimePicker
             // 
@@ -198,18 +243,20 @@
             this.dateTimePicker.Size = new System.Drawing.Size(240, 29);
             this.dateTimePicker.TabIndex = 20;
             // 
-            // button3
+            // btnInscription
             // 
-            this.button3.AutoSize = true;
-            this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.button3.Location = new System.Drawing.Point(96, 199);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(166, 31);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Inscrire une equipe";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnInscription.AutoSize = true;
+            this.btnInscription.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnInscription.Enabled = false;
+            this.btnInscription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnInscription.Location = new System.Drawing.Point(102, 283);
+            this.btnInscription.Margin = new System.Windows.Forms.Padding(2);
+            this.btnInscription.Name = "btnInscription";
+            this.btnInscription.Size = new System.Drawing.Size(166, 31);
+            this.btnInscription.TabIndex = 15;
+            this.btnInscription.Text = "Inscrire une equipe";
+            this.btnInscription.UseVisualStyleBackColor = true;
+            this.btnInscription.Click += new System.EventHandler(this.btnInscription_Click);
             // 
             // lblDate
             // 
@@ -243,14 +290,14 @@
             this.lblNomLieu.TabIndex = 18;
             this.lblNomLieu.Text = "Nom du lieu :";
             // 
-            // txtBoxNomEquipe
+            // txtBoxNomEpreuve
             // 
-            this.txtBoxNomEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxNomEquipe.Location = new System.Drawing.Point(303, 35);
-            this.txtBoxNomEquipe.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBoxNomEquipe.Name = "txtBoxNomEquipe";
-            this.txtBoxNomEquipe.Size = new System.Drawing.Size(240, 29);
-            this.txtBoxNomEquipe.TabIndex = 17;
+            this.txtBoxNomEpreuve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxNomEpreuve.Location = new System.Drawing.Point(303, 35);
+            this.txtBoxNomEpreuve.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBoxNomEpreuve.Name = "txtBoxNomEpreuve";
+            this.txtBoxNomEpreuve.Size = new System.Drawing.Size(240, 29);
+            this.txtBoxNomEpreuve.TabIndex = 17;
             // 
             // btnLancerUnRound
             // 
@@ -258,7 +305,7 @@
             this.btnLancerUnRound.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLancerUnRound.Enabled = false;
             this.btnLancerUnRound.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnLancerUnRound.Location = new System.Drawing.Point(219, 330);
+            this.btnLancerUnRound.Location = new System.Drawing.Point(232, 428);
             this.btnLancerUnRound.Margin = new System.Windows.Forms.Padding(2);
             this.btnLancerUnRound.Name = "btnLancerUnRound";
             this.btnLancerUnRound.Size = new System.Drawing.Size(191, 40);
@@ -273,7 +320,7 @@
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(459, 163);
+            this.button1.Location = new System.Drawing.Point(557, 132);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 25);
@@ -297,7 +344,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1314, 730);
+            this.ClientSize = new System.Drawing.Size(1347, 706);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Lobby";
@@ -326,11 +373,11 @@
         private System.Windows.Forms.Button btnAjouterEquipe;
         private System.Windows.Forms.Button btnDesinscrire;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnInscription;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.ComboBox cmbBoxLieu;
         private System.Windows.Forms.Label lblNomLieu;
-        private System.Windows.Forms.TextBox txtBoxNomEquipe;
+        private System.Windows.Forms.TextBox txtBoxNomEpreuve;
         private System.Windows.Forms.Button btnLancerUnRound;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblNomEpreuve;
@@ -338,5 +385,8 @@
         private System.Windows.Forms.Button btnImporterOrdreDePassage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridViewListeEquipe;
+        private System.Windows.Forms.TextBox txtBoxInscription;
+        private System.Windows.Forms.CheckBox checkBoxPayé;
+        private System.Windows.Forms.Button btnCreerEpreuve;
     }
 }
