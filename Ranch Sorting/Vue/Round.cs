@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Ranch_Sorting.Controleur;
+using Ranch_Sorting.Modeles;
+using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -14,11 +9,15 @@ namespace Ranch_Sorting.Vue
 {
     public partial class Round : Form
     {
+        private Controle controleur; // donnée membre privée pour stocker le contrôleur
+        Lobby parent;
+
         private Timer timer;
         int nbrVache;
         private static Stopwatch chrono;
         static DateTime startTime;
         private int numVache;
+
         public Round()
         {
             InitializeComponent();
@@ -63,15 +62,6 @@ namespace Ranch_Sorting.Vue
             Random random = new Random();
             return random.Next(min, max);
         }
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            btnBonneVache.Enabled = true;
-            btnMauvaiseVache.Enabled = true;
-            GestionTimer();
-            btnStart.Enabled = false;
-            lblNumVache.Text = RandomNumber(0, 9).ToString();
-            numVache = int.Parse(lblNumVache.Text);
-        }
         private void GestionTimer()
         {
             timer.Start();
@@ -80,11 +70,6 @@ namespace Ranch_Sorting.Vue
             // Démarrage du chronomètre
             chrono.Start();
         }
-        private void btnEquipeSuivante_Click(object sender, EventArgs e)
-        {
-            btnEquipeSuivante.Enabled = true;
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             chrono.Stop();
@@ -94,17 +79,40 @@ namespace Ranch_Sorting.Vue
             string temps = lblTimer.Text;
             return temps;
         }
-        private void btnBonneVache_Click(object sender, EventArgs e)
-        {
+       
 
+        private void btnValidationResultats_Click(object sender, EventArgs e)
+        {
+            btnEquipeSuivante.Enabled = true;
+        }
+
+        private void btnStart_Click_1(object sender, EventArgs e)
+        {
+            btnBonneVache.Enabled = true;
+            btnMauvaiseVache.Enabled = true;
+            GestionTimer();
+            btnStart.Enabled = false;
+            lblNumVache.Text = RandomNumber(0, 9).ToString();
+            lblNumVache.Visible = true; 
+            numVache = int.Parse(lblNumVache.Text);
+        }
+
+        private void btnBonneVache_Click_1(object sender, EventArgs e)
+        {
             if (nbrVache == 9)
             {
                 chrono.Stop();
                 btnBonneVache.Enabled = false;
+                btnMauvaiseVache.Enabled = false;
                 btnValidationResultats.Enabled = true;
             }
+            //string temps = TempsVache(numVache);
+           // string nomEpreuve = parent.GetNomEpreuve();
+           // string dateEpreuve = parent.GetDateEpreuve();
+           // string nomEquipe = parent.GetNomEquipe();
 
-            //richTextBox1.AppendText('\n' + "Vache " + numVache + " : " + TempsVache(numVache));
+            //controleur.AjouterTempsVache(nomEpreuve, dateEpreuve, nomEquipe, numVache, temps);
+            richTextBoxResultats.AppendText('\n' + "Vache " + numVache + " : " + TempsVache(numVache));
 
             if (numVache == 9)
             {
@@ -116,36 +124,72 @@ namespace Ranch_Sorting.Vue
             }
             nbrVache++;
         }
-        
-        private void btnValidationResultat_Click(object sender, EventArgs e)
+
+        private void btnMauvaiseVache_Click_1(object sender, EventArgs e)
+        {
+
+            chrono.Stop();
+            richTextBoxResultats.AppendText('\n' + "NULL");
+            btnValidationResultats.Enabled = true;
+            btnBonneVache.Enabled = false;
+            btnMauvaiseVache.Enabled = false;
+        }
+
+        private void BtnStopChrono_Click_1(object sender, EventArgs e)
+        {
+            chrono.Stop();
+
+        }
+        private void btnValidationResultats_Click_1(object sender, EventArgs e)
         {
             btnEquipeSuivante.Enabled = true;
         }
-
-        private void BtnStopChrono_Click(object sender, EventArgs e)
-        {
-            chrono.Stop();  
-        }
-
-        private void btnMauvaiseVache_Click(object sender, EventArgs e)
-        {
-            chrono.Stop();
-            //richTextBox1.AppendText('\n' + "NULL");
-            btnValidationResultats.Enabled = true;
-        }
-
-        private void btnEquipeSuivante_Click_1(object sender, EventArgs e)
+        private void btnEquipeSuivante_Click_2(object sender, EventArgs e)
         {
             lblTimer.Text = "00:00:000";
             btnStart.Enabled = true;
             btnValidationResultats.Enabled = false;
             btnEquipeSuivante.Enabled = false;
+            richTextBoxResultats.Clear();
+        }
+
+        private void lblEquipeSuivante_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void btnValidationResultats_Click(object sender, EventArgs e)
+        private void Round_Load(object sender, EventArgs e)
         {
-            btnEquipeSuivante.Enabled = true;
+            GetScore();
+           //lblNomEquipeEnCours.Text = parent.GetNomEquipeEnCours();
+           //lblNomEquipeSuivante.Text = parent.GetNomEquipeSuivante();
+/*
+            try
+            {
+                //controleur.ouvreBD();
+                getData();
+                //MessageBox.Show("Connexion à la base de données réussie", "Connexion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+*/
+        }
+
+        private void GetScore()
+        {
+            try
+            {
+                string nomEpreuve = parent.GetNomEpreuve();
+                string dateEpreuve = parent.GetDateEpreuve();
+                dataGridViewScoresEquipe.DataSource = controleur.GetScores(nomEpreuve, dateEpreuve);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
         }
     }
 }

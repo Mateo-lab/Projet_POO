@@ -54,6 +54,7 @@
     <Compile Include="Modeles\Equipe.cs" />
     <Compile Include="Modeles\Inscription.cs" />
     <Compile Include="Modeles\Lieu.cs" />
+    <Compile Include="Modeles\Scores.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vue\Lobby.cs">

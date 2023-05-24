@@ -44,6 +44,21 @@ namespace Ranch_Sorting.Controleur
             return _bd.ObtienLieu();
         }
 
+        public List<Inscription> GetInscriptions(string nomEpreuve)
+        {
+            //if ( _bd == null) return null;
+            return _bd.ObtienInscriptions(nomEpreuve);
+        }
+        public List<Scores> GetScores(string nomEpreuve, string dateEpreuve)
+        {
+            //if ( _bd == null) return null;
+            return _bd.ObtienScores(nomEpreuve, dateEpreuve);
+        }
+        public List<Epreuve> GetEpreuves(string nomEpreuve)
+        {
+            //if ( _bd == null) return null;
+            return _bd.ObtienEpreuves(nomEpreuve);
+        }
         public List<string> GetNomLieux()
         {
             return _bd.ObtienNomLieux();
@@ -64,6 +79,11 @@ namespace Ranch_Sorting.Controleur
         {
             _bd.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu);
         }
+
+        public void CreationNouvelleTableScore(string nomEpreuve, string dateEpreuve)
+        {
+            _bd.CreationNouvelleTableScore(nomEpreuve, dateEpreuve);
+        }
         public void AjouterUneInscription(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool payé )
         {
             _bd.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);
@@ -72,6 +92,21 @@ namespace Ranch_Sorting.Controleur
         public void SupprimerUneInscription(string nomEquipe)
         {
             _bd.SupprimerUneInscription(nomEquipe);
+        }
+
+        public  void AjouterInscriptionDansScore(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
+        {
+            _bd.AjouterInscriptionDansScore(nomEpreuve, dateEpreuve, nomEquipe, numRound, nbrVache, tDerniereV, tV1, tV2, tV3, tV4, tV5, tV6, tV7, tV8, tV9, tV10);
+        }
+
+        public void SupprimerInscriptionDansScore(string nomEquipe)
+        {
+            _bd.SupprimerInscriptionDansScore(nomEquipe);
+        }
+
+        public void AjouterTempsVache(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int numVache, string tempsVache)
+        {
+            _bd.AjouterTempsVache(nomEpreuve, dateEpreuve, nomEquipe, numRound, numVache, tempsVache);
         }
     }
 }

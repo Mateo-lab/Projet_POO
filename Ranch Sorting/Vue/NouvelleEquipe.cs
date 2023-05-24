@@ -32,7 +32,7 @@ namespace Ranch_Sorting.Vue
             try
             {
                 parent.Controleur.AjouterEquipe(txtBoxNomEquipe.Text, txtBoxNomPremierCavalier.Text, txtBoxNomPremierCheval.Text, txtBoxNomDeuxiemeCavalier.Text, txtBoxNomDeuxiemeCheval.Text);
-                parent.getData();
+                parent.GetEquipe();
             }
             catch (Exception exc)
             {

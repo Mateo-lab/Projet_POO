@@ -22,7 +22,7 @@ namespace Ranch_Sorting
             Application.SetCompatibleTextRenderingDefault(false);
 
             Controle ctrl = new Controle(); // création du contrôleur
-            Lobby fenetrePrincipale = new Lobby // création de la fenêtre principale
+            Lobby fenetrePrincipale = new Lobby() // création de la fenêtre principale
             {
                 //Il faut que la fenêtre principale connaisse le contrôleur 
                 //Elle pourra le faire connaître aux autres vues

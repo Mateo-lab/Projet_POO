@@ -35,7 +35,7 @@ namespace Ranch_Sorting.Vue
             try
             {
                 parent.Controleur.SupprimerEquipe(txtBoxEquipeASupprimer.Text);
-                parent.getData();
+                parent.GetEquipe();
             }
             catch (Exception exc)
             {

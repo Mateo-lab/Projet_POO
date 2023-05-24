@@ -1,15 +1,7 @@
 ﻿using Ranch_Sorting.Controleur;
 using Ranch_Sorting.Modeles;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Ranch_Sorting.Vue
 {
@@ -20,6 +12,7 @@ namespace Ranch_Sorting.Vue
         {
             InitializeComponent();
         }
+        
         public Controle Controleur  // propriété set Contrôleur pour modifier la donnée membre privée ctrl
         {
             set
@@ -32,13 +25,7 @@ namespace Ranch_Sorting.Vue
                 return controleur;
             }
         }
-
-        private void Lobby_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        public void getData()
+        public void GetEquipe()
         {
             try
             {
@@ -53,7 +40,30 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
+        public void GetInscriptions(string nomEpreuve)
+        {     
+            try
+            {
+                //bdsEquipe.DataSource = controleur.GetEquipe();
+                //dataGridView1.DataSource = bdsEquipe;
 
+                dataGridViewEquipeInscrite.DataSource = controleur.GetInscriptions(nomEpreuve);
+            }
+                       catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+        }
+        public string GetNomEpreuve()
+        { 
+            //essayer de passer par inscriptions
+            return null;
+        }
+        public string GetDateEpreuve()
+        {
+            return null;
+        }
         public void ClearComboBox()
         {
             cmbBoxLieu.Items.Clear();
@@ -71,42 +81,12 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
 
         private void btnAjouterEquipe_Click(object sender, EventArgs e)
         {
             NouvelleEquipe nouvelleEquipe = new NouvelleEquipe(this);
             nouvelleEquipe.Show();
         }
-
 
         private void btnImporterOrdreDePassage_Click(object sender, EventArgs e)
         {
@@ -130,9 +110,9 @@ namespace Ranch_Sorting.Vue
             {
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            getData();
+            GetEquipe();
             AddComboBoxNomLieu();
-
+            
         }
 
         private void btnSupprEquipe_Click(object sender, EventArgs e)
@@ -149,21 +129,25 @@ namespace Ranch_Sorting.Vue
 
         private void btnInscription_Click(object sender, EventArgs e)
         {
+            //Cette fonction va ajouter une inscription dans la table Inscription et  mettre à jour la table Equipe
             try
             {
                 string nomEpreuve = txtBoxNomEpreuve.Text;
-                string dateEpreuve = dateTimePicker.Value.ToString("yyyy-MM-dd");
+                string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
                 string nomEquipe = txtBoxInscription.Text;
-                string dateInscription = DateTime.Now.ToString("yyyy-MM-dd");
+                string dateInscription = DateTime.Now.ToString("d-M-yyy");
                 bool payé = checkBoxPayé.CheckState == CheckState.Checked ? true : false; // si la case est cochée, payé = true, sinon payé = false 
                 
 
                 Controleur.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);   
+                Controleur.AjouterInscriptionDansScore(nomEpreuve, dateEpreuve, nomEquipe, 1 , 0, "", "", "", "", "", "", "", "", "", "", "");
+                GetInscriptions(nomEpreuve);
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            DialogResult dr = MessageBox.Show("L'equipe inscrite", "Inscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
             checkBoxPayé.CheckState = CheckState.Unchecked;
             
         }
@@ -172,11 +156,13 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
+                Epreuve.Nom
                 string nomEpreuve = txtBoxNomEpreuve.Text;
-                string dateEpreuve = dateTimePicker.Value.ToString("yyyy-MM-dd");
+                string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
                 string nomLieu = cmbBoxLieu.Text;
 
                 Controleur.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu);
+                Controleur.CreationNouvelleTableScore(nomEpreuve, dateEpreuve);
 
                 txtBoxNomEpreuve.Enabled = false;
                 dateTimePicker.Enabled = false;
@@ -208,7 +194,10 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
+                string nomEpreuve = txtBoxNomEpreuve.Text;
                 Controleur.SupprimerUneInscription(txtBoxInscription.Text);
+                Controleur.SupprimerInscriptionDansScore(txtBoxInscription.Text);
+                GetInscriptions(nomEpreuve);
             }
             catch (Exception exc)
             {
@@ -223,5 +212,6 @@ namespace Ranch_Sorting.Vue
                 txtBoxInscription.Text = "";
             }
         }
+
     }
 }
