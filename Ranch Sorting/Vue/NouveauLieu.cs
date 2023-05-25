@@ -26,7 +26,7 @@ namespace Ranch_Sorting.Vue
             {
                 parent.Controleur.AjouterLieu(txtBoxNomLieu.Text, txtBoxAdresse.Text, txtBoxNomProprietaire.Text);
                 parent.ClearComboBox();
-                parent.AddComboBoxNomLieu();
+                parent.MaJComboBoxNomLieu();
             }
             catch (Exception exc)
             {

@@ -37,27 +37,35 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienEquipe();
         }
-
         public List<Lieu> GetLieu()
         {
             //if ( _bd == null) return null;
             return _bd.ObtienLieu();
         }
-
         public List<Inscription> GetInscriptions(string nomEpreuve)
         {
             //if ( _bd == null) return null;
             return _bd.ObtienInscriptions(nomEpreuve);
         }
-        public List<Scores> GetScores(string nomEpreuve, string dateEpreuve)
+        public List<Scores> GetScores(string nomEpreuve, string dateEpreuve, int numRound)
         {
             //if ( _bd == null) return null;
-            return _bd.ObtienScores(nomEpreuve, dateEpreuve);
+            return _bd.ObtienScores(nomEpreuve, dateEpreuve, numRound);
         }
         public List<Epreuve> GetEpreuves(string nomEpreuve)
         {
             //if ( _bd == null) return null;
             return _bd.ObtienEpreuves(nomEpreuve);
+        }
+        public List<string> GetNomEpreuve()
+        {
+            if ( _bd == null) return null;
+            return _bd.ObtienNomEpreuve();
+        }
+        public string GetDateEpreuve(string nomEpreuve)
+        {
+            //if ( _bd == null) return null;
+            return _bd.ObtienDateEpreuve(nomEpreuve);
         }
         public List<string> GetNomLieux()
         {
@@ -74,6 +82,10 @@ namespace Ranch_Sorting.Controleur
         public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
         {
             _bd.AjouterLieu(nomLieu, adresse, nomProprietaire);
+        }
+        public void SupprimerLieu(string nomLieuASupprimer)
+        {
+            _bd.SupprimerLieu(nomLieuASupprimer);
         }
         public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu)
         {

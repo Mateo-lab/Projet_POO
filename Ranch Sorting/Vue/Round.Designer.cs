@@ -49,6 +49,9 @@
             this.lblClassement = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewScoresEquipe = new System.Windows.Forms.DataGridView();
+            this.cmbBoxSelectEpreuve = new System.Windows.Forms.ComboBox();
+            this.cmbBoxNumRound = new System.Windows.Forms.ComboBox();
+            this.btnLancer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -142,6 +145,9 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.btnLancer);
+            this.splitContainer3.Panel2.Controls.Add(this.cmbBoxNumRound);
+            this.splitContainer3.Panel2.Controls.Add(this.cmbBoxSelectEpreuve);
             this.splitContainer3.Panel2.Controls.Add(this.lblTimer);
             this.splitContainer3.Panel2.Controls.Add(this.lblNumVache);
             this.splitContainer3.Panel2.Controls.Add(this.lblAnnoncePremiereVache);
@@ -205,7 +211,7 @@
             this.lblTimer.BackColor = System.Drawing.SystemColors.ControlLight;
             this.lblTimer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblTimer.Font = new System.Drawing.Font("Segoe UI", 50F, System.Drawing.FontStyle.Bold);
-            this.lblTimer.Location = new System.Drawing.Point(223, 4);
+            this.lblTimer.Location = new System.Drawing.Point(200, 17);
             this.lblTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(390, 110);
@@ -216,6 +222,7 @@
             // lblNumVache
             // 
             this.lblNumVache.AutoSize = true;
+            this.lblNumVache.Enabled = false;
             this.lblNumVache.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumVache.Location = new System.Drawing.Point(487, 149);
             this.lblNumVache.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -223,11 +230,11 @@
             this.lblNumVache.Size = new System.Drawing.Size(230, 37);
             this.lblNumVache.TabIndex = 43;
             this.lblNumVache.Text = "*Random vache*";
-            this.lblNumVache.Visible = false;
             // 
             // lblAnnoncePremiereVache
             // 
             this.lblAnnoncePremiereVache.AutoSize = true;
+            this.lblAnnoncePremiereVache.Enabled = false;
             this.lblAnnoncePremiereVache.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnnoncePremiereVache.Location = new System.Drawing.Point(59, 149);
             this.lblAnnoncePremiereVache.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -240,6 +247,7 @@
             // 
             this.BtnStopChrono.AutoSize = true;
             this.BtnStopChrono.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BtnStopChrono.Enabled = false;
             this.BtnStopChrono.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.BtnStopChrono.Location = new System.Drawing.Point(601, 234);
             this.BtnStopChrono.Margin = new System.Windows.Forms.Padding(2);
@@ -281,6 +289,7 @@
             // 
             this.btnMauvaiseVache.AutoSize = true;
             this.btnMauvaiseVache.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMauvaiseVache.Enabled = false;
             this.btnMauvaiseVache.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.btnMauvaiseVache.Location = new System.Drawing.Point(515, 305);
             this.btnMauvaiseVache.Margin = new System.Windows.Forms.Padding(2);
@@ -294,6 +303,7 @@
             // 
             this.btnBonneVache.AutoSize = true;
             this.btnBonneVache.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBonneVache.Enabled = false;
             this.btnBonneVache.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.btnBonneVache.Location = new System.Drawing.Point(145, 305);
             this.btnBonneVache.Margin = new System.Windows.Forms.Padding(2);
@@ -307,6 +317,7 @@
             // 
             this.btnStart.AutoSize = true;
             this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold);
             this.btnStart.Location = new System.Drawing.Point(379, 212);
             this.btnStart.Margin = new System.Windows.Forms.Padding(2);
@@ -343,6 +354,43 @@
             this.dataGridViewScoresEquipe.Name = "dataGridViewScoresEquipe";
             this.dataGridViewScoresEquipe.Size = new System.Drawing.Size(1132, 231);
             this.dataGridViewScoresEquipe.TabIndex = 0;
+            // 
+            // cmbBoxSelectEpreuve
+            // 
+            this.cmbBoxSelectEpreuve.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbBoxSelectEpreuve.FormattingEnabled = true;
+            this.cmbBoxSelectEpreuve.Location = new System.Drawing.Point(601, 29);
+            this.cmbBoxSelectEpreuve.Name = "cmbBoxSelectEpreuve";
+            this.cmbBoxSelectEpreuve.Size = new System.Drawing.Size(225, 24);
+            this.cmbBoxSelectEpreuve.TabIndex = 45;
+            this.cmbBoxSelectEpreuve.Text = "Sélectionner l\'épreuve à lancer";
+            // 
+            // cmbBoxNumRound
+            // 
+            this.cmbBoxNumRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbBoxNumRound.FormattingEnabled = true;
+            this.cmbBoxNumRound.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.cmbBoxNumRound.Location = new System.Drawing.Point(601, 68);
+            this.cmbBoxNumRound.Name = "cmbBoxNumRound";
+            this.cmbBoxNumRound.Size = new System.Drawing.Size(225, 24);
+            this.cmbBoxNumRound.TabIndex = 46;
+            this.cmbBoxNumRound.Text = "Sélectionner le numero du round";
+            // 
+            // btnLancer
+            // 
+            this.btnLancer.AutoSize = true;
+            this.btnLancer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLancer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLancer.Location = new System.Drawing.Point(677, 97);
+            this.btnLancer.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLancer.Name = "btnLancer";
+            this.btnLancer.Size = new System.Drawing.Size(63, 29);
+            this.btnLancer.TabIndex = 47;
+            this.btnLancer.Text = "Lancer";
+            this.btnLancer.UseVisualStyleBackColor = true;
+            this.btnLancer.Click += new System.EventHandler(this.btnLancer_Click);
             // 
             // Round
             // 
@@ -400,5 +448,8 @@
         private System.Windows.Forms.Label lblNomEquipeEnCours;
         private System.Windows.Forms.Label lblClassement;
         private System.Windows.Forms.DataGridView dataGridViewScoresEquipe;
+        private System.Windows.Forms.Button btnLancer;
+        private System.Windows.Forms.ComboBox cmbBoxNumRound;
+        private System.Windows.Forms.ComboBox cmbBoxSelectEpreuve;
     }
 }

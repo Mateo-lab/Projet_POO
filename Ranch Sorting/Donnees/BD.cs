@@ -42,18 +42,17 @@ namespace Ranch_Sorting_App.Donnees
             OleDbCommand cmd = new OleDbCommand(req, _oleConnection);
             return cmd;
         }
-
         public IDataReader ExecuteReaderRequest(string req)
         {
             OleDbCommand cmd = ExecuteRequest(req);
             return cmd.ExecuteReader();
         }
-
         public void ExecuteNonQueryRequest(string req)
         {
             OleDbCommand cmd = ExecuteRequest(req);
             cmd.ExecuteNonQuery();
         }
+
 
         public List<Equipe> ObtienEquipe()
         {
@@ -89,7 +88,21 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return listeDesLieux; // Retourne la liste des lieux
         }
+        public List<string> ObtienNomLieux()
+        {
+            string req = "SELECT [Nom Lieu] FROM Lieux";
+            IDataReader reader = ExecuteReaderRequest(req);
 
+            List<string> listeDesNomDesLieux = new List<string>();
+
+            while (reader.Read())
+            {
+                string nomLieu = reader.GetString(0);
+                listeDesNomDesLieux.Add(nomLieu);
+            }
+            reader.Close();
+            return listeDesNomDesLieux;
+        }
         public List<Inscription> ObtienInscriptions(string nomEpreuve)
         {
             List<Inscription> listeDesInscriptions = new List<Inscription>(); // Liste des inscriptions qui sera retournée par la méthode 
@@ -111,7 +124,6 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return listeDesInscriptions; // Retourne la liste des inscriptions
         }
-
         public List<Epreuve> ObtienEpreuves(string nomEpreuve)
         {
             List<Epreuve> epreuves = new List<Epreuve>(); // Liste des inscriptions qui sera retournée par la méthode 
@@ -131,20 +143,53 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return epreuves;
         }
-        public List<string> ObtienNomLieux()
+        public List<string> ObtienNomEpreuve()
         {
-            string req = "SELECT [Nom Lieu] FROM Lieux";
+            string req = "SELECT [Nom épreuve] FROM Epreuves";
             IDataReader reader = ExecuteReaderRequest(req);
 
-            List<string> listeDesNomDesLieux = new List<string>();
+            List<string> listeDesNomDesEpreuves = new List<string>();
 
             while (reader.Read())
             {
-                string nomLieu = reader.GetString(0);
-                listeDesNomDesLieux.Add(nomLieu);
+                string nomEpreuve = reader.GetString(0);
+                listeDesNomDesEpreuves.Add(nomEpreuve);
             }
             reader.Close();
-            return listeDesNomDesLieux;
+            return listeDesNomDesEpreuves;
+        }
+
+        public string ObtienDateEpreuve(string nomEpreuve)
+        {
+            string req = "SELECT [Date épreuve] FROM Epreuves WHERE [Nom épreuve] = '" + nomEpreuve + "'";
+            IDataReader reader = ExecuteReaderRequest(req);
+
+            string listeDesDateDesEpreuves = "";
+
+            while (reader.Read())
+            {
+                string dateEpreuve = reader.GetString(0); //GetString(0) car il n'y a qu'une seule colonne indexée
+                listeDesDateDesEpreuves = dateEpreuve;
+            }
+            reader.Close();
+            return listeDesDateDesEpreuves;
+        }
+        public List<Scores> ObtienScores(string nomEpreuve, string dateEpreuve, int numRound)
+        {
+            List<Scores> listeDesScores = new List<Scores>(); // Liste des scores qui sera retournée par la méthode 
+            string req = "SELECT * FROM [Scores de l'épreuve : " + nomEpreuve + " du " + dateEpreuve + "] WHERE [N°round] = '"+ numRound +"'"; // Requete SQL pour obtenir les scores
+            IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
+
+            while (reader.Read())
+            {
+                // Ajoute les scores dans la liste des scores 
+                // champs : NomEpreuve, DateEpreuve, NomEquipe, NumRound, NbrVache, TDerniereV, TV1, TV2, TV3, TV4, TV5, TV6, TV7, TV8, TV9, TV10
+
+                listeDesScores.Add(new Scores(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), reader.GetString(15)));// Ajoute les scores dans la liste des scores 
+                Console.WriteLine(listeDesScores);
+            }
+            reader.Close(); // Ferme le reader
+            return listeDesScores; // Retourne la liste des scores
         }
 
         public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval2)
@@ -152,19 +197,21 @@ namespace Ranch_Sorting_App.Donnees
             string req = "INSERT INTO Equipes VALUES ('" + nomEquipe + "', '" + nomCavalier1 + "', '" + nomCavalier2 + "', '" + nomCheval1 + "', '" + nomCheval2 + "')";
             ExecuteNonQueryRequest(req);
         }
-
         public void SupprimerEquipe(string nomEquipe)
         {
             string req = "DELETE FROM Equipes WHERE [Nom équipe] = '" + nomEquipe + "'";
             ExecuteNonQueryRequest(req);
         }
-
         public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
         {
             string req = "INSERT INTO Lieux VALUES ('" + nomLieu + "', '" + adresse + "', '" + nomProprietaire + "')";
             ExecuteNonQueryRequest(req);
         }
-
+        public void SupprimerLieu(string nomLieu)
+        {
+            string req = "DELETE FROM Lieux WHERE [Nom lieu] = '" + nomLieu + "'";
+            ExecuteNonQueryRequest(req);
+        }   
         public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu)
         {
             string req = "INSERT INTO Epreuves VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomLieu + "')";
@@ -183,13 +230,11 @@ namespace Ranch_Sorting_App.Donnees
             string req = "INSERT INTO Inscriptions VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomEquipe + "', '" + dateInscription + "', " + payé + ")";
             ExecuteNonQueryRequest(req);
         }
-
         public void SupprimerUneInscription( string nomEquipe)
         {
             string req = "DELETE FROM Inscriptions WHERE [Nom équipe] = '" + nomEquipe + "'";
             ExecuteNonQueryRequest(req);
         }
-
         public void AjouterInscriptionDansScore(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int nbrVache,string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
         {
             string req = "INSERT INTO [Scores de l'épreuve : " + nomEpreuve + " du " + dateEpreuve + "] VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomEquipe + "', " + numRound + ", " + nbrVache + ", '" + tDerniereV + "', '" + tV1 + "', '" + tV2 + "', '" + tV3 + "', '" + tV4 + "', '" + tV5 + "', '" + tV6 + "', '" + tV7 + "', '" + tV8 + "', '" + tV9 + "', '" + tV10 + "')";
@@ -200,24 +245,6 @@ namespace Ranch_Sorting_App.Donnees
         {
             string req = "DELETE FROM [Scores équipes] WHERE [Nom équipe] = '" + nomEquipe + "'";
             ExecuteNonQueryRequest(req);
-        }
-
-        public List<Scores> ObtienScores(string nomEpreuve, string dateEpreuve)
-        {
-            List<Scores> listeDesScores = new List<Scores>(); // Liste des scores qui sera retournée par la méthode 
-            string req = "SELECT * FROM [Scores de l'épreuve : " + nomEpreuve + " du " + dateEpreuve + "]"; // Requete SQL pour obtenir les scores
-            IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
-
-            while (reader.Read())
-            {
-                // Ajoute les scores dans la liste des scores 
-                // champs : NomEpreuve, DateEpreuve, NomEquipe, NumRound, NbrVache, TDerniereV, TV1, TV2, TV3, TV4, TV5, TV6, TV7, TV8, TV9, TV10
-
-                listeDesScores.Add(new Scores(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), reader.GetString(15)));// Ajoute les scores dans la liste des scores 
-                Console.WriteLine(listeDesScores);
-            }
-            reader.Close(); // Ferme le reader
-            return listeDesScores; // Retourne la liste des scores
         }
 
         public void AjouterTempsVache(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int numVache, string temps)

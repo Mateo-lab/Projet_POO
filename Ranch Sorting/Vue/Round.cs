@@ -1,5 +1,4 @@
 ﻿using Ranch_Sorting.Controleur;
-using Ranch_Sorting.Modeles;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -9,8 +8,7 @@ namespace Ranch_Sorting.Vue
 {
     public partial class Round : Form
     {
-        private Controle controleur; // donnée membre privée pour stocker le contrôleur
-        Lobby parent;
+        private Controle ctrl; // donnée membre privée pour stocker le contrôleur
 
         private Timer timer;
         int nbrVache;
@@ -18,6 +16,17 @@ namespace Ranch_Sorting.Vue
         static DateTime startTime;
         private int numVache;
 
+        public Controle Ctrlr 
+        {
+            set
+            {
+                ctrl = value;
+            }
+            get
+            {
+                return ctrl;
+            }
+        } // propriété set Contrôleur pour modifier la donnée membre privée ctrl
         public Round()
         {
             InitializeComponent();
@@ -153,43 +162,58 @@ namespace Ranch_Sorting.Vue
             richTextBoxResultats.Clear();
         }
 
-        private void lblEquipeSuivante_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Round_Load(object sender, EventArgs e)
         {
-            GetScore();
-           //lblNomEquipeEnCours.Text = parent.GetNomEquipeEnCours();
-           //lblNomEquipeSuivante.Text = parent.GetNomEquipeSuivante();
-/*
-            try
-            {
-                //controleur.ouvreBD();
-                getData();
-                //MessageBox.Show("Connexion à la base de données réussie", "Connexion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-*/
+            MaJComboBoxNomEpreuve();
         }
-
-        private void GetScore()
+        private void MaJComboBoxNomEpreuve()
         {
             try
             {
-                string nomEpreuve = parent.GetNomEpreuve();
-                string dateEpreuve = parent.GetDateEpreuve();
-                dataGridViewScoresEquipe.DataSource = controleur.GetScores(nomEpreuve, dateEpreuve);
+                cmbBoxSelectEpreuve.Items.AddRange(ctrl.GetNomEpreuve().ToArray());
             }
             catch (Exception e)
             {
                 MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
+        }
+        
+
+        private void GetScoreRoundEpreuve()
+        {
+            try
+            {
+                int.TryParse(cmbBoxNumRound.Text, out int numRound);
+                string nomEpreuve = cmbBoxSelectEpreuve.Text;
+                string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
+                dataGridViewScoresEquipe.DataSource = ctrl.GetScores(nomEpreuve, dateEpreuve, numRound);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+        }
+        private string GetDateEpreuve(string nomEpreuve)
+        {
+            string dateEpreuve = "";
+            try
+            {
+               dateEpreuve = ctrl.GetDateEpreuve(nomEpreuve);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+
+            return dateEpreuve;
+        }
+        private void btnLancer_Click(object sender, EventArgs e)
+        {
+            GetScoreRoundEpreuve();
+            btnStart.Enabled = true;
         }
     }
 }

@@ -15,15 +15,9 @@ namespace Ranch_Sorting.Vue
         
         public Controle Controleur  // propriété set Contrôleur pour modifier la donnée membre privée ctrl
         {
-            set
-            {
-                controleur = value;
-            }
+            set => controleur = value;
 
-            get
-            {
-                return controleur;
-            }
+            get => controleur;
         }
         public void GetEquipe()
         {
@@ -68,11 +62,10 @@ namespace Ranch_Sorting.Vue
         {
             cmbBoxLieu.Items.Clear();
         }
-        public void AddComboBoxNomLieu()
+        public void MaJComboBoxNomLieu()
         {
             try
             {
-                //List<string> nomLieux = controleur.GetNomLieux();
                 cmbBoxLieu.Items.AddRange(controleur.GetNomLieux().ToArray());
             }
             catch (Exception e)
@@ -80,23 +73,6 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
-        }
-
-        private void btnAjouterEquipe_Click(object sender, EventArgs e)
-        {
-            NouvelleEquipe nouvelleEquipe = new NouvelleEquipe(this);
-            nouvelleEquipe.Show();
-        }
-
-        private void btnImporterOrdreDePassage_Click(object sender, EventArgs e)
-        {
-            btnLancerUnRound.Enabled = true;    
-        }
-
-        private void btnLancerUnRound_Click(object sender, EventArgs e)
-        {
-            Round round = new Round();
-            round.Show();   
         }
 
         private void Lobby_Load_1(object sender, EventArgs e)
@@ -111,22 +87,55 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             GetEquipe();
-            AddComboBoxNomLieu();
-            
+            MaJComboBoxNomLieu();
         }
-
+        private void btnAjouterEquipe_Click(object sender, EventArgs e)
+        {
+            NouvelleEquipe nouvelleEquipe = new NouvelleEquipe(this);
+            nouvelleEquipe.Show();
+        }
+        private void btnLancerUnRound_Click(object sender, EventArgs e)
+        {
+            Round round = new Round();
+            round.Show();   
+        }
         private void btnSupprEquipe_Click(object sender, EventArgs e)
         {
             SupprimerUneEquipe supprimerUneEquipe = new SupprimerUneEquipe(this);
             supprimerUneEquipe.Show();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnNouveauLieu_Click_1(object sender, EventArgs e)
         {
+
             NouveauLieu nouveauLieu = new NouveauLieu(this);
             nouveauLieu.Show();
         }
+        private void btnSupprimerUnLieu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dr = MessageBox.Show("Voulez-vous vraiment supprimer ce lieu ?", "Supprimer un lieu", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+                else if (dr == DialogResult.Yes)
+                {
+                    string nomLieuASupprimer = cmbBoxLieu.Text;
+                    Controleur.SupprimerLieu(nomLieuASupprimer);
+                    ClearComboBox();
+                    MaJComboBoxNomLieu();
+                    cmbBoxLieu.Text = "";
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
+        }
+
+        
         private void btnInscription_Click(object sender, EventArgs e)
         {
             //Cette fonction va ajouter une inscription dans la table Inscription et  mettre à jour la table Equipe
@@ -156,7 +165,7 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
-                Epreuve.Nom
+                //Epreuve.Nom
                 string nomEpreuve = txtBoxNomEpreuve.Text;
                 string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
                 string nomLieu = cmbBoxLieu.Text;
