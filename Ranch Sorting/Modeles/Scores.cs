@@ -1,18 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ranch_Sorting.Modeles
 {
     public class Scores
     {
-        private string _nomEpreuve, _dateEpreuve, _nomEquipe;
+        private string _nomEquipe;
         private int _numRound, _nbrVache;
         private string _tDerniereV, _tV1, _tV2, _tV3, _tV4, _tV5, _tV6, _tV7, _tV8, _tV9, _tV10;
 
-        public Scores(string nomEpreuve, string dateEpreuve, string nomEquipe,int numRound, int nbrVache,
+        public Scores(string nomEquipe,int numRound, int nbrVache,
             string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
         {
-            _nomEpreuve = nomEpreuve;
-            _dateEpreuve = dateEpreuve;
             _nomEquipe = nomEquipe;
             _numRound = numRound;
             _nbrVache = nbrVache;
@@ -27,34 +26,6 @@ namespace Ranch_Sorting.Modeles
             _tV8 = tV8;
             _tV9 = tV9;
             _tV10 = tV10;
-        }
-
-        public string NomEpreuve
-        {
-
-            get
-            {
-                return _nomEpreuve;
-            }
-            set
-            {
-                if (value != "")
-                    _nomEpreuve = value;
-                else
-                    throw new Exception("Veuillez entrer le nom de l'epreuve");
-            }
-        }
-
-        public string DateEpreuve
-        {
-            get
-            {
-                return _dateEpreuve;
-            }
-            set
-            {
-                _dateEpreuve = value;
-            }
         }
 
         public string NomEquipe
@@ -226,5 +197,6 @@ namespace Ranch_Sorting.Modeles
         }
 
     }
+    
     
 }

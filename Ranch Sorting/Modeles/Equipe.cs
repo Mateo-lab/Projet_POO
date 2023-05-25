@@ -96,4 +96,55 @@ namespace Ranch_Sorting.Modeles
 
         }
     }
+    public class ListeNomsEquipes : List<string>
+    //Liste des noms des equipes participantes à l'epreuve en cours herite de la classe List<string> 
+    //List<string> est une classe generique
+    // L'avantage de cette façon de faire est que l'on peut utiliser toutes les methodes de List<string>
+    // comme Add, Remove, Clear, etc.
+    {
+        public ListeNomsEquipes(IEnumerable<string> collection) : base(collection)
+        {
+        }
+        public string GetNomEquipeEnCours(int numeroDePassage)
+        {
+            if (Count > 0)
+            {
+                return this[numeroDePassage]; //Attention numero de passage commence à 0
+            }
+            else
+            {
+                // Gérer le cas où la liste est vide
+                return string.Empty;
+            }
+        }
+        public string GetNomEquipeSuivante(int numeroDePassage)
+        {
+            if (Count > 0)
+            {
+                return this[numeroDePassage+1];
+            }
+            else
+            {
+                // Gérer le cas où la liste est vide
+                return string.Empty;
+            }
+        }
+        public void MelangerEquipes()
+        {
+            Random random = new Random();
+            int count = Count; // Count permet de compter le nombre d'éléments dans la liste (ici le nombre d'équipes)
+            while (count > 1)
+            {
+                count--;
+                int index = random.Next(count + 1);
+                string temp = this[index];
+                this[index] = this[count];
+                this[count] = temp;
+            }
+        }
+        public int CompterEquipes()
+        {
+            return Count;
+        }
+    }
 }

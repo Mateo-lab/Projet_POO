@@ -51,6 +51,8 @@
             this.lblListeInscrit = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewEquipeInscrite = new System.Windows.Forms.DataGridView();
+            this.lblNmbrRound = new System.Windows.Forms.Label();
+            this.numericUpDownNbrRound = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,6 +65,7 @@
             this.splitContainer2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEquipeInscrite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbrRound)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -83,8 +86,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1347, 706);
-            this.splitContainer1.SplitterDistance = 649;
+            this.splitContainer1.Size = new System.Drawing.Size(1288, 791);
+            this.splitContainer1.SplitterDistance = 602;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -114,12 +117,14 @@
             // 
             // dataGridViewListeEquipe
             // 
-            this.dataGridViewListeEquipe.AllowUserToOrderColumns = true;
+            this.dataGridViewListeEquipe.AllowUserToAddRows = false;
+            this.dataGridViewListeEquipe.AllowUserToDeleteRows = false;
             this.dataGridViewListeEquipe.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridViewListeEquipe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListeEquipe.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewListeEquipe.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewListeEquipe.Name = "dataGridViewListeEquipe";
+            this.dataGridViewListeEquipe.ReadOnly = true;
             this.dataGridViewListeEquipe.RowHeadersWidth = 51;
             this.dataGridViewListeEquipe.RowTemplate.Height = 24;
             this.dataGridViewListeEquipe.Size = new System.Drawing.Size(564, 605);
@@ -150,6 +155,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.numericUpDownNbrRound);
+            this.splitContainer2.Panel1.Controls.Add(this.lblNmbrRound);
             this.splitContainer2.Panel1.Controls.Add(this.btnSupprimerUnLieu);
             this.splitContainer2.Panel1.Controls.Add(this.btnCreerEpreuve);
             this.splitContainer2.Panel1.Controls.Add(this.checkBoxPayé);
@@ -169,8 +176,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.lblListeInscrit);
             this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanel2);
-            this.splitContainer2.Size = new System.Drawing.Size(695, 706);
-            this.splitContainer2.SplitterDistance = 416;
+            this.splitContainer2.Size = new System.Drawing.Size(683, 791);
+            this.splitContainer2.SplitterDistance = 508;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -180,7 +187,7 @@
             this.btnSupprimerUnLieu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSupprimerUnLieu.BackColor = System.Drawing.SystemColors.Control;
             this.btnSupprimerUnLieu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnSupprimerUnLieu.Location = new System.Drawing.Point(562, 123);
+            this.btnSupprimerUnLieu.Location = new System.Drawing.Point(557, 169);
             this.btnSupprimerUnLieu.Margin = new System.Windows.Forms.Padding(2);
             this.btnSupprimerUnLieu.Name = "btnSupprimerUnLieu";
             this.btnSupprimerUnLieu.Size = new System.Drawing.Size(116, 25);
@@ -194,7 +201,7 @@
             this.btnCreerEpreuve.AutoSize = true;
             this.btnCreerEpreuve.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCreerEpreuve.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnCreerEpreuve.Location = new System.Drawing.Point(182, 153);
+            this.btnCreerEpreuve.Location = new System.Drawing.Point(177, 232);
             this.btnCreerEpreuve.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreerEpreuve.Name = "btnCreerEpreuve";
             this.btnCreerEpreuve.Size = new System.Drawing.Size(290, 40);
@@ -207,7 +214,7 @@
             // 
             this.checkBoxPayé.AutoSize = true;
             this.checkBoxPayé.Enabled = false;
-            this.checkBoxPayé.Location = new System.Drawing.Point(504, 222);
+            this.checkBoxPayé.Location = new System.Drawing.Point(514, 331);
             this.checkBoxPayé.Name = "checkBoxPayé";
             this.checkBoxPayé.Size = new System.Drawing.Size(135, 17);
             this.checkBoxPayé.TabIndex = 24;
@@ -218,7 +225,7 @@
             // 
             this.lblNomEpreuve.AutoSize = true;
             this.lblNomEpreuve.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomEpreuve.Location = new System.Drawing.Point(104, 17);
+            this.lblNomEpreuve.Location = new System.Drawing.Point(99, 63);
             this.lblNomEpreuve.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblNomEpreuve.Name = "lblNomEpreuve";
             this.lblNomEpreuve.Size = new System.Drawing.Size(158, 21);
@@ -229,7 +236,7 @@
             // 
             this.txtBoxInscription.Enabled = false;
             this.txtBoxInscription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxInscription.Location = new System.Drawing.Point(167, 211);
+            this.txtBoxInscription.Location = new System.Drawing.Point(177, 320);
             this.txtBoxInscription.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxInscription.Name = "txtBoxInscription";
             this.txtBoxInscription.Size = new System.Drawing.Size(314, 29);
@@ -242,7 +249,7 @@
             this.btnNouveauLieu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNouveauLieu.BackColor = System.Drawing.SystemColors.Control;
             this.btnNouveauLieu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnNouveauLieu.Location = new System.Drawing.Point(562, 94);
+            this.btnNouveauLieu.Location = new System.Drawing.Point(557, 140);
             this.btnNouveauLieu.Margin = new System.Windows.Forms.Padding(2);
             this.btnNouveauLieu.Name = "btnNouveauLieu";
             this.btnNouveauLieu.Size = new System.Drawing.Size(90, 25);
@@ -256,7 +263,7 @@
             this.btnLancerEpreuve.AutoSize = true;
             this.btnLancerEpreuve.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLancerEpreuve.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.btnLancerEpreuve.Location = new System.Drawing.Point(229, 324);
+            this.btnLancerEpreuve.Location = new System.Drawing.Point(239, 433);
             this.btnLancerEpreuve.Margin = new System.Windows.Forms.Padding(2);
             this.btnLancerEpreuve.Name = "btnLancerEpreuve";
             this.btnLancerEpreuve.Size = new System.Drawing.Size(225, 40);
@@ -271,7 +278,7 @@
             this.btnDesinscrire.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDesinscrire.Enabled = false;
             this.btnDesinscrire.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDesinscrire.Location = new System.Drawing.Point(392, 260);
+            this.btnDesinscrire.Location = new System.Drawing.Point(402, 369);
             this.btnDesinscrire.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesinscrire.Name = "btnDesinscrire";
             this.btnDesinscrire.Size = new System.Drawing.Size(194, 31);
@@ -283,7 +290,7 @@
             // txtBoxNomEpreuve
             // 
             this.txtBoxNomEpreuve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxNomEpreuve.Location = new System.Drawing.Point(309, 12);
+            this.txtBoxNomEpreuve.Location = new System.Drawing.Point(304, 58);
             this.txtBoxNomEpreuve.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomEpreuve.Name = "txtBoxNomEpreuve";
             this.txtBoxNomEpreuve.Size = new System.Drawing.Size(240, 29);
@@ -292,7 +299,7 @@
             // dateTimePicker
             // 
             this.dateTimePicker.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.dateTimePicker.Location = new System.Drawing.Point(309, 56);
+            this.dateTimePicker.Location = new System.Drawing.Point(304, 102);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(240, 29);
@@ -302,7 +309,7 @@
             // 
             this.lblNomLieu.AutoSize = true;
             this.lblNomLieu.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomLieu.Location = new System.Drawing.Point(104, 113);
+            this.lblNomLieu.Location = new System.Drawing.Point(99, 159);
             this.lblNomLieu.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblNomLieu.Name = "lblNomLieu";
             this.lblNomLieu.Size = new System.Drawing.Size(114, 21);
@@ -315,7 +322,7 @@
             this.btnInscription.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnInscription.Enabled = false;
             this.btnInscription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnInscription.Location = new System.Drawing.Point(108, 260);
+            this.btnInscription.Location = new System.Drawing.Point(118, 369);
             this.btnInscription.Margin = new System.Windows.Forms.Padding(2);
             this.btnInscription.Name = "btnInscription";
             this.btnInscription.Size = new System.Drawing.Size(166, 31);
@@ -328,7 +335,7 @@
             // 
             this.cmbBoxLieu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.cmbBoxLieu.FormattingEnabled = true;
-            this.cmbBoxLieu.Location = new System.Drawing.Point(309, 106);
+            this.cmbBoxLieu.Location = new System.Drawing.Point(304, 152);
             this.cmbBoxLieu.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBoxLieu.Name = "cmbBoxLieu";
             this.cmbBoxLieu.Size = new System.Drawing.Size(240, 29);
@@ -338,7 +345,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(104, 61);
+            this.lblDate.Location = new System.Drawing.Point(99, 107);
             this.lblDate.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(189, 21);
@@ -374,11 +381,41 @@
             this.dataGridViewEquipeInscrite.Size = new System.Drawing.Size(615, 218);
             this.dataGridViewEquipeInscrite.TabIndex = 0;
             // 
+            // lblNmbrRound
+            // 
+            this.lblNmbrRound.AutoSize = true;
+            this.lblNmbrRound.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNmbrRound.Location = new System.Drawing.Point(99, 196);
+            this.lblNmbrRound.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
+            this.lblNmbrRound.Name = "lblNmbrRound";
+            this.lblNmbrRound.Size = new System.Drawing.Size(231, 21);
+            this.lblNmbrRound.TabIndex = 27;
+            this.lblNmbrRound.Text = "Nombre de Round  (max 2): ";
+            // 
+            // numericUpDownNbrRound
+            // 
+            this.numericUpDownNbrRound.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownNbrRound.Location = new System.Drawing.Point(335, 196);
+            this.numericUpDownNbrRound.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownNbrRound.Name = "numericUpDownNbrRound";
+            this.numericUpDownNbrRound.Size = new System.Drawing.Size(209, 29);
+            this.numericUpDownNbrRound.TabIndex = 28;
+            this.numericUpDownNbrRound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownNbrRound.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1347, 706);
+            this.ClientSize = new System.Drawing.Size(1288, 791);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Lobby";
@@ -399,6 +436,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEquipeInscrite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbrRound)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -428,5 +466,7 @@
         private System.Windows.Forms.Label lblListeInscrit;
         private System.Windows.Forms.DataGridView dataGridViewEquipeInscrite;
         private System.Windows.Forms.Button btnSupprimerUnLieu;
+        private System.Windows.Forms.Label lblNmbrRound;
+        private System.Windows.Forms.NumericUpDown numericUpDownNbrRound;
     }
 }

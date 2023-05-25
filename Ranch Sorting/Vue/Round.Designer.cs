@@ -193,7 +193,6 @@
             this.lblEquipeSuivante.Size = new System.Drawing.Size(244, 28);
             this.lblEquipeSuivante.TabIndex = 44;
             this.lblEquipeSuivante.Text = "Nom de l\'equipe suivante :";
-            this.lblEquipeSuivante.Click += new System.EventHandler(this.lblEquipeSuivante_Click);
             // 
             // lblEquipeEncours
             // 

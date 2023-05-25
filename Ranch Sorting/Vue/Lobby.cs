@@ -8,9 +8,12 @@ namespace Ranch_Sorting.Vue
     public partial class Lobby : Form
     {
         private Controle controleur; // donnée membre privée pour stocker le contrôleur
+        
+
         public Lobby()
         {
             InitializeComponent();
+
         }
         
         public Controle Controleur  // propriété set Contrôleur pour modifier la donnée membre privée ctrl
@@ -23,9 +26,6 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
-                //bdsEquipe.DataSource = controleur.GetEquipe();
-                //dataGridView1.DataSource = bdsEquipe;
-
                 dataGridViewListeEquipe.DataSource = controleur.GetEquipe();
             }
             catch (Exception e)
@@ -77,6 +77,14 @@ namespace Ranch_Sorting.Vue
 
         private void Lobby_Load_1(object sender, EventArgs e)
         {
+            // lobby load represente le chargement de la page
+            // et la difference entre lobby load et Initialize component c'est que
+            // lobby load est appelé à chaque fois que la page est chargée grace à this.show()
+            // alors que initialize component est appelé une seule fois au chargement de la page
+            // donc on met les fonctions qui doivent etre appelé à chaque fois dans lobby load
+            // et les fonctions qui doivent etre appelé une seule fois dans initialize component
+            // comme la connexion à la base de données par exemple qui se fait une seule fois
+
             try
             {
                 controleur.ouvreBD();
@@ -148,17 +156,47 @@ namespace Ranch_Sorting.Vue
                 bool payé = checkBoxPayé.CheckState == CheckState.Checked ? true : false; // si la case est cochée, payé = true, sinon payé = false 
                 
 
-                Controleur.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);   
-                Controleur.AjouterInscriptionDansScore(nomEpreuve, dateEpreuve, nomEquipe, 1 , 0, "", "", "", "", "", "", "", "", "", "", "");
+                Controleur.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);
+
+                int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
+                Controleur.AjouterInscriptionDansScore(nomEpreuve, dateEpreuve, nomEquipe, nbrRound , 0, "", "", "", "", "", "", "", "", "", "", "");
                 GetInscriptions(nomEpreuve);
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; //permet de sortir de la methode sans executer DialogResult
             }
             DialogResult dr = MessageBox.Show("L'equipe inscrite", "Inscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
             checkBoxPayé.CheckState = CheckState.Unchecked;
             
+        }
+
+        private void btnDesinscrire_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nomEpreuve = txtBoxNomEpreuve.Text;
+                string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
+                string nomEquipe = txtBoxInscription.Text;
+
+                Controleur.SupprimerUneInscription(txtBoxInscription.Text);
+                Controleur.SupprimerInscriptionDansScore(nomEpreuve, dateEpreuve, nomEquipe);
+                GetInscriptions(nomEpreuve);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; //permet de sortir de la methode sans executer DialogResult
+            }
+
+            DialogResult dr = MessageBox.Show("L'equipe désinscrite", "Désinscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (dr == DialogResult.No)
+                this.Close();
+            else
+            {
+                txtBoxInscription.Text = "";
+            }
         }
 
         private void btnCreerEpreuve_Click(object sender, EventArgs e)
@@ -169,8 +207,9 @@ namespace Ranch_Sorting.Vue
                 string nomEpreuve = txtBoxNomEpreuve.Text;
                 string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
                 string nomLieu = cmbBoxLieu.Text;
+                int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
 
-                Controleur.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu);
+                Controleur.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu,nbrRound);
                 Controleur.CreationNouvelleTableScore(nomEpreuve, dateEpreuve);
 
                 txtBoxNomEpreuve.Enabled = false;
@@ -197,29 +236,6 @@ namespace Ranch_Sorting.Vue
             }
             
 
-        }
-
-        private void btnDesinscrire_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string nomEpreuve = txtBoxNomEpreuve.Text;
-                Controleur.SupprimerUneInscription(txtBoxInscription.Text);
-                Controleur.SupprimerInscriptionDansScore(txtBoxInscription.Text);
-                GetInscriptions(nomEpreuve);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            DialogResult dr = MessageBox.Show("L'equipe désinscrite", "Désinscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (dr == DialogResult.No)
-                this.Close();
-            else
-            {
-                txtBoxInscription.Text = "";
-            }
         }
 
     }
