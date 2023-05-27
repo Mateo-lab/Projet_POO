@@ -1,7 +1,9 @@
 ﻿using Ranch_Sorting.Controleur;
 using Ranch_Sorting.Modeles;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -9,35 +11,25 @@ namespace Ranch_Sorting.Vue
 {
     public partial class Round : Form
     {
-        private Controle ctrl; // donnée membre privée pour stocker le contrôleur
+        Lobby parent; // donnée membre privée pour stocker le contrôleur
+        ListeNomsEquipes listeNomsEquipes;
 
         private Timer timer;
         private int nbrParticipants, numeroDePassage, numVache, nbrVache;
         private static Stopwatch chrono;
         static DateTime startTime;
 
-        public Round()
+        
+        public Round(Lobby parent_)
         {
+            parent = parent_;
             InitializeComponent();
             timer = new Timer();
             timer.Interval = 10;
             timer.Tick += Timer_Tick;
         }
 
-        //Constructeur
-        public Controle Ctrl
-        {
-            set
-            {
-                ctrl = value;
-            }
-            get
-            {
-                return ctrl;
-            }
-        } // propriété set Contrôleur pour modifier la donnée membre privée ctrl
-        
-        //Méthodes
+        ////////////////////////////////////////////////////
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Appeler la mise à jour du libellé à chaque tick du Timer
@@ -56,23 +48,36 @@ namespace Ranch_Sorting.Vue
             TimeSpan elapsedTime = chrono.Elapsed;
 
             // Mise à jour du libellé avec le temps écoulé en minutes, secondes et millisecondes
-            lblTimer.Invoke(new Action(() =>
+            if (lblTimer.InvokeRequired)
+            {
+                lblTimer.BeginInvoke(new Action(() =>
+                {
+                    lblTimer.Text = string.Format("{0:00}:{1:00}:{2:000}",
+                        elapsedTime.Minutes, elapsedTime.Seconds, elapsedTime.Milliseconds);
+                }));
+            }
+            else
             {
                 lblTimer.Text = string.Format("{0:00}:{1:00}:{2:000}",
                     elapsedTime.Minutes, elapsedTime.Seconds, elapsedTime.Milliseconds);
-            }));
+            }
+           
 
-            if (elapsedTime.Seconds == 90)
+            if (elapsedTime.TotalSeconds >= 10)
             {
 
                 string nomEpreuve = cmbBoxSelectEpreuve.Text;
                 string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
-                string nomEquipe = lblEquipeEncours.Text;
+                string nomEquipe = lblNomEquipeEnCours.Text;
                 int.TryParse(cmbBoxNumRound.Text, out int numRound);
-                string temps = GetTempsDerniereVache();
 
                 chrono.Stop();
-                ctrl.ResultatsEquipe(nomEpreuve, dateEpreuve, nomEquipe, numRound, nbrVache , temps);
+                parent.Controleur.ResultatsEquipe(nomEpreuve, nomEquipe, numRound, nbrVache.ToString());
+                GetScoreRoundEpreuve();
+
+                nbrVache = 0;
+                btnBonneVache.Enabled = false;
+                btnMauvaiseVache.Enabled = false;
                 btnValidationResultats.Enabled = true;
 
             }
@@ -91,109 +96,121 @@ namespace Ranch_Sorting.Vue
             // Démarrage du chronomètre
             chrono.Start();
         }
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            chrono.Stop();
-        }
-        private string TempsVache(int numvache)
+        private string TempsVache()
         {
             string temps = lblTimer.Text;
             return temps;
         }
-
-        private string GetTempsDerniereVache()
+        private void Round_Load(object sender, EventArgs e)
         {
-            int lastLineIndex = richTextBoxResultats.Lines.Length - 1; // Indice de la dernière ligne
-            string lastLine = richTextBoxResultats.Lines[lastLineIndex]; // Lecture de la dernière ligne
-
-            int commaIndex = lastLine.IndexOf(":"); // Recherche de la position de la virgule
-            string temps = lastLine.Substring(commaIndex + 2); // Extraction de la sous-chaîne après la virgule
-            // le + 2 permet de ne pas prendre les deux points et l'espace
-            return temps;
+            MaJComboBoxNomEpreuve();
         }
-       
-        private void btnStart_Click_1(object sender, EventArgs e)
+        private void MaJComboBoxNomEpreuve()
+        {
+            try
+            {
+                cmbBoxSelectEpreuve.Items.AddRange(parent.Controleur.GetNomEpreuve().ToArray());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+        }
+        private void MaJComboBoxNbrRound(string nomEpreuve)
+        {
+            try
+            {
+                List<string> nbrRound = parent.Controleur.GetNbrRound(nomEpreuve);
+                if (nbrRound[0] == "2")
+                    cmbBoxNumRound.Items.AddRange(nbrRound.ToArray());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // throw e;   // Q : qu'est-ce que cette instruction produit ?
+            }
+        }
+
+        ///////////////////////////////////////////////////
+        private void btnStart_Click(object sender, EventArgs e)
         {
             btnBonneVache.Enabled = true;
             btnMauvaiseVache.Enabled = true;
+
             GestionTimer();
             btnStart.Enabled = false;
             lblNumVache.Text = RandomNumber(0, 9).ToString();
-            lblNumVache.Visible = true; 
+            lblNumVache.Visible = true;
             numVache = int.Parse(lblNumVache.Text);
         }
-
-        private void btnBonneVache_Click_1(object sender, EventArgs e)
+        private void BtnStopChrono_Click(object sender, EventArgs e)
         {
+            chrono.Stop();
+        }
 
-            nbrVache++; // correspond au nombre de vache passée donc il doit commebcer à 1
-
+        private void btnBonneVache_Click(object sender, EventArgs e)
+        { 
+            nbrVache++;
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
-            string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
-            string nomEquipe = lblEquipeEncours.Text;
+            string nomEquipe = lblNomEquipeEnCours.Text;
             int.TryParse(cmbBoxNumRound.Text, out int numRound);
-            string temps = TempsVache(numVache);
+            string temps = TempsVache();
 
-            ctrl.AjouterTempsVache(nomEpreuve, dateEpreuve, nomEquipe, numRound, numVache, temps);
-            richTextBoxResultats.AppendText('\n' + "Vache " + numVache + " : " + TempsVache(numVache));
+            parent.Controleur.AjouterTempsVache(nomEpreuve, nomEquipe, numRound, numVache, temps);
+            richTextBoxResultats.AppendText('\n' + "Vache " + numVache + " : " + TempsVache());
+            GetScoreRoundEpreuve();
 
             if (nbrVache == 10)
             {
+                parent.Controleur.ResultatsEquipe(nomEpreuve, nomEquipe, numRound, "TEN COWS");
+                GetScoreRoundEpreuve();
                 chrono.Stop();
-                ctrl.ResultatsEquipe(nomEpreuve, dateEpreuve, nomEquipe, numRound, nbrVache, temps );
                 btnBonneVache.Enabled = false;
                 btnMauvaiseVache.Enabled = false;
                 btnValidationResultats.Enabled = true;
+                nbrVache = 0;
             }
             if (numVache == 9)
             {
                 numVache = 0;
-            }
-            else
-            {
-                numVache++;
-            }
+            }else numVache++;
         }
 
-        private void btnMauvaiseVache_Click_1(object sender, EventArgs e)
+        private void btnMauvaiseVache_Click(object sender, EventArgs e)
         {
-
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
-            string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
-            string nomEquipe = lblEquipeEncours.Text;
+            string nomEquipe = lblNomEquipeEnCours.Text;
             int.TryParse(cmbBoxNumRound.Text, out int numRound);
 
-            ctrl.ResultatsEquipe(nomEpreuve, dateEpreuve, nomEquipe, numRound, 99 , null);
-
+            parent.Controleur.ResultatsEquipe(nomEpreuve, nomEquipe, numRound, "00-NO TIME");
+            GetScoreRoundEpreuve();
             chrono.Stop();
+
+            nbrVache = 0;
             richTextBoxResultats.AppendText('\n' + "NULL");
             btnValidationResultats.Enabled = true;
             btnBonneVache.Enabled = false;
             btnMauvaiseVache.Enabled = false;
+
         }
 
-        private void BtnStopChrono_Click_1(object sender, EventArgs e)
-        {
-            chrono.Stop();
-        }
-        private void btnValidationResultats_Click_1(object sender, EventArgs e)
+        private void btnValidationResultats_Click(object sender, EventArgs e)
         {
 
             btnEquipeSuivante.Enabled = true;
         }
-        private void btnEquipeSuivante_Click_2(object sender, EventArgs e)
+
+        private void btnEquipeSuivante_Click(object sender, EventArgs e)
         {
 
             int.TryParse(cmbBoxNumRound.Text, out int numRound);
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
-            string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
 
-            ListeNomsEquipes listeNomsEquipes = ctrl.ObtienOrdreParticipants(nomEpreuve, dateEpreuve, numRound);
-            
-            if (numeroDePassage != nbrParticipants )
+            if (numeroDePassage != nbrParticipants)
             {
-                lblEquipeEncours.Text = listeNomsEquipes.GetNomEquipeEnCours(numeroDePassage);
-                lblEquipeSuivante.Text = listeNomsEquipes.GetNomEquipeSuivante(numeroDePassage);
+                lblNomEquipeEnCours.Text = listeNomsEquipes.GetNomEquipeEnCours(numeroDePassage);
+                lblNomEquipeSuivante.Text = listeNomsEquipes.GetNomEquipeSuivante(numeroDePassage);
                 numeroDePassage++;
             }
             else
@@ -216,30 +233,26 @@ namespace Ranch_Sorting.Vue
             richTextBoxResultats.Clear();
         }
 
-        private void Round_Load(object sender, EventArgs e)
+        private void cmbBoxNumRound_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MaJComboBoxNomEpreuve();
+            btnLancer.Enabled = true;
         }
-        private void MaJComboBoxNomEpreuve()
+
+        private void cmbBoxSelectEpreuve_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                cmbBoxSelectEpreuve.Items.AddRange(ctrl.GetNomEpreuve().ToArray());
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // throw e;   // Q : qu'est-ce que cette instruction produit ?
-            }
+            cmbBoxNumRound.Items.Remove("2");
+            string nomEpreuve = cmbBoxSelectEpreuve.Text;
+            MaJComboBoxNbrRound(nomEpreuve);
+            cmbBoxNumRound.Enabled = true;
         }
+
         private void GetScoreRoundEpreuve()
         {
             try
             {
                 int.TryParse(cmbBoxNumRound.Text, out int numRound);
                 string nomEpreuve = cmbBoxSelectEpreuve.Text;
-                string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
-                dataGridViewScoresEquipe.DataSource = ctrl.GetScores(nomEpreuve, dateEpreuve, numRound);
+                dataGridViewScoresEquipe.DataSource = parent.Controleur.GetScores(nomEpreuve, numRound);
             }
             catch (Exception e)
             {
@@ -252,7 +265,7 @@ namespace Ranch_Sorting.Vue
             string dateEpreuve = "";
             try
             {
-               dateEpreuve = ctrl.GetDateEpreuve(nomEpreuve);
+               dateEpreuve = parent.Controleur.GetDateEpreuve(nomEpreuve);
             }
             catch (Exception e)
             {
@@ -267,9 +280,7 @@ namespace Ranch_Sorting.Vue
 
             int.TryParse(cmbBoxNumRound.Text, out int numRound);
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
-            string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
-
-            ListeNomsEquipes listeNomsEquipes = ctrl.ObtienOrdreParticipants(nomEpreuve, dateEpreuve, numRound);
+            listeNomsEquipes = new ListeNomsEquipes(parent.Controleur.ObtienOrdreParticipants(nomEpreuve, numRound));
             nbrParticipants = listeNomsEquipes.CompterEquipes();
 
             if (nbrParticipants == 0)
@@ -277,8 +288,8 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Aucune équipe n'est inscrite à cette épreuve", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            lblEquipeEncours.Text = listeNomsEquipes.GetNomEquipeEnCours(numeroDePassage);
-            lblEquipeSuivante.Text = listeNomsEquipes.GetNomEquipeSuivante(numeroDePassage);
+            lblNomEquipeEnCours.Text = listeNomsEquipes.GetNomEquipeEnCours(numeroDePassage);
+            lblNomEquipeSuivante.Text = listeNomsEquipes.GetNomEquipeSuivante(numeroDePassage);
             GetScoreRoundEpreuve();
             btnStart.Enabled = true;
         }

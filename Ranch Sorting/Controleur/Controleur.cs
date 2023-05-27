@@ -39,9 +39,9 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienEquipe();
         }
-        public ListeNomsEquipes ObtienOrdreParticipants(string nomEpreuve, string dateEpreuve, int numRound)
+        public ListeNomsEquipes ObtienOrdreParticipants(string nomEpreuve, int numRound)
         {             
-            return _bd.ObtienOrdreParticipants(nomEpreuve, dateEpreuve, numRound);
+            return _bd.ObtienOrdreParticipants(nomEpreuve, numRound);
         }
         public List<Lieu> GetLieu()
         {
@@ -53,10 +53,24 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienInscriptions(nomEpreuve);
         }
-        public List<Scores> GetScores(string nomEpreuve, string dateEpreuve, int numRound)
+
+        public int GetIdInscription(string nomEpreuve, string nomEquipe)
+        {
+            return _bd.ObtienIDInscription(nomEpreuve, nomEquipe);
+        }
+        public int GetNbrInscription(string nomEpreuve)
+        {
+            return _bd.ObtientNbrIscription(nomEpreuve);
+        }
+
+        public List<string> GetNbrRound(string nomEpreuve)
+        {
+            return _bd.ObtienNbrRound(nomEpreuve);
+        }
+        public List<Scores> GetScores(string nomEpreuve, int numRound)
         {
             //if ( _bd == null) return null;
-            return _bd.ObtienScores(nomEpreuve, dateEpreuve, numRound);
+            return _bd.ObtienScores(nomEpreuve, numRound);
         }
         public List<Epreuve> GetEpreuves(string nomEpreuve)
         {
@@ -76,6 +90,21 @@ namespace Ranch_Sorting.Controleur
         public List<string> GetNomLieux()
         {
             return _bd.ObtienNomLieux();
+        }
+        public string GetInitiales(string phrase)
+        {
+            string[] mots = phrase.Split(' ');
+            string initiales = "";
+
+            foreach (string mot in mots)
+            {
+                if (!string.IsNullOrEmpty(mot))
+                {
+                    initiales += char.ToUpper(mot[0]);
+                }
+            }
+
+            return initiales;
         }
         public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval21)
         {
@@ -98,38 +127,37 @@ namespace Ranch_Sorting.Controleur
             _bd.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu, nbrRound);
         }
 
-        public void CreationNouvelleTableScore(string nomEpreuve, string dateEpreuve)
+        public void AjouterEpreuveDansScore(string idInscription, string nomEquipe)
         {
-            _bd.CreationNouvelleTableScore(nomEpreuve, dateEpreuve);
-        }
-        public void AjouterUneInscription(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool payé )
-        {
-            _bd.AjouterUneInscription(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé);
+            _bd.AjouterEpreuveDansScore(idInscription, nomEquipe);
         }
 
-        public void SupprimerUneInscription(string nomEquipe)
+        public void AjouterInscriptionEtEquipeScore(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye, int nbrRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
         {
-            _bd.SupprimerUneInscription(nomEquipe);
+           _bd.AjouterInscriptionEtEquipeScore(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, paye, nbrRound, nbrVache, tDerniereV, tV1, tV2, tV3, tV4, tV5, tV6, tV7, tV8, tV9, tV10) ;
+        }
+        public void SupprimerUneInscription(int idInscription)
+        {
+            _bd.SupprimerUneInscription(idInscription);
         }
 
-        public  void AjouterInscriptionDansScore(string nomEpreuve, string dateEpreuve, string nomEquipe, int nbrRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
+        public void SupprimerInscriptionDansScore(int idInscription)
         {
-            _bd.AjouterUneEquipeInscriteDansScore(nomEpreuve, dateEpreuve, nomEquipe, nbrRound, nbrVache, tDerniereV, tV1, tV2, tV3, tV4, tV5, tV6, tV7, tV8, tV9, tV10);
+            _bd.SupprimerInscriptionDansScore(idInscription);
         }
 
-        public void SupprimerInscriptionDansScore(string nomEpreuve, string dateEpreuve, string nomEquipe)
+        public void SupprimerUneInscriptionEtEquipe(string nomEquipe)
         {
-            _bd.SupprimerInscriptionDansScore(nomEpreuve, dateEpreuve,nomEquipe);
+            _bd.SupprimerUneInscriptionEtEquipe(nomEquipe);
+        }
+        public void AjouterTempsVache(string nomEpreuve, string nomEquipe, int numRound, int numVache, string tempsVache)
+        {
+            _bd.AjouterTempsVache(nomEpreuve, nomEquipe, numRound, numVache, tempsVache);
         }
 
-        public void AjouterTempsVache(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int numVache, string tempsVache)
+        public void ResultatsEquipe(string nomEpreuve, string nomEquipe, int numRound, string nbrVache)
         {
-            _bd.AjouterTempsVache(nomEpreuve, dateEpreuve, nomEquipe, numRound, numVache, tempsVache);
-        }
-
-        public void ResultatsEquipe(string nomEpreuve, string dateEpreuve, string nomEquipe, int numRound, int nbrVache, string tempsDerniereVache)
-        {
-            _bd.ResultatsEquipe(nomEpreuve, dateEpreuve, nomEquipe, numRound, nbrVache, tempsDerniereVache);
+            _bd.ResultatsEquipe(nomEpreuve, nomEquipe, numRound, nbrVache);
         }
     }
 }

@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Ranch_Sorting.Modeles
 {
-    
+
     public class Inscription
     {
+        private int _idInscription;
         private string _nomEpreuve, _dateEpreuve, _nomEquipe, _dateInscription;
         private bool _paye;
 
         //CONSTRUCTEUR
-        public Inscription(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye)
+        public Inscription(int idInscription, string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye)
         {
+            _idInscription = idInscription;
             _nomEpreuve = nomEpreuve;
             _dateEpreuve = dateEpreuve;
             _nomEquipe = nomEquipe;
@@ -22,6 +24,11 @@ namespace Ranch_Sorting.Modeles
             _paye = paye;
         }
 
+        public int IdInscription
+        {
+            get { return _idInscription; }
+            set { _idInscription = value; }
+        }
         public string NomEpreuve
         {
             get
@@ -81,7 +88,7 @@ namespace Ranch_Sorting.Modeles
                     throw new Exception("Veuillez entrer la date de l'inscription");
             }
         }
-            
+
         public bool Paye
         {
             get
@@ -93,6 +100,8 @@ namespace Ranch_Sorting.Modeles
                 _paye = value;
             }
         }
+
     }
+
 
 }

@@ -36,19 +36,35 @@ namespace Ranch_Sorting.Vue
             {
                 parent.Controleur.SupprimerEquipe(txtBoxEquipeASupprimer.Text);
                 parent.GetEquipe();
+
+                DialogResult dr = MessageBox.Show("Voulez vous supprimer un autre equipe ?", "Ajout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No) Close();
+                else
+                {
+                    txtBoxEquipeASupprimer.Clear();
+                }
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string exceptionName = exc.GetType().Name;
+                if (exceptionName == "OleDbException" && exc.Message.Contains("Impossible de supprimer ou de modifier l'enregistrement car la table « Inscriptions » comprend des enregistrements connexes.")) // Numéro d'erreur spécifique pour violation d'unicité
+                {
+                    DialogResult dr = MessageBox.Show("Supprimer une equipe entrainera la suppresion de toutes ses inscription et scores !! Voulez-vous continuez ?", "Supprimer une équipe", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Yes)
+                    {
+
+                        parent.Controleur.SupprimerUneInscriptionEtEquipe(txtBoxEquipeASupprimer.Text);
+                        parent.GetEquipe();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
 
-            DialogResult dr = MessageBox.Show("Voulez vous supprimer un autre equipe ?", "Ajout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.No)
-                this.Close();
-            else
-            {
-                txtBoxEquipeASupprimer.Clear();
-            }
+            
         }
     }
 }

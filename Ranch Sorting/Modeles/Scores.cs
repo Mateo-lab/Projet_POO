@@ -6,16 +6,17 @@ namespace Ranch_Sorting.Modeles
     public class Scores
     {
         private string _nomEquipe;
-        private int _numRound, _nbrVache;
-        private string _tDerniereV, _tV1, _tV2, _tV3, _tV4, _tV5, _tV6, _tV7, _tV8, _tV9, _tV10;
+        private int _numRound;
+        private string _nbrVache,_tDerniereV, _tV1, _tV2, _tV3, _tV4, _tV5, _tV6, _tV7, _tV8, _tV9, _tV0;
 
-        public Scores(string nomEquipe,int numRound, int nbrVache,
-            string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
+        public Scores(string nomEquipe,int numRound, string nbrVache,
+            string tDerniereV, string tV0, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9)
         {
             _nomEquipe = nomEquipe;
             _numRound = numRound;
             _nbrVache = nbrVache;
             _tDerniereV = tDerniereV;
+            _tV0 = tV0;
             _tV1 = tV1;
             _tV2 = tV2;
             _tV3 = tV3;
@@ -25,7 +26,6 @@ namespace Ranch_Sorting.Modeles
             _tV7 = tV7;
             _tV8 = tV8;
             _tV9 = tV9;
-            _tV10 = tV10;
         }
 
         public string NomEquipe
@@ -55,7 +55,7 @@ namespace Ranch_Sorting.Modeles
             }
         }
 
-        public int NbrVache
+        public string NbrVache
         {
             get
             {
@@ -184,15 +184,15 @@ namespace Ranch_Sorting.Modeles
             }
         }
 
-        public string TV10
+        public string TV0
         {
             get
             {
-                return _tV10;
+                return _tV0;
             }
             set
             {
-                _tV10 = value;
+                _tV0 = value;
             }
         }
 

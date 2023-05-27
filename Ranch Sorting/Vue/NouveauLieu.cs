@@ -30,7 +30,15 @@ namespace Ranch_Sorting.Vue
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string exceptionName = exc.GetType().Name;
+                if (exceptionName == "SqlException" && exc.Message.Contains("Violation d'unicité")) // Numéro d'erreur spécifique pour violation d'unicité
+                {
+                     MessageBox.Show("Ce Lieux existe déjà", "Lieu existant", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             DialogResult dr = MessageBox.Show("Voulez vous ajoutez un autre lieu ?", "Ajout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
