@@ -65,8 +65,7 @@ namespace Ranch_Sorting.Vue
                     elapsedTime.Minutes, elapsedTime.Seconds, elapsedTime.Milliseconds);
             }
            
-
-            if (elapsedTime.TotalSeconds >= 120)
+            if (elapsedTime.TotalSeconds >= 80)
             {
 
                 string nomEpreuve = cmbBoxSelectEpreuve.Text;
@@ -149,6 +148,7 @@ namespace Ranch_Sorting.Vue
         ///////////////////////////////////////////////////
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnLancer.Enabled = false;
             enCoursDEpreuve = true;
             btnRetour.Enabled = false;  
             btnBonneVache.Enabled = true;
@@ -241,6 +241,7 @@ namespace Ranch_Sorting.Vue
             }
             else
             {
+                btnLancer.Enabled = true;
                 btnRetour.Enabled = true;
                 enCoursDEpreuve = false;
                 lblNomEquipeEnCours.Text = "Toutes les équipes ont terminé";
@@ -363,6 +364,7 @@ namespace Ranch_Sorting.Vue
         {
 
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
+            richTextBoxResultats.Clear();
 
             GetScoreRoundEpreuve();
             

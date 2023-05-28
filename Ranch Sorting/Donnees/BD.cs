@@ -155,7 +155,7 @@ namespace Ranch_Sorting_App.Donnees
         public List<Epreuve> ObtienEpreuves()
         {
             List<Epreuve> epreuves = new List<Epreuve>(); // Liste des inscriptions qui sera retournée par la méthode 
-            string req = "SELECT * FROM Epreuves"; // Requete SQL pour obtenir les inscriptions
+            string req = "SELECT * FROM Epreuves "; // Requete SQL pour obtenir les inscriptions
             IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
 
             while (reader.Read())
