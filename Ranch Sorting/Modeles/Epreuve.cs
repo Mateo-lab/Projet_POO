@@ -9,14 +9,15 @@ namespace Ranch_Sorting.Modeles
     public class Epreuve
     {
         private string _nomEpreuve, _dateEpreuve, _nomLieu;// Les infos que chaque epreuve doit avoir
-        public string nomEpreuveEnCours, dateEpreuveEnCours;
+        private int _numRound;
 
         //CONSTRUCTEUR
-        public Epreuve(string nomEpreuve, string date, string nomLieu)
+        public Epreuve(string nomEpreuve, string date, string nomLieu, int numRound)
         {
             _nomEpreuve = nomEpreuve;
             _dateEpreuve = date;
             _nomLieu = nomLieu;
+            _numRound = numRound;
         }
         public string NomEpreuve
         {
@@ -60,27 +61,15 @@ namespace Ranch_Sorting.Modeles
                     throw new Exception("Veuillez choisir le lieu de l'epreuve");
             }
         }
-        
-        public string NomEpreuveEnCours
+        public int NumRound
         {
             get
             {
-                return nomEpreuveEnCours;
+                return _numRound;
             }
             set
             {
-                    nomEpreuveEnCours = value;
-            }
-        }
-        public string DateEpreuveEnCours
-        {
-            get
-            {
-                return dateEpreuveEnCours;
-            }
-            set
-            {
-                dateEpreuveEnCours = value;
+                _numRound = value;
             }
         }
     }

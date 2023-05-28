@@ -15,8 +15,6 @@ namespace Ranch_Sorting.Controleur
     {
         private BD _bd;
 
-        public List<Equipe> DataSource { get; internal set; }
-
         public Controle()
         {
             _bd = new BD();   
@@ -39,15 +37,12 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienEquipe();
         }
-        public ListeNomsEquipes ObtienOrdreParticipants(string nomEpreuve, int numRound)
-        {             
-            return _bd.ObtienOrdreParticipants(nomEpreuve, numRound);
-        }
-        public List<Lieu> GetLieu()
+
+        public List<Inscription> CreateRandomPassageList(string nomEpreuve)
         {
-            //if ( _bd == null) return null;
-            return _bd.ObtienLieu();
+            return _bd.CreateRandomPassageList(nomEpreuve);
         }
+        
         public List<Inscription> GetInscriptions(string nomEpreuve)
         {
             //if ( _bd == null) return null;
@@ -67,15 +62,15 @@ namespace Ranch_Sorting.Controleur
         {
             return _bd.ObtienNbrRound(nomEpreuve);
         }
-        public List<Scores> GetScores(string nomEpreuve, int numRound)
+        public List<Scores> GetScores(string nomEpreuve, int numRound, out bool sansScore)
         {
             //if ( _bd == null) return null;
-            return _bd.ObtienScores(nomEpreuve, numRound);
+            return _bd.ObtienScores(nomEpreuve, numRound, out sansScore);
         }
-        public List<Epreuve> GetEpreuves(string nomEpreuve)
+        public List<Epreuve> GetEpreuves()
         {
             //if ( _bd == null) return null;
-            return _bd.ObtienEpreuves(nomEpreuve);
+            return _bd.ObtienEpreuves();
         }
         public List<string> GetNomEpreuve()
         {
@@ -127,11 +122,10 @@ namespace Ranch_Sorting.Controleur
             _bd.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu, nbrRound);
         }
 
-        public void AjouterEpreuveDansScore(string idInscription, string nomEquipe)
+        public bool CheckInscription(string nomEpreuve, string nomEquipe)
         {
-            _bd.AjouterEpreuveDansScore(idInscription, nomEquipe);
+            return _bd.CheckInscription(nomEpreuve, nomEquipe);
         }
-
         public void AjouterInscriptionEtEquipeScore(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye, int nbrRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
         {
            _bd.AjouterInscriptionEtEquipeScore(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, paye, nbrRound, nbrVache, tDerniereV, tV1, tV2, tV3, tV4, tV5, tV6, tV7, tV8, tV9, tV10) ;

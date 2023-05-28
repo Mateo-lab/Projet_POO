@@ -43,7 +43,6 @@
             this.lblTimer = new System.Windows.Forms.Label();
             this.lblNumVache = new System.Windows.Forms.Label();
             this.lblAnnoncePremiereVache = new System.Windows.Forms.Label();
-            this.BtnStopChrono = new System.Windows.Forms.Button();
             this.btnEquipeSuivante = new System.Windows.Forms.Button();
             this.btnValidationResultats = new System.Windows.Forms.Button();
             this.btnMauvaiseVache = new System.Windows.Forms.Button();
@@ -52,6 +51,7 @@
             this.lblClassement = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewScoresEquipe = new System.Windows.Forms.DataGridView();
+            this.btnRetour = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,7 +86,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblClassement);
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(1567, 1033);
-            this.splitContainer1.SplitterDistance = 664;
+            this.splitContainer1.SplitterDistance = 663;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -94,7 +94,7 @@
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -105,8 +105,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1567, 664);
-            this.splitContainer2.SplitterDistance = 409;
+            this.splitContainer2.Size = new System.Drawing.Size(1567, 663);
+            this.splitContainer2.SplitterDistance = 408;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 27;
             // 
@@ -116,7 +116,7 @@
             this.lblGrilleResultat.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGrilleResultat.Location = new System.Drawing.Point(19, 66);
             this.lblGrilleResultat.Name = "lblGrilleResultat";
-            this.lblGrilleResultat.Size = new System.Drawing.Size(345, 45);
+            this.lblGrilleResultat.Size = new System.Drawing.Size(286, 37);
             this.lblGrilleResultat.TabIndex = 36;
             this.lblGrilleResultat.Text = "Resultat de l\'equipe :";
             // 
@@ -124,7 +124,7 @@
             // 
             this.richTextBoxResultats.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxResultats.Location = new System.Drawing.Point(16, 127);
-            this.richTextBoxResultats.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBoxResultats.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxResultats.Name = "richTextBoxResultats";
             this.richTextBoxResultats.Size = new System.Drawing.Size(383, 425);
             this.richTextBoxResultats.TabIndex = 0;
@@ -134,7 +134,7 @@
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -147,20 +147,20 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.btnRetour);
             this.splitContainer3.Panel2.Controls.Add(this.btnLancer);
             this.splitContainer3.Panel2.Controls.Add(this.cmbBoxNumRound);
             this.splitContainer3.Panel2.Controls.Add(this.cmbBoxSelectEpreuve);
             this.splitContainer3.Panel2.Controls.Add(this.lblTimer);
             this.splitContainer3.Panel2.Controls.Add(this.lblNumVache);
             this.splitContainer3.Panel2.Controls.Add(this.lblAnnoncePremiereVache);
-            this.splitContainer3.Panel2.Controls.Add(this.BtnStopChrono);
             this.splitContainer3.Panel2.Controls.Add(this.btnEquipeSuivante);
             this.splitContainer3.Panel2.Controls.Add(this.btnValidationResultats);
             this.splitContainer3.Panel2.Controls.Add(this.btnMauvaiseVache);
             this.splitContainer3.Panel2.Controls.Add(this.btnBonneVache);
             this.splitContainer3.Panel2.Controls.Add(this.btnStart);
-            this.splitContainer3.Size = new System.Drawing.Size(1149, 660);
-            this.splitContainer3.SplitterDistance = 118;
+            this.splitContainer3.Size = new System.Drawing.Size(1150, 659);
+            this.splitContainer3.SplitterDistance = 116;
             this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 36;
             // 
@@ -170,7 +170,7 @@
             this.lblNomEquipeSuivante.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.lblNomEquipeSuivante.Location = new System.Drawing.Point(571, 74);
             this.lblNomEquipeSuivante.Name = "lblNomEquipeSuivante";
-            this.lblNomEquipeSuivante.Size = new System.Drawing.Size(189, 35);
+            this.lblNomEquipeSuivante.Size = new System.Drawing.Size(149, 28);
             this.lblNomEquipeSuivante.TabIndex = 46;
             this.lblNomEquipeSuivante.Text = "Equipe suivante";
             // 
@@ -180,7 +180,7 @@
             this.lblNomEquipeEnCours.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.lblNomEquipeEnCours.Location = new System.Drawing.Point(571, 23);
             this.lblNomEquipeEnCours.Name = "lblNomEquipeEnCours";
-            this.lblNomEquipeEnCours.Size = new System.Drawing.Size(201, 35);
+            this.lblNomEquipeEnCours.Size = new System.Drawing.Size(162, 28);
             this.lblNomEquipeEnCours.TabIndex = 45;
             this.lblNomEquipeEnCours.Text = "Equipe en cours";
             // 
@@ -190,7 +190,7 @@
             this.lblEquipeSuivante.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.lblEquipeSuivante.Location = new System.Drawing.Point(95, 74);
             this.lblEquipeSuivante.Name = "lblEquipeSuivante";
-            this.lblEquipeSuivante.Size = new System.Drawing.Size(311, 35);
+            this.lblEquipeSuivante.Size = new System.Drawing.Size(244, 28);
             this.lblEquipeSuivante.TabIndex = 44;
             this.lblEquipeSuivante.Text = "Nom de l\'equipe suivante :";
             // 
@@ -200,7 +200,7 @@
             this.lblEquipeEncours.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.lblEquipeEncours.Location = new System.Drawing.Point(65, 23);
             this.lblEquipeEncours.Name = "lblEquipeEncours";
-            this.lblEquipeEncours.Size = new System.Drawing.Size(331, 35);
+            this.lblEquipeEncours.Size = new System.Drawing.Size(266, 28);
             this.lblEquipeEncours.TabIndex = 43;
             this.lblEquipeEncours.Text = "Nom de l\'equipe en cours :";
             // 
@@ -209,11 +209,11 @@
             this.btnLancer.AutoSize = true;
             this.btnLancer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLancer.Enabled = false;
-            this.btnLancer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLancer.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.btnLancer.Location = new System.Drawing.Point(903, 119);
             this.btnLancer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLancer.Name = "btnLancer";
-            this.btnLancer.Size = new System.Drawing.Size(72, 33);
+            this.btnLancer.Size = new System.Drawing.Size(84, 38);
             this.btnLancer.TabIndex = 47;
             this.btnLancer.Text = "Lancer";
             this.btnLancer.UseVisualStyleBackColor = true;
@@ -221,27 +221,29 @@
             // 
             // cmbBoxNumRound
             // 
+            this.cmbBoxNumRound.BackColor = System.Drawing.Color.Yellow;
             this.cmbBoxNumRound.Enabled = false;
             this.cmbBoxNumRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmbBoxNumRound.FormattingEnabled = true;
             this.cmbBoxNumRound.Items.AddRange(new object[] {
             "1"});
             this.cmbBoxNumRound.Location = new System.Drawing.Point(801, 84);
-            this.cmbBoxNumRound.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBoxNumRound.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBoxNumRound.Name = "cmbBoxNumRound";
-            this.cmbBoxNumRound.Size = new System.Drawing.Size(299, 28);
+            this.cmbBoxNumRound.Size = new System.Drawing.Size(299, 24);
             this.cmbBoxNumRound.TabIndex = 46;
             this.cmbBoxNumRound.Text = "Sélectionner le numero du round";
             this.cmbBoxNumRound.SelectedIndexChanged += new System.EventHandler(this.cmbBoxNumRound_SelectedIndexChanged);
             // 
             // cmbBoxSelectEpreuve
             // 
+            this.cmbBoxSelectEpreuve.BackColor = System.Drawing.Color.Yellow;
             this.cmbBoxSelectEpreuve.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmbBoxSelectEpreuve.FormattingEnabled = true;
             this.cmbBoxSelectEpreuve.Location = new System.Drawing.Point(801, 36);
-            this.cmbBoxSelectEpreuve.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBoxSelectEpreuve.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBoxSelectEpreuve.Name = "cmbBoxSelectEpreuve";
-            this.cmbBoxSelectEpreuve.Size = new System.Drawing.Size(299, 28);
+            this.cmbBoxSelectEpreuve.Size = new System.Drawing.Size(299, 24);
             this.cmbBoxSelectEpreuve.TabIndex = 45;
             this.cmbBoxSelectEpreuve.Text = "Sélectionner l\'épreuve à lancer";
             this.cmbBoxSelectEpreuve.SelectedIndexChanged += new System.EventHandler(this.cmbBoxSelectEpreuve_SelectedIndexChanged);
@@ -265,7 +267,7 @@
             this.lblNumVache.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumVache.Location = new System.Drawing.Point(649, 183);
             this.lblNumVache.Name = "lblNumVache";
-            this.lblNumVache.Size = new System.Drawing.Size(279, 45);
+            this.lblNumVache.Size = new System.Drawing.Size(230, 37);
             this.lblNumVache.TabIndex = 43;
             this.lblNumVache.Text = "*Random vache*";
             // 
@@ -276,24 +278,9 @@
             this.lblAnnoncePremiereVache.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnnoncePremiereVache.Location = new System.Drawing.Point(79, 183);
             this.lblAnnoncePremiereVache.Name = "lblAnnoncePremiereVache";
-            this.lblAnnoncePremiereVache.Size = new System.Drawing.Size(495, 45);
+            this.lblAnnoncePremiereVache.Size = new System.Drawing.Size(410, 37);
             this.lblAnnoncePremiereVache.TabIndex = 42;
             this.lblAnnoncePremiereVache.Text = "Numero de la premiere vache :";
-            // 
-            // BtnStopChrono
-            // 
-            this.BtnStopChrono.AutoSize = true;
-            this.BtnStopChrono.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BtnStopChrono.Enabled = false;
-            this.BtnStopChrono.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.BtnStopChrono.Location = new System.Drawing.Point(801, 288);
-            this.BtnStopChrono.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BtnStopChrono.Name = "BtnStopChrono";
-            this.BtnStopChrono.Size = new System.Drawing.Size(58, 33);
-            this.BtnStopChrono.TabIndex = 41;
-            this.BtnStopChrono.Text = "Stop";
-            this.BtnStopChrono.UseVisualStyleBackColor = true;
-            this.BtnStopChrono.Click += new System.EventHandler(this.BtnStopChrono_Click);
             // 
             // btnEquipeSuivante
             // 
@@ -304,7 +291,7 @@
             this.btnEquipeSuivante.Location = new System.Drawing.Point(687, 460);
             this.btnEquipeSuivante.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEquipeSuivante.Name = "btnEquipeSuivante";
-            this.btnEquipeSuivante.Size = new System.Drawing.Size(211, 45);
+            this.btnEquipeSuivante.Size = new System.Drawing.Size(172, 38);
             this.btnEquipeSuivante.TabIndex = 40;
             this.btnEquipeSuivante.Text = "Equipe suivante";
             this.btnEquipeSuivante.UseVisualStyleBackColor = true;
@@ -319,7 +306,7 @@
             this.btnValidationResultats.Location = new System.Drawing.Point(144, 460);
             this.btnValidationResultats.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnValidationResultats.Name = "btnValidationResultats";
-            this.btnValidationResultats.Size = new System.Drawing.Size(253, 45);
+            this.btnValidationResultats.Size = new System.Drawing.Size(207, 38);
             this.btnValidationResultats.TabIndex = 39;
             this.btnValidationResultats.Text = "Valider les résultats";
             this.btnValidationResultats.UseVisualStyleBackColor = true;
@@ -334,7 +321,7 @@
             this.btnMauvaiseVache.Location = new System.Drawing.Point(687, 375);
             this.btnMauvaiseVache.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMauvaiseVache.Name = "btnMauvaiseVache";
-            this.btnMauvaiseVache.Size = new System.Drawing.Size(218, 45);
+            this.btnMauvaiseVache.Size = new System.Drawing.Size(179, 38);
             this.btnMauvaiseVache.TabIndex = 38;
             this.btnMauvaiseVache.Text = "Mauvaise  vache";
             this.btnMauvaiseVache.UseVisualStyleBackColor = true;
@@ -349,7 +336,7 @@
             this.btnBonneVache.Location = new System.Drawing.Point(193, 375);
             this.btnBonneVache.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBonneVache.Name = "btnBonneVache";
-            this.btnBonneVache.Size = new System.Drawing.Size(175, 45);
+            this.btnBonneVache.Size = new System.Drawing.Size(143, 38);
             this.btnBonneVache.TabIndex = 37;
             this.btnBonneVache.Text = "Bonne vache";
             this.btnBonneVache.UseVisualStyleBackColor = true;
@@ -359,15 +346,16 @@
             // 
             this.btnStart.AutoSize = true;
             this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStart.BackColor = System.Drawing.Color.LawnGreen;
             this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold);
             this.btnStart.Location = new System.Drawing.Point(505, 261);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(97, 67);
+            this.btnStart.Size = new System.Drawing.Size(80, 56);
             this.btnStart.TabIndex = 36;
             this.btnStart.Text = "GO";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // lblClassement
@@ -376,7 +364,7 @@
             this.lblClassement.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClassement.Location = new System.Drawing.Point(655, 14);
             this.lblClassement.Name = "lblClassement";
-            this.lblClassement.Size = new System.Drawing.Size(215, 45);
+            this.lblClassement.Size = new System.Drawing.Size(177, 37);
             this.lblClassement.TabIndex = 37;
             this.lblClassement.Text = "Classement :";
             // 
@@ -385,7 +373,7 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.flowLayoutPanel1.Controls.Add(this.dataGridViewScoresEquipe);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(35, 59);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1516, 290);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -394,11 +382,25 @@
             // 
             this.dataGridViewScoresEquipe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewScoresEquipe.Location = new System.Drawing.Point(4, 4);
-            this.dataGridViewScoresEquipe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewScoresEquipe.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewScoresEquipe.Name = "dataGridViewScoresEquipe";
             this.dataGridViewScoresEquipe.RowHeadersWidth = 51;
             this.dataGridViewScoresEquipe.Size = new System.Drawing.Size(1509, 284);
             this.dataGridViewScoresEquipe.TabIndex = 0;
+            // 
+            // btnRetour
+            // 
+            this.btnRetour.AutoSize = true;
+            this.btnRetour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRetour.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnRetour.Location = new System.Drawing.Point(977, 473);
+            this.btnRetour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRetour.Name = "btnRetour";
+            this.btnRetour.Size = new System.Drawing.Size(146, 29);
+            this.btnRetour.TabIndex = 49;
+            this.btnRetour.Text = "Retour à l\'acceuille";
+            this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // Round
             // 
@@ -407,9 +409,11 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1567, 1033);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Round";
             this.Text = "Round";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Round_FormClosing);
             this.Load += new System.EventHandler(this.Round_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -446,7 +450,6 @@
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Label lblNumVache;
         private System.Windows.Forms.Label lblAnnoncePremiereVache;
-        private System.Windows.Forms.Button BtnStopChrono;
         private System.Windows.Forms.Button btnEquipeSuivante;
         private System.Windows.Forms.Button btnValidationResultats;
         private System.Windows.Forms.Button btnMauvaiseVache;
@@ -459,5 +462,6 @@
         private System.Windows.Forms.Button btnLancer;
         private System.Windows.Forms.ComboBox cmbBoxNumRound;
         private System.Windows.Forms.ComboBox cmbBoxSelectEpreuve;
+        private System.Windows.Forms.Button btnRetour;
     }
 }

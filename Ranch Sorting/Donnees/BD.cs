@@ -5,10 +5,6 @@ using System.Data;
 using System.IO;
 using Ranch_Sorting.Modeles;
 using System.Linq;
-using System.Globalization;
-using System.Data.SqlClient;
-using System.Text;
-using System.Reflection;
 
 namespace Ranch_Sorting_App.Donnees
 {
@@ -28,6 +24,7 @@ namespace Ranch_Sorting_App.Donnees
             _oleConnection.Open();
         }
 
+        /////////////////// Methode BD/////////////////////
         public void CloseConnexionBD()
         {
             if (_oleConnection != null)
@@ -50,6 +47,7 @@ namespace Ranch_Sorting_App.Donnees
             cmd.ExecuteNonQuery();
         }
 
+        ///////////////////////////////////////////////////
 
         public List<Equipe> ObtienEquipe()
         {
@@ -68,7 +66,6 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return listeDesEquipes; // Retourne la liste des equipes
         }
-
         public int ObtientNbrIscription(string nomEquipe) 
         {
             int nombreEquipes = 0;
@@ -136,6 +133,7 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return listeDesInscriptions; // Retourne la liste des inscriptions
         }
+
         public int ObtienIDInscription(string nomEpreuve,string nomEquipe)
         {
             int idInscription = 0;
@@ -154,10 +152,10 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close(); // Ferme le reader
             return idInscription; // Retourne la liste des equipes
         }
-        public List<Epreuve> ObtienEpreuves(string nomEpreuve)
+        public List<Epreuve> ObtienEpreuves()
         {
             List<Epreuve> epreuves = new List<Epreuve>(); // Liste des inscriptions qui sera retournée par la méthode 
-            string req = "SELECT * FROM Epreuves WHERE [Nom épreuve] = '" + nomEpreuve + "' "; // Requete SQL pour obtenir les inscriptions
+            string req = "SELECT * FROM Epreuves"; // Requete SQL pour obtenir les inscriptions
             IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
 
             while (reader.Read())
@@ -167,7 +165,7 @@ namespace Ranch_Sorting_App.Donnees
                 DateTime dateEpreuve = reader.GetDateTime(1);
                 string dateEpreuveEnString = dateEpreuve.ToString("d-M-yyy");;
 
-                epreuves.Add(new Epreuve(reader.GetString(0), dateEpreuveEnString, reader.GetString(1))); // Ajoute les inscriptions dans la liste des inscriptions
+                epreuves.Add(new Epreuve(reader.GetString(0), dateEpreuveEnString, reader.GetString(2), reader.GetInt32(3))); // Ajoute les inscriptions dans la liste des inscriptions
 
             }
             reader.Close(); // Ferme le reader
@@ -223,8 +221,10 @@ namespace Ranch_Sorting_App.Donnees
             return listeDesDateDesEpreuves;
             
         }
-        public List<Scores> ObtienScores(string nomEpreuve, int numRound)
+        public List<Scores> ObtienScores(string nomEpreuve, int numRound, out bool sansScore)
         {
+            int i = 0;
+            bool _sansScore = false;
             List<Scores> listeDesScores = new List<Scores>(); // Liste des scores qui sera retournée par la méthode 
             string req = "SELECT [Scores équipes].[Nom équipe], [Nb vaches validées], [Temps dernière vache]";
             req += ", [Temps vache 0], [Temps vache 1], [Temps vache 2], [Temps vache 3], [Temps vache 4],";
@@ -232,7 +232,7 @@ namespace Ranch_Sorting_App.Donnees
             req += " FROM ([Inscriptions]";
             req += " INNER JOIN [Scores équipes] ON Inscriptions.IDinscription = [Scores équipes].IDinscription)"; 
             req += " WHERE [N° round] = "+ numRound +" AND Inscriptions.[Nom épreuve] = '" + nomEpreuve + "'";
-            req += " ORDER BY [Nb vaches validées] DESC;";
+            req += " ORDER BY [Nb vaches validées] DESC, [Temps dernière vache] ASC;";
             
             IDataReader reader = ExecuteReaderRequest(req); 
 
@@ -240,13 +240,32 @@ namespace Ranch_Sorting_App.Donnees
             {
                 // Ajoute les scores dans la liste des scores 
                 // champs : NomEquipe, NumRound, NbrVache, TDerniereV, TV1, TV2, TV3, TV4, TV5, TV6, TV7, TV8, TV9, TV10
-                string num = reader.GetString(1);
+                if (i == 0)
+                {
+                    string check_sansScore = reader.GetString(2);
+                    string check_sansInscrit = reader.GetString(0);
+                    if (check_sansScore == "" )
+                    {
+                        _sansScore = true;
+                    }
+                }
                 listeDesScores.Add(new Scores(reader.GetString(0), numRound, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11), reader.GetString(12)));// Ajoute les scores dans la liste des scores 
+                i = 1;
             }
+            sansScore = _sansScore;
             reader.Close(); // Ferme le reader
             return listeDesScores; // Retourne la liste des scores
         }
 
+        public List<Inscription> CreateRandomPassageList(string nomEpreuve)
+        {
+            List<Inscription> listePassage = new List<Inscription>();
+            listePassage = ObtienInscriptions(nomEpreuve); // Obtient la liste des inscriptions
+            // Mélanger la liste de passage
+            Random random = new Random();
+            listePassage = listePassage.OrderBy(x => random.Next()).ToList();
+            return listePassage;
+        }
         public ListeNomsEquipes ObtienOrdreParticipants(string nomEpreuve, int numRound)
         {
             List<Scores> listeDesScores = new List<Scores>();
@@ -294,7 +313,7 @@ namespace Ranch_Sorting_App.Donnees
         }   
         public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu, int nbrRound)
         {
-            string req = "INSERT INTO Epreuves VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "' , '" + nomLieu + "', '" + nbrRound + "')";
+            string req = "INSERT INTO Epreuves VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "' , '" + nomLieu + "', " + nbrRound +" ) ;";
             ExecuteNonQueryRequest(req);
         }
         public void AjouterEpreuveDansScore(string idInscription, string nomEquipe)
@@ -307,12 +326,21 @@ namespace Ranch_Sorting_App.Donnees
             ExecuteNonQueryRequest(req);
 
         }
+        public bool CheckInscription(string nomEpreuve, string nomEquipe)
+        {
+            string req = "SELECT * FROM Inscriptions WHERE [Nom épreuve] = '" + nomEpreuve + "' AND [Nom équipe] = '" + nomEquipe + "'";
+            IDataReader reader = ExecuteReaderRequest(req);
+
+            bool check = reader.Read();
+            reader.Close();
+            return check;
+        }
         public void AjouterInscriptionEtEquipeScore(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye, int nbrRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
         {
             int idInscription = 0; // Déterminez comment générer l'IDInscription ici
 
             string req = "INSERT INTO Inscriptions ([Nom épreuve], [Date épreuve], [Nom équipe], [Date inscription], [Payé])";
-            req += " VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "', '" + nomEquipe + "', '" + dateInscription + "', " + paye + ") ";
+            req += " VALUES ('" + nomEpreuve + "' , '" + dateEpreuve + "', '" + nomEquipe + "', '" + dateInscription + "', " + paye + ") ";
             ExecuteNonQueryRequest(req);
 
             req = "SELECT IDinscription FROM [Inscriptions] ";

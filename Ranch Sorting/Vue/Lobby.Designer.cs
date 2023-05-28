@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSupprEquipe = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewListeEquipe = new System.Windows.Forms.DataGridView();
+            this.lblListeEquipe = new System.Windows.Forms.Label();
+            this.btnSupprEquipe = new System.Windows.Forms.Button();
             this.btnAjouterEquipe = new System.Windows.Forms.Button();
             this.btnListeInscrit = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
@@ -56,16 +56,16 @@
             this.btnInscription = new System.Windows.Forms.Button();
             this.cmbBoxLieu = new System.Windows.Forms.ComboBox();
             this.lblDate = new System.Windows.Forms.Label();
-            this.lblListeEquipe = new System.Windows.Forms.Label();
+            this.dataGridViewListeEpreuve = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListeEquipe)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEquipeInscrite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbrRound)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListeEpreuve)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -79,9 +79,9 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewListeEquipe);
             this.splitContainer1.Panel1.Controls.Add(this.lblListeEquipe);
             this.splitContainer1.Panel1.Controls.Add(this.btnSupprEquipe);
-            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
             this.splitContainer1.Panel1.Controls.Add(this.btnAjouterEquipe);
             // 
             // splitContainer1.Panel2
@@ -108,58 +108,63 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnInscription);
             this.splitContainer1.Panel2.Controls.Add(this.cmbBoxLieu);
             this.splitContainer1.Panel2.Controls.Add(this.lblDate);
-            this.splitContainer1.Size = new System.Drawing.Size(1717, 964);
-            this.splitContainer1.SplitterDistance = 800;
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridViewListeEpreuve);
+            this.splitContainer1.Size = new System.Drawing.Size(1487, 814);
+            this.splitContainer1.SplitterDistance = 548;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // dataGridViewListeEquipe
+            // 
+            this.dataGridViewListeEquipe.AllowUserToAddRows = false;
+            this.dataGridViewListeEquipe.AllowUserToDeleteRows = false;
+            this.dataGridViewListeEquipe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewListeEquipe.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridViewListeEquipe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListeEquipe.Location = new System.Drawing.Point(7, 72);
+            this.dataGridViewListeEquipe.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridViewListeEquipe.Name = "dataGridViewListeEquipe";
+            this.dataGridViewListeEquipe.ReadOnly = true;
+            this.dataGridViewListeEquipe.RowHeadersWidth = 51;
+            this.dataGridViewListeEquipe.RowTemplate.Height = 24;
+            this.dataGridViewListeEquipe.Size = new System.Drawing.Size(730, 635);
+            this.dataGridViewListeEquipe.TabIndex = 0;
+            // 
+            // lblListeEquipe
+            // 
+            this.lblListeEquipe.AutoSize = true;
+            this.lblListeEquipe.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListeEquipe.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblListeEquipe.Location = new System.Drawing.Point(154, 32);
+            this.lblListeEquipe.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
+            this.lblListeEquipe.Name = "lblListeEquipe";
+            this.lblListeEquipe.Size = new System.Drawing.Size(222, 21);
+            this.lblListeEquipe.TabIndex = 44;
+            this.lblListeEquipe.Text = "Liste des équipes connues :";
+            this.lblListeEquipe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnSupprEquipe
             // 
             this.btnSupprEquipe.AutoSize = true;
             this.btnSupprEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSupprEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnSupprEquipe.Location = new System.Drawing.Point(465, 873);
+            this.btnSupprEquipe.Location = new System.Drawing.Point(311, 723);
             this.btnSupprEquipe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSupprEquipe.Name = "btnSupprEquipe";
-            this.btnSupprEquipe.Size = new System.Drawing.Size(231, 38);
+            this.btnSupprEquipe.Size = new System.Drawing.Size(190, 31);
             this.btnSupprEquipe.TabIndex = 8;
             this.btnSupprEquipe.Text = "Supprimer une equipe";
             this.btnSupprEquipe.UseVisualStyleBackColor = true;
             this.btnSupprEquipe.Click += new System.EventHandler(this.btnSupprEquipe_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.flowLayoutPanel1.Controls.Add(this.dataGridViewListeEquipe);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 92);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(752, 745);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // dataGridViewListeEquipe
-            // 
-            this.dataGridViewListeEquipe.AllowUserToAddRows = false;
-            this.dataGridViewListeEquipe.AllowUserToDeleteRows = false;
-            this.dataGridViewListeEquipe.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridViewListeEquipe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewListeEquipe.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewListeEquipe.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridViewListeEquipe.Name = "dataGridViewListeEquipe";
-            this.dataGridViewListeEquipe.ReadOnly = true;
-            this.dataGridViewListeEquipe.RowHeadersWidth = 51;
-            this.dataGridViewListeEquipe.RowTemplate.Height = 24;
-            this.dataGridViewListeEquipe.Size = new System.Drawing.Size(752, 745);
-            this.dataGridViewListeEquipe.TabIndex = 0;
             // 
             // btnAjouterEquipe
             // 
             this.btnAjouterEquipe.AutoSize = true;
             this.btnAjouterEquipe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAjouterEquipe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnAjouterEquipe.Location = new System.Drawing.Point(87, 873);
+            this.btnAjouterEquipe.Location = new System.Drawing.Point(43, 723);
             this.btnAjouterEquipe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAjouterEquipe.Name = "btnAjouterEquipe";
-            this.btnAjouterEquipe.Size = new System.Drawing.Size(204, 38);
+            this.btnAjouterEquipe.Size = new System.Drawing.Size(167, 31);
             this.btnAjouterEquipe.TabIndex = 7;
             this.btnAjouterEquipe.Text = "Ajouter une equipe";
             this.btnAjouterEquipe.UseVisualStyleBackColor = true;
@@ -173,7 +178,7 @@
             this.btnListeInscrit.Location = new System.Drawing.Point(252, 289);
             this.btnListeInscrit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnListeInscrit.Name = "btnListeInscrit";
-            this.btnListeInscrit.Size = new System.Drawing.Size(353, 47);
+            this.btnListeInscrit.Size = new System.Drawing.Size(288, 40);
             this.btnListeInscrit.TabIndex = 49;
             this.btnListeInscrit.Text = "Obtenir la liste des inscrit";
             this.btnListeInscrit.UseVisualStyleBackColor = true;
@@ -188,7 +193,7 @@
             this.btnRetour.Location = new System.Drawing.Point(716, 296);
             this.btnRetour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRetour.Name = "btnRetour";
-            this.btnRetour.Size = new System.Drawing.Size(86, 38);
+            this.btnRetour.Size = new System.Drawing.Size(71, 31);
             this.btnRetour.TabIndex = 48;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = true;
@@ -203,7 +208,7 @@
             this.btnCreeUneNouvelleEpreuve.Location = new System.Drawing.Point(252, 153);
             this.btnCreeUneNouvelleEpreuve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreeUneNouvelleEpreuve.Name = "btnCreeUneNouvelleEpreuve";
-            this.btnCreeUneNouvelleEpreuve.Size = new System.Drawing.Size(378, 47);
+            this.btnCreeUneNouvelleEpreuve.Size = new System.Drawing.Size(306, 40);
             this.btnCreeUneNouvelleEpreuve.TabIndex = 47;
             this.btnCreeUneNouvelleEpreuve.Text = "Créer une nouvelle épreuve";
             this.btnCreeUneNouvelleEpreuve.UseVisualStyleBackColor = true;
@@ -217,7 +222,7 @@
             this.btnVisualiserEpreeuveExistante.Location = new System.Drawing.Point(222, 226);
             this.btnVisualiserEpreeuveExistante.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVisualiserEpreeuveExistante.Name = "btnVisualiserEpreeuveExistante";
-            this.btnVisualiserEpreeuveExistante.Size = new System.Drawing.Size(440, 47);
+            this.btnVisualiserEpreeuveExistante.Size = new System.Drawing.Size(357, 40);
             this.btnVisualiserEpreeuveExistante.TabIndex = 46;
             this.btnVisualiserEpreeuveExistante.Text = "Visualiser une épreuve existante";
             this.btnVisualiserEpreeuveExistante.UseVisualStyleBackColor = true;
@@ -231,7 +236,7 @@
             this.btnLancerEpreuve.Location = new System.Drawing.Point(317, 887);
             this.btnLancerEpreuve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLancerEpreuve.Name = "btnLancerEpreuve";
-            this.btnLancerEpreuve.Size = new System.Drawing.Size(276, 47);
+            this.btnLancerEpreuve.Size = new System.Drawing.Size(225, 40);
             this.btnLancerEpreuve.TabIndex = 16;
             this.btnLancerEpreuve.Text = "Lancer une epreuve";
             this.btnLancerEpreuve.UseVisualStyleBackColor = true;
@@ -249,10 +254,14 @@
             // 
             // dataGridViewEquipeInscrite
             // 
+            this.dataGridViewEquipeInscrite.AllowUserToAddRows = false;
+            this.dataGridViewEquipeInscrite.AllowUserToDeleteRows = false;
+            this.dataGridViewEquipeInscrite.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewEquipeInscrite.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEquipeInscrite.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEquipeInscrite.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewEquipeInscrite.Name = "dataGridViewEquipeInscrite";
+            this.dataGridViewEquipeInscrite.ReadOnly = true;
             this.dataGridViewEquipeInscrite.RowHeadersWidth = 51;
             this.dataGridViewEquipeInscrite.Size = new System.Drawing.Size(853, 268);
             this.dataGridViewEquipeInscrite.TabIndex = 0;
@@ -264,7 +273,7 @@
             this.lblListeInscrit.Location = new System.Drawing.Point(296, 535);
             this.lblListeInscrit.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.lblListeInscrit.Name = "lblListeInscrit";
-            this.lblListeInscrit.Size = new System.Drawing.Size(284, 28);
+            this.lblListeInscrit.Size = new System.Drawing.Size(224, 21);
             this.lblListeInscrit.TabIndex = 43;
             this.lblListeInscrit.Text = "Nom des équipes inscrites :";
             // 
@@ -279,7 +288,7 @@
             0,
             0});
             this.numericUpDownNbrRound.Name = "numericUpDownNbrRound";
-            this.numericUpDownNbrRound.Size = new System.Drawing.Size(279, 34);
+            this.numericUpDownNbrRound.Size = new System.Drawing.Size(279, 29);
             this.numericUpDownNbrRound.TabIndex = 45;
             this.numericUpDownNbrRound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownNbrRound.Value = new decimal(new int[] {
@@ -296,7 +305,7 @@
             this.lblNmbrRound.Location = new System.Drawing.Point(105, 236);
             this.lblNmbrRound.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.lblNmbrRound.Name = "lblNmbrRound";
-            this.lblNmbrRound.Size = new System.Drawing.Size(295, 28);
+            this.lblNmbrRound.Size = new System.Drawing.Size(231, 21);
             this.lblNmbrRound.TabIndex = 44;
             this.lblNmbrRound.Text = "Nombre de Round  (max 2): ";
             this.lblNmbrRound.Visible = false;
@@ -310,7 +319,7 @@
             this.btnSupprimerUnLieu.Location = new System.Drawing.Point(716, 203);
             this.btnSupprimerUnLieu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSupprimerUnLieu.Name = "btnSupprimerUnLieu";
-            this.btnSupprimerUnLieu.Size = new System.Drawing.Size(143, 30);
+            this.btnSupprimerUnLieu.Size = new System.Drawing.Size(116, 25);
             this.btnSupprimerUnLieu.TabIndex = 42;
             this.btnSupprimerUnLieu.Text = "Supprimer un lieu";
             this.btnSupprimerUnLieu.UseVisualStyleBackColor = true;
@@ -325,7 +334,7 @@
             this.btnCreerEpreuve.Location = new System.Drawing.Point(252, 289);
             this.btnCreerEpreuve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreerEpreuve.Name = "btnCreerEpreuve";
-            this.btnCreerEpreuve.Size = new System.Drawing.Size(359, 47);
+            this.btnCreerEpreuve.Size = new System.Drawing.Size(290, 40);
             this.btnCreerEpreuve.TabIndex = 41;
             this.btnCreerEpreuve.Text = "Creer la Nouvelle epreuve";
             this.btnCreerEpreuve.UseVisualStyleBackColor = true;
@@ -339,7 +348,7 @@
             this.checkBoxPayé.Location = new System.Drawing.Point(658, 412);
             this.checkBoxPayé.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxPayé.Name = "checkBoxPayé";
-            this.checkBoxPayé.Size = new System.Drawing.Size(169, 20);
+            this.checkBoxPayé.Size = new System.Drawing.Size(166, 20);
             this.checkBoxPayé.TabIndex = 40;
             this.checkBoxPayé.Text = "L\'equipe a-t-elle payé ?";
             this.checkBoxPayé.UseVisualStyleBackColor = true;
@@ -351,7 +360,7 @@
             this.lblNomEpreuve.Location = new System.Drawing.Point(105, 72);
             this.lblNomEpreuve.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.lblNomEpreuve.Name = "lblNomEpreuve";
-            this.lblNomEpreuve.Size = new System.Drawing.Size(201, 28);
+            this.lblNomEpreuve.Size = new System.Drawing.Size(158, 21);
             this.lblNomEpreuve.TabIndex = 30;
             this.lblNomEpreuve.Text = "Nom de l\'epreuve :";
             this.lblNomEpreuve.Visible = false;
@@ -363,7 +372,7 @@
             this.txtBoxInscription.Location = new System.Drawing.Point(213, 398);
             this.txtBoxInscription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBoxInscription.Name = "txtBoxInscription";
-            this.txtBoxInscription.Size = new System.Drawing.Size(417, 34);
+            this.txtBoxInscription.Size = new System.Drawing.Size(417, 29);
             this.txtBoxInscription.TabIndex = 39;
             this.txtBoxInscription.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -376,7 +385,7 @@
             this.btnNouveauLieu.Location = new System.Drawing.Point(716, 167);
             this.btnNouveauLieu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNouveauLieu.Name = "btnNouveauLieu";
-            this.btnNouveauLieu.Size = new System.Drawing.Size(111, 30);
+            this.btnNouveauLieu.Size = new System.Drawing.Size(90, 25);
             this.btnNouveauLieu.TabIndex = 32;
             this.btnNouveauLieu.Text = "Nouveau lieu";
             this.btnNouveauLieu.UseVisualStyleBackColor = true;
@@ -392,7 +401,7 @@
             this.btnDesinscrire.Location = new System.Drawing.Point(516, 466);
             this.btnDesinscrire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDesinscrire.Name = "btnDesinscrire";
-            this.btnDesinscrire.Size = new System.Drawing.Size(238, 38);
+            this.btnDesinscrire.Size = new System.Drawing.Size(194, 31);
             this.btnDesinscrire.TabIndex = 38;
             this.btnDesinscrire.Text = "Desinscrire une equipe";
             this.btnDesinscrire.UseVisualStyleBackColor = true;
@@ -404,7 +413,7 @@
             this.txtBoxNomEpreuve.Location = new System.Drawing.Point(378, 66);
             this.txtBoxNomEpreuve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBoxNomEpreuve.Name = "txtBoxNomEpreuve";
-            this.txtBoxNomEpreuve.Size = new System.Drawing.Size(319, 34);
+            this.txtBoxNomEpreuve.Size = new System.Drawing.Size(319, 29);
             this.txtBoxNomEpreuve.TabIndex = 34;
             this.txtBoxNomEpreuve.Visible = false;
             // 
@@ -414,7 +423,7 @@
             this.dateTimePicker.Location = new System.Drawing.Point(378, 121);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(319, 34);
+            this.dateTimePicker.Size = new System.Drawing.Size(319, 29);
             this.dateTimePicker.TabIndex = 37;
             this.dateTimePicker.Visible = false;
             // 
@@ -425,7 +434,7 @@
             this.lblNomLieu.Location = new System.Drawing.Point(105, 191);
             this.lblNomLieu.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.lblNomLieu.Name = "lblNomLieu";
-            this.lblNomLieu.Size = new System.Drawing.Size(146, 28);
+            this.lblNomLieu.Size = new System.Drawing.Size(114, 21);
             this.lblNomLieu.TabIndex = 35;
             this.lblNomLieu.Text = "Nom du lieu :";
             this.lblNomLieu.Visible = false;
@@ -439,7 +448,7 @@
             this.btnInscription.Location = new System.Drawing.Point(140, 466);
             this.btnInscription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInscription.Name = "btnInscription";
-            this.btnInscription.Size = new System.Drawing.Size(203, 38);
+            this.btnInscription.Size = new System.Drawing.Size(166, 31);
             this.btnInscription.TabIndex = 33;
             this.btnInscription.Text = "Inscrire une equipe";
             this.btnInscription.UseVisualStyleBackColor = true;
@@ -452,7 +461,7 @@
             this.cmbBoxLieu.Location = new System.Drawing.Point(378, 182);
             this.cmbBoxLieu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbBoxLieu.Name = "cmbBoxLieu";
-            this.cmbBoxLieu.Size = new System.Drawing.Size(319, 36);
+            this.cmbBoxLieu.Size = new System.Drawing.Size(319, 29);
             this.cmbBoxLieu.TabIndex = 36;
             this.cmbBoxLieu.Visible = false;
             // 
@@ -463,45 +472,47 @@
             this.lblDate.Location = new System.Drawing.Point(105, 127);
             this.lblDate.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(238, 28);
+            this.lblDate.Size = new System.Drawing.Size(189, 21);
             this.lblDate.TabIndex = 31;
             this.lblDate.Text = "Selectionner une date :";
             this.lblDate.Visible = false;
             // 
-            // lblListeEquipe
+            // dataGridViewListeEpreuve
             // 
-            this.lblListeEquipe.AutoSize = true;
-            this.lblListeEquipe.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListeEquipe.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblListeEquipe.Location = new System.Drawing.Point(252, 40);
-            this.lblListeEquipe.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
-            this.lblListeEquipe.Name = "lblListeEquipe";
-            this.lblListeEquipe.Size = new System.Drawing.Size(282, 28);
-            this.lblListeEquipe.TabIndex = 44;
-            this.lblListeEquipe.Text = "Liste des équipes connues :";
-            this.lblListeEquipe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dataGridViewListeEpreuve.AllowUserToAddRows = false;
+            this.dataGridViewListeEpreuve.AllowUserToDeleteRows = false;
+            this.dataGridViewListeEpreuve.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewListeEpreuve.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListeEpreuve.Location = new System.Drawing.Point(40, 125);
+            this.dataGridViewListeEpreuve.Name = "dataGridViewListeEpreuve";
+            this.dataGridViewListeEpreuve.ReadOnly = true;
+            this.dataGridViewListeEpreuve.RowTemplate.Height = 24;
+            this.dataGridViewListeEpreuve.Size = new System.Drawing.Size(853, 140);
+            this.dataGridViewListeEpreuve.TabIndex = 50;
+            this.dataGridViewListeEpreuve.Visible = false;
             // 
             // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1717, 964);
+            this.ClientSize = new System.Drawing.Size(1487, 814);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Lobby";
             this.Text = "Ranch Sorting Application";
-            this.Load += new System.EventHandler(this.Lobby_Load_1);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Lobby_FormClosing);
+            this.Load += new System.EventHandler(this.Lobby_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListeEquipe)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEquipeInscrite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbrRound)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListeEpreuve)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -512,7 +523,6 @@
         private System.Windows.Forms.Button btnAjouterEquipe;
         private System.Windows.Forms.Button btnLancerEpreuve;
         private System.Windows.Forms.Button btnSupprEquipe;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridViewListeEquipe;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.DataGridView dataGridViewEquipeInscrite;
@@ -537,5 +547,6 @@
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.Button btnListeInscrit;
         private System.Windows.Forms.Label lblListeEquipe;
+        private System.Windows.Forms.DataGridView dataGridViewListeEpreuve;
     }
 }
