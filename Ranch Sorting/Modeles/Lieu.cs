@@ -45,7 +45,6 @@ namespace Ranch_Sorting.Modeles
                     throw new Exception("Veuillez entrer l'adresse du lieu");
             }
         }
-
         public string Propriétaire
         {
             get
@@ -59,6 +58,15 @@ namespace Ranch_Sorting.Modeles
                 else
                     throw new Exception("Veuillez entrer le nom du proprietaire du lieu");
             }
+        }
+        public static List<string> GetNomLieu(List<Ranch_Sorting.Modeles.Lieu> lieux)
+        {
+            List<string> listeDesNomsDesLieux = new List<string>();
+            foreach (var Lieu in lieux)
+            {
+                listeDesNomsDesLieux.Add(Lieu.NomLieu);
+            }
+            return listeDesNomsDesLieux;
         }
     }
 }

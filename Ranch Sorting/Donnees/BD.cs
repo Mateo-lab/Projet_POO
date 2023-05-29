@@ -13,8 +13,6 @@ namespace Ranch_Sorting_App.Donnees
     public class BD
     {
         private OleDbConnection _oleConnection;
-        private readonly SqlConnection _connection;
-
         public BD()
         {
             string repCourant = Directory.GetCurrentDirectory();  // répertoire de l'exécutable
@@ -51,8 +49,6 @@ namespace Ranch_Sorting_App.Donnees
         }// Execute une requete qui ne retourne pas de resultat
 
         ///////////////////////////////////////////////////
-
-        
         public List<Equipe> ObtienEquipe()// Retourne la liste des equipes
         {
             List<Equipe> listeDesEquipes = new List<Equipe>(); // Liste des equipes qui sera retournée par la méthode 
@@ -94,7 +90,7 @@ namespace Ranch_Sorting_App.Donnees
         public List<Epreuve> ObtienEpreuves()// Retourne la liste des epreuves
         {
             List<Epreuve> epreuves = new List<Epreuve>(); // Liste des inscriptions qui sera retournée par la méthode 
-            string req = "SELECT * FROM Epreuves "; // Requete SQL pour obtenir les inscriptions
+            string req = "SELECT * FROM Epreuves ORDER BY [Date épreuve] DESC"; // Requete SQL pour obtenir les inscriptions
             IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
 
             while (reader.Read())
@@ -154,102 +150,22 @@ namespace Ranch_Sorting_App.Donnees
             listePassage = listePassage.OrderBy(x => random.Next()).ToList();
             return listePassage;
         }
-        public List<string> ObtienNomLieux()// Retourne la liste des lieux
+        public List<Lieu> ObtienLieux()// Retourne la liste des lieux
         {
-            string req = "SELECT [Nom Lieu] FROM Lieux";
+            string req = "SELECT * FROM Lieux";
             IDataReader reader = ExecuteReaderRequest(req);
 
-            List<string> listeDesNomDesLieux = new List<string>();
+            List<Lieu> listeDesLieux = new List<Lieu>();
 
             while (reader.Read())
             {
-                string nomLieu = reader.GetString(0);
-                listeDesNomDesLieux.Add(nomLieu);
+
+                listeDesLieux.Add(new Lieu(reader.GetString(0), reader.GetString(1), reader.GetString(2)));
             }
             reader.Close();
-            return listeDesNomDesLieux;
+            return listeDesLieux;
         }
-        public List<string> ObtienNomEpreuve()// Retourne la liste des noms d'epreuves
-        {
-            string req = "SELECT [Nom épreuve] FROM Epreuves";
-            req += " ORDER BY [Date épreuve]";
-            IDataReader reader = ExecuteReaderRequest(req);
-
-            List<string> listeDesNomDesEpreuves = new List<string>();
-
-            while (reader.Read())
-            {
-                string nomEpreuve = reader.GetString(0);
-                listeDesNomDesEpreuves.Add(nomEpreuve);
-            }
-            reader.Close();
-            return listeDesNomDesEpreuves;
-        }
-        public List<string> ObtienNbrRound(string nomEpreuve)
-        {
-            string req = "SELECT [Nombre de round] FROM Epreuves WHERE [Nom épreuve] = '" + nomEpreuve + "' ";
-            IDataReader reader = ExecuteReaderRequest(req);
-
-            List<string> nbrRound = new List<string>();
-
-            while (reader.Read())
-            {
-                string _nbrRound = reader.GetInt32(0).ToString();
-                nbrRound.Add(_nbrRound);
-            }
-            reader.Close();
-            return nbrRound;
-        }
-        public int ObtientNbrIscription(string nomEquipe)
-        {
-            int nombreEquipes = 0;
-
-            string req = "SELECT COUNT(*) FROM Inscription WHERE [Nom équipe] = '" + nomEquipe + "' NombreRound = 1";
-            using (IDataReader reader = ExecuteReaderRequest(req))
-            {
-                if (reader.Read())
-                {
-                    nombreEquipes = reader.GetInt32(0);
-                }
-            }
-            return nombreEquipes;
-        }
-        public int ObtienIDInscription(string nomEpreuve, string nomEquipe)
-        {
-            int idInscription = 0;
-            string req = "SELECT [IDinscription] ";  // mieux : StringBuilder
-            req += "FROM Inscriptions ";
-            req += "WHERE [Nom épreuve]= '" + nomEpreuve + "' "; ;
-            req += "AND [Nom équipe] = '" + nomEquipe + "'";
-
-            IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
-            while (reader.Read())
-            {
-                // Ajoute les equipes dans la liste des equipes 
-                // champs : NomEquipe, NomCavalier1, NomCavalier2, NomCheval1, NomCheval2
-                idInscription = reader.GetInt32(0);
-            }
-            reader.Close(); // Ferme le reader
-            return idInscription; // Retourne la liste des equipes
-        }
-        public string ObtienDateEpreuve(string nomEpreuve)
-        {
-            string req = "SELECT [Date épreuve] FROM Epreuves WHERE [Nom épreuve] = '" + nomEpreuve + "'";
-            IDataReader reader = ExecuteReaderRequest(req);
-
-            string listeDesDateDesEpreuves = "";
-
-            while (reader.Read())
-            {
-
-                DateTime dateEpreuve = reader.GetDateTime(0);
-                listeDesDateDesEpreuves = dateEpreuve.ToString("d-MM-yy"); ;
-            }
-            reader.Close();
-            return listeDesDateDesEpreuves;
-
-        }
-        public bool CheckInscription(string nomEpreuve, string nomEquipe)
+        public bool CheckInscription(string nomEpreuve, string nomEquipe)// Vérifie si l'équipe est inscrite à l'épreuve
         {
             string req = "SELECT * FROM Inscriptions WHERE [Nom épreuve] = '" + nomEpreuve + "' AND [Nom équipe] = '" + nomEquipe + "'";
             IDataReader reader = ExecuteReaderRequest(req);
@@ -258,33 +174,34 @@ namespace Ranch_Sorting_App.Donnees
             reader.Close();
             return check;
         }
-        public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval2)
+        public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval2)// Ajoute une équipe
         {
             string req = "INSERT INTO Equipes VALUES ('" + nomEquipe + "', '" + nomCavalier1 + "', '" + nomCavalier2 + "', '" + nomCheval1 + "', '" + nomCheval2 + "')";
             ExecuteNonQueryRequest(req);
         }
-        public void SupprimerEquipe(string nomEquipe)
+        public void SupprimerEquipe(string nomEquipe)// Supprime une équipe
         {
             string req = "DELETE FROM Equipes WHERE [Nom équipe] = '" + nomEquipe + "'";
             ExecuteNonQueryRequest(req);
         }
-        public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)
+        public void AjouterLieu(string nomLieu, string adresse, string nomProprietaire)// Ajoute un lieu
         {
             string req = "INSERT INTO Lieux VALUES ('" + nomLieu + "', '" + adresse + "', '" + nomProprietaire + "')";
             ExecuteNonQueryRequest(req);
         }
-        public void SupprimerLieu(string nomLieu)
+        public void SupprimerLieu(string nomLieu)// Supprime un lieu
         {
             
             string req = "DELETE FROM Lieux WHERE [Nom lieu] = '" + nomLieu + "'";
             ExecuteNonQueryRequest(req);
         }   
-        public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu, int nbrRound)
+        public void CreerEpreuve(string nomEpreuve, string dateEpreuve, string nomLieu, int nbrRound)// Créer une épreuve
         {
             string req = "INSERT INTO Epreuves VALUES ('" + nomEpreuve + "', '" + dateEpreuve + "' , '" + nomLieu + "', " + nbrRound +" ) ;";
             ExecuteNonQueryRequest(req);
         }
         public void AjouterInscriptionEtEquipeScore(string nomEpreuve, string dateEpreuve, string nomEquipe, string dateInscription, bool paye, int nbrRound, int nbrVache, string tDerniereV, string tV1, string tV2, string tV3, string tV4, string tV5, string tV6, string tV7, string tV8, string tV9, string tV10)
+        // Ajoute une inscription et une équipe dans la table des scores
         {
             int idInscription = 0; // Déterminez comment générer l'IDInscription ici
 
@@ -293,17 +210,8 @@ namespace Ranch_Sorting_App.Donnees
 
             ExecuteNonQueryRequest(req); // Execute la requete
             
-            req = "SELECT IDinscription FROM [Inscriptions] ";
-            req += $"WHERE [Nom épreuve] = '{nomEpreuve}' AND [Nom équipe] = '{nomEquipe}';"; // Requete SQL pour obtenir les inscriptions
-            
-
-            IDataReader reader = ExecuteReaderRequest(req); // Execute la requete et retourne un IDataReader
-
-            while (reader.Read())
-            {
-                idInscription = reader.GetInt32(0);
-            }
-            reader.Close();
+            List<Inscription> listeInscription = ObtienInscriptions(nomEpreuve);
+            idInscription = Inscription.GetIDInscription(listeInscription, nomEpreuve, nomEquipe);
 
             for (int i = 1; i <= nbrRound; i++)
              {
@@ -313,17 +221,18 @@ namespace Ranch_Sorting_App.Donnees
              }
                
         }
-        public void SupprimerUneInscription(int idInscription)
+        public void SupprimerUneInscription(int idInscription)// Supprime une inscription
         {
             string req = "DELETE FROM Inscriptions WHERE [IDinscription] = " + idInscription + "";
             ExecuteNonQueryRequest(req);
         }
-        public void SupprimerInscriptionDansScore(int idInscription)
+        public void SupprimerInscriptionDansScore(int idInscription)// Supprime une inscription dans la table des scores
         {
             string req = "DELETE FROM [Scores équipes] WHERE [IDinscription] = " + idInscription + "";
             ExecuteNonQueryRequest(req);
+            //ExecuteNonQueryRequest(req);//une deuxieme fois pour supprimer le possible deuxieme round
         }
-        public void SupprimerUneInscriptionEtEquipe(string nomEquipe)
+        public void SupprimerUneInscriptionEtEquipe(string nomEquipe)// Supprime une inscription et une équipe
         {
             string req = "DELETE FROM [Scores équipes] WHERE IDinscription IN (SELECT IDinscription   FROM [Inscriptions]";
             req += " WHERE [Nom équipe] = '" + nomEquipe + "')";
@@ -338,18 +247,19 @@ namespace Ranch_Sorting_App.Donnees
 
             ExecuteNonQueryRequest(req);
         }
-        public void AjouterTempsVache(string nomEpreuve,string nomEquipe, int numRound, int numVache, string temps)
+        public void AjouterTempsVache(string nomEpreuve,string nomEquipe, int numRound, int numVache, string temps)// Ajoute un temps de vache
         {
-            int id = ObtienIDInscription(nomEpreuve, nomEquipe);
+            List<Inscription> listeInscription = ObtienInscriptions(nomEpreuve);
+            int id = Inscription.GetIDInscription(listeInscription, nomEpreuve, nomEquipe);
             string champs = "Temps vache " + numVache;
             string req = "UPDATE [Scores équipes] SET [" + champs + "] = ' " + temps + "', [Temps dernière vache]  = '" + temps + "'"; 
             req += " WHERE [IDinscription] = " + id +" AND [N° round] = " + numRound + " ;";
             ExecuteNonQueryRequest(req);
         }
-        public void ResultatsEquipe(string nomEpreuve, string nomEquipe, int numRound, string nbrVache)
+        public void ResultatsEquipe(string nomEpreuve, string nomEquipe, int numRound, string nbrVache)// Ajoute un temps de vache
         {
-
-            int id = ObtienIDInscription(nomEpreuve, nomEquipe);
+            List<Inscription> listeInscription = ObtienInscriptions(nomEpreuve);
+            int id = Inscription.GetIDInscription(listeInscription, nomEpreuve, nomEquipe);
             string req = "UPDATE [Scores équipes] SET [Nb vaches validées] = '" + nbrVache + "' ";
             req += " WHERE [IDinscription] = " + id + " AND [N° round] = " + numRound + " ";
             ExecuteNonQueryRequest(req);

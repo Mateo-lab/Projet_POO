@@ -73,14 +73,41 @@ namespace Ranch_Sorting.Modeles
                 _numRound = value;
             }
         }
-        public List<string> GetNomEpreuve(List<string> epreuves)
+        public static List<string> GetNomEpreuve(List<Ranch_Sorting.Modeles.Epreuve> epreuves)
         {
             List<string> listeDesNomDesEpreuves = new List<string>();
-            while (epreuves.Count != 0)
+            foreach (var epreuve in epreuves)
             {
-                listeDesNomDesEpreuves.Add(epreuves[0]);
+                listeDesNomDesEpreuves.Add(epreuve.NomEpreuve);
             }
             return listeDesNomDesEpreuves;
+        }
+        public static int GetNbrRound(List<Ranch_Sorting.Modeles.Epreuve> epreuves, string nomEpreuve)
+        {
+            int nbrRound = 1;
+            foreach (var epreuve in epreuves)
+            {
+                if (nomEpreuve == epreuve.NomEpreuve)
+                {
+                    nbrRound = epreuve.NumRound;
+                    break;  
+                }
+            }
+            return nbrRound;
+        }
+
+        public static string GetDateEpreuve(List<Ranch_Sorting.Modeles.Epreuve> epreuves ,  string nomEpreuve)
+        {
+            string dateEpreuve = "";
+            foreach (var epreuve in epreuves)
+            {
+                if (nomEpreuve == epreuve.NomEpreuve)
+                {
+                    dateEpreuve = epreuve.DateEpreuve;
+                    break;
+                }
+            }
+            return dateEpreuve;
         }
     }
 }

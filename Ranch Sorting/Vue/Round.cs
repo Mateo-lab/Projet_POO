@@ -1,10 +1,7 @@
-﻿using Ranch_Sorting.Controleur;
-using Ranch_Sorting.Modeles;
-using Ranch_Sorting_App.Donnees;
+﻿using Ranch_Sorting.Modeles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -12,15 +9,12 @@ namespace Ranch_Sorting.Vue
 {
     public partial class Round : Form
     {
-        Lobby parent; 
-        ListeNomsEquipes listeNomsEquipes;
-        List<Epreuve> epreuves;
+        Lobby parent;
         List<Inscription> listePassage;
         Timer timer;
 
-        private int nbrParticipants, numVache, nbrVache, equipeCouranteIndex;
+        private int numVache, nbrVache, equipeCouranteIndex;
         private static Stopwatch chrono;
-        static DateTime startTime;
         private bool enCoursDEpreuve = false;
 
         
@@ -32,8 +26,6 @@ namespace Ranch_Sorting.Vue
             timer.Interval = 10;
             timer.Tick += Timer_Tick;
         }
-
-        ////////////////////////////////////////////////////
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Appeler la mise à jour du libellé à chaque tick du Timer
@@ -70,7 +62,6 @@ namespace Ranch_Sorting.Vue
             {
 
                 string nomEpreuve = cmbBoxSelectEpreuve.Text;
-                string dateEpreuve = GetDateEpreuve(cmbBoxSelectEpreuve.Text);
                 string nomEquipe = lblNomEquipeEnCours.Text;
                 int.TryParse(cmbBoxNumRound.Text, out int numRound);
 
@@ -106,9 +97,10 @@ namespace Ranch_Sorting.Vue
         }
         private void Round_Load(object sender, EventArgs e)
         {
+            List<Epreuve> epreuves = parent.Controleur.GetEpreuves();
             string message = "Pour lancer une nouvelle Epreuve, sélectionné la dans la zone Jaune, choisisé le numero du round puis appuyer sur lancé lancer l'epreuve";
             MessageBox.Show(message, "Bienvenu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MaJComboBoxNomEpreuve();
+            MaJComboBoxNomEpreuve(epreuves);
         }
         private void Round_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -118,12 +110,14 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Veuillez patienter jusqu'à la fin de l'epreuve.");
             }
         }
-        private void MaJComboBoxNomEpreuve()
+        private void MaJComboBoxNomEpreuve(List<Ranch_Sorting.Modeles.Epreuve> epreuves)
         {
             try
             {
-                List<Epreuve> epreuves = parent.Controleur.GetEpreuves();
-                cmbBoxSelectEpreuve.Items.AddRange(epreuves.GetRound(epreuves));
+                
+                List<string> nomEpreuves = Epreuve.GetNomEpreuve(epreuves);
+                cmbBoxSelectEpreuve.Items.Clear();
+                cmbBoxSelectEpreuve.Items.AddRange(nomEpreuves.ToArray());
                 //cmbBoxSelectEpreuve.Items.AddRange(parent.Controleur.GetNomEpreuve().ToArray());
             }
             catch (Exception e)
@@ -132,13 +126,13 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-        private void MaJComboBoxNbrRound(string nomEpreuve)
+        private void MaJComboBoxNbrRound(List<Ranch_Sorting.Modeles.Epreuve> epreuves, string nomEpreuve)
         {
             try
             {
-                List<string> nbrRound = parent.Controleur.GetNbrRound(nomEpreuve);
-                if (nbrRound[0] == "2")
-                    cmbBoxNumRound.Items.AddRange(nbrRound.ToArray());
+                int nbrRound = Epreuve.GetNbrRound(epreuves,nomEpreuve);
+                if (nbrRound == 2)
+                    cmbBoxNumRound.Items.Add(nbrRound.ToString());
             }
             catch (Exception e)
             {
@@ -146,13 +140,13 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
-        ///////////////////////////////////////////////////
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnLancer.Enabled = false;
+            btnRetour.Enabled = false;
+            cmbBoxSelectEpreuve.Enabled = false;
+            cmbBoxNumRound.Enabled = false;
             enCoursDEpreuve = true;
-            btnRetour.Enabled = false;  
             btnBonneVache.Enabled = true;
             btnMauvaiseVache.Enabled = true;
 
@@ -245,6 +239,8 @@ namespace Ranch_Sorting.Vue
                 enCoursDEpreuve = false;
                 lblNomEquipeEnCours.Text = "Toutes les équipes ont terminé";
                 btnStart.Enabled = false;
+                cmbBoxSelectEpreuve.Enabled = true;
+                cmbBoxNumRound.Enabled = true;
                 DialogResult dr = MessageBox.Show("Toutes les équipes ont terminé ! Voulez-vous fermer cette fenetre ?", "Fin de la liste de passage", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes) Close();
                 else
@@ -274,9 +270,10 @@ namespace Ranch_Sorting.Vue
         }
         private void cmbBoxSelectEpreuve_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<Epreuve> epreuves = parent.Controleur.GetEpreuves();
             cmbBoxNumRound.Items.Remove("2");
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
-            MaJComboBoxNbrRound(nomEpreuve);
+            MaJComboBoxNbrRound(epreuves, nomEpreuve);
             cmbBoxNumRound.Enabled = true;
         }
         private void GetScore()
@@ -286,7 +283,6 @@ namespace Ranch_Sorting.Vue
                 int.TryParse(cmbBoxNumRound.Text, out int numRound);
                 string nomEpreuve = cmbBoxSelectEpreuve.Text;
                 bool sansScore = false;
-                bool sansInscrit = false;
                 dataGridViewScoresEquipe.DataSource = parent.Controleur.GetScores(nomEpreuve, numRound, out sansScore);
 
             }
@@ -337,21 +333,6 @@ namespace Ranch_Sorting.Vue
                 MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
-        }
-        private string GetDateEpreuve(string nomEpreuve)
-        {
-            string dateEpreuve = "";
-            try
-            {
-               dateEpreuve = parent.Controleur.GetDateEpreuve(nomEpreuve);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // throw e;   // Q : qu'est-ce que cette instruction produit ?
-            }
-
-            return dateEpreuve;
         }
         private void btnLancer_Click(object sender, EventArgs e)
         {

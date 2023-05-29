@@ -10,9 +10,11 @@ namespace Ranch_Sorting.Vue
     {
         private Controle controleur; // donnée membre privée pour stocker le contrôleu
         private string _selectedEpreuve, _dateEpreuve;
+        private int _nbrRound;
         public Lobby()
         {
             InitializeComponent();
+
         }
         public Controle Controleur  // propriété set Contrôleur pour modifier la donnée membre privée ctrl
         {
@@ -58,10 +60,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-        public int GetIdInscription(string nomEpreuve, string nomEquipe)
-        {
-            return controleur.GetIdInscription(nomEpreuve, nomEquipe);
-        }
         public void ClearComboBox()
         {
             cmbBoxLieu.Items.Clear();
@@ -70,7 +68,8 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
-                cmbBoxLieu.Items.AddRange(controleur.GetNomLieux().ToArray());
+                List<string> listeDesLieux = Lieu.GetNomLieu(Controleur.GetLieux()) ;
+                cmbBoxLieu.Items.AddRange(listeDesLieux.ToArray());
             }
             catch (Exception e)
             {
@@ -173,8 +172,6 @@ namespace Ranch_Sorting.Vue
             //Cette fonction va ajouter une inscription dans la table Inscription et  mettre à jour la table Equipe
             try
             {
-                int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
-
                 string nomEquipe = txtBoxInscription.Text;
                 string dateInscription = DateTime.Now.ToString("d-MM-yy");
                 bool payé = checkBoxPayé.CheckState == CheckState.Checked ? true : false; // si la case est cochée, payé = true, sinon payé = false 
@@ -188,7 +185,7 @@ namespace Ranch_Sorting.Vue
                 }
                 else
                 {
-                    Controleur.AjouterInscriptionEtEquipeScore(_selectedEpreuve, _dateEpreuve, nomEquipe, dateInscription, payé, nbrRound, 1, "", "", "", "", "", "", "", "", "", "", "");
+                    Controleur.AjouterInscriptionEtEquipeScore(_selectedEpreuve, _dateEpreuve, nomEquipe, dateInscription, payé, _nbrRound, 1, "", "", "", "", "", "", "", "", "", "", "");
                     GetInscriptions(_selectedEpreuve);
                     DialogResult dr = MessageBox.Show("L'equipe inscrite", "Inscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtBoxInscription.Clear();
@@ -208,14 +205,15 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
+                List<Inscription> listeInscription = Controleur.GetInscriptions(_selectedEpreuve);
                 string dateEpreuve = dateTimePicker.Value.ToString("d-MM-yy");
                 string nomEquipe = txtBoxInscription.Text;
                 string dateInscription = DateTime.Now.ToString("d-MM-yy");
-                int idInscritption = GetIdInscription(_selectedEpreuve, nomEquipe);
+                int idInscription = Inscription.GetIDInscription(listeInscription, _selectedEpreuve, nomEquipe);
 
 
-                Controleur.SupprimerInscriptionDansScore(idInscritption);
-                Controleur.SupprimerUneInscription(idInscritption);
+                Controleur.SupprimerInscriptionDansScore(idInscription);
+                Controleur.SupprimerUneInscription(idInscription);
                 GetInscriptions(_selectedEpreuve);
                 txtBoxInscription.Clear();
             }
@@ -236,18 +234,21 @@ namespace Ranch_Sorting.Vue
                 _selectedEpreuve = txtBoxNomEpreuve.Text;
                 _dateEpreuve = dateTimePicker.Value.ToString("d-MM-yy");
                 string nomLieu = cmbBoxLieu.Text;
-                int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
+                _nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
 
-                Controleur.CreerEpreuve(_selectedEpreuve, _dateEpreuve, nomLieu,nbrRound);
-
+                Controleur.CreerEpreuve(_selectedEpreuve, _dateEpreuve, nomLieu,_nbrRound);
+                
+                numericUpDownNbrRound.Enabled = false;
                 txtBoxNomEpreuve.Enabled = false;
                 dateTimePicker.Enabled = false;
                 cmbBoxLieu.Enabled = false;
-                btnCreerEpreuve.Enabled = false;
                 txtBoxInscription.Enabled = true;
                 checkBoxPayé.Enabled = true;
                 btnInscription.Enabled = true;
                 btnDesinscrire.Enabled = true;
+                btnCreerEpreuve.Enabled = false;
+                btnNouveauLieu.Enabled = false;
+                btnSupprimerUnLieu.Enabled = false;
             }
 
             catch (Exception exc)
@@ -310,6 +311,9 @@ namespace Ranch_Sorting.Vue
             dateTimePicker.Enabled = true;
             cmbBoxLieu.Enabled = true;
             btnCreerEpreuve.Enabled = true;
+            btnNouveauLieu.Enabled = true;
+            btnSupprimerUnLieu.Enabled = true;
+            numericUpDownNbrRound.Enabled = true;
             dataGridViewListeEpreuve.DataSource = "";
             dataGridViewEquipeInscrite.DataSource = "";
         }
@@ -326,38 +330,13 @@ namespace Ranch_Sorting.Vue
             btnVisualiserEpreeuveExistante.Visible=false;
             btnCreeUneNouvelleEpreuve.Visible = false;
         }
-        private void btnListeInscrit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                
-                string nomEpreuve = txtBoxNomEpreuve.Text;
-                GetInscriptions(nomEpreuve);
-
-                txtBoxInscription.Enabled = true;
-                checkBoxPayé.Enabled = true;
-                btnInscription.Enabled = true;
-                btnDesinscrire.Enabled = true;
-            }
-
-            catch (Exception exc)
-            {
-                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-                txtBoxInscription.Enabled = false;
-                checkBoxPayé.Enabled = false;
-                btnInscription.Enabled = false;
-                btnDesinscrire.Enabled = false;
-            }
-            
-        }
-
         private void dataGridViewListeEpreuve_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 _selectedEpreuve = dataGridViewListeEpreuve.CurrentRow.Cells[0].Value.ToString();
                 _dateEpreuve = dataGridViewListeEpreuve.CurrentRow.Cells[1].Value.ToString();
+                _nbrRound = Convert.ToInt32(dataGridViewListeEpreuve.CurrentRow.Cells[3].Value);
                 GetInscriptions(_selectedEpreuve);
 
                 txtBoxInscription.Enabled = true;

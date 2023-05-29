@@ -101,7 +101,22 @@ namespace Ranch_Sorting.Modeles
             }
         }
 
+        public static int GetIDInscription(List<Ranch_Sorting.Modeles.Inscription> listeInscriprtion, string nomEpreuve, string nomEquipe )
+        {
+            int idInscription = 0;
+            foreach (Inscription inscription in listeInscriprtion)
+            {
+                if (nomEpreuve == inscription.NomEpreuve )
+                {
+                    if (nomEquipe == inscription.NomEquipe)
+                    { 
+                        idInscription = inscription.IdInscription; 
+                        break;
+                    }
+                }
+            }
+            return idInscription ;
+        }
     }
-
 
 }

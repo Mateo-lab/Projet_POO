@@ -44,18 +44,6 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienInscriptions(nomEpreuve);
         }
-        public int GetIdInscription(string nomEpreuve, string nomEquipe)
-        {
-            return _bd.ObtienIDInscription(nomEpreuve, nomEquipe);
-        }
-        public int GetNbrInscription(string nomEpreuve)
-        {
-            return _bd.ObtientNbrIscription(nomEpreuve);
-        }
-        public List<string> GetNbrRound(string nomEpreuve)
-        {
-            return _bd.ObtienNbrRound(nomEpreuve);
-        }
         public List<Scores> GetScores(string nomEpreuve, int numRound, out bool sansScore)
         {
             //if ( _bd == null) return null;
@@ -66,34 +54,9 @@ namespace Ranch_Sorting.Controleur
             //if ( _bd == null) return null;
             return _bd.ObtienEpreuves();
         }
-        public List<string> GetNomEpreuve()
+        public List<Lieu> GetLieux()
         {
-            if ( _bd == null) return null;
-            return _bd.ObtienNomEpreuve();
-        }
-        public string GetDateEpreuve(string nomEpreuve)
-        {
-            //if ( _bd == null) return null;
-            return _bd.ObtienDateEpreuve(nomEpreuve);
-        }
-        public List<string> GetNomLieux()
-        {
-            return _bd.ObtienNomLieux();
-        }
-        public string GetInitiales(string phrase)
-        {
-            string[] mots = phrase.Split(' ');
-            string initiales = "";
-
-            foreach (string mot in mots)
-            {
-                if (!string.IsNullOrEmpty(mot))
-                {
-                    initiales += char.ToUpper(mot[0]);
-                }
-            }
-
-            return initiales;
+            return _bd.ObtienLieux();
         }
         public void AjouterEquipe(string nomEquipe, string nomCavalier1, string nomCheval1, string nomCavalier2, string nomCheval21)
         {
