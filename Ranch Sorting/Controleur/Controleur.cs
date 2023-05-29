@@ -19,7 +19,6 @@ namespace Ranch_Sorting.Controleur
         {
             _bd = new BD();   
         }
-
         public void ouvreBD()
         {
             if (_bd == null)
@@ -31,24 +30,20 @@ namespace Ranch_Sorting.Controleur
                 _bd.CloseConnexionBD();
             _bd = null;
         }
-
         public List<Equipe> GetEquipe()
         {
             //if ( _bd == null) return null;
             return _bd.ObtienEquipe();
         }
-
         public List<Inscription> CreateRandomPassageList(string nomEpreuve)
         {
             return _bd.CreateRandomPassageList(nomEpreuve);
         }
-        
         public List<Inscription> GetInscriptions(string nomEpreuve)
         {
             //if ( _bd == null) return null;
             return _bd.ObtienInscriptions(nomEpreuve);
         }
-
         public int GetIdInscription(string nomEpreuve, string nomEquipe)
         {
             return _bd.ObtienIDInscription(nomEpreuve, nomEquipe);
@@ -57,7 +52,6 @@ namespace Ranch_Sorting.Controleur
         {
             return _bd.ObtientNbrIscription(nomEpreuve);
         }
-
         public List<string> GetNbrRound(string nomEpreuve)
         {
             return _bd.ObtienNbrRound(nomEpreuve);
@@ -121,7 +115,6 @@ namespace Ranch_Sorting.Controleur
         {
             _bd.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu, nbrRound);
         }
-
         public bool CheckInscription(string nomEpreuve, string nomEquipe)
         {
             return _bd.CheckInscription(nomEpreuve, nomEquipe);
@@ -134,12 +127,10 @@ namespace Ranch_Sorting.Controleur
         {
             _bd.SupprimerUneInscription(idInscription);
         }
-
         public void SupprimerInscriptionDansScore(int idInscription)
         {
             _bd.SupprimerInscriptionDansScore(idInscription);
         }
-
         public void SupprimerUneInscriptionEtEquipe(string nomEquipe)
         {
             _bd.SupprimerUneInscriptionEtEquipe(nomEquipe);
@@ -148,7 +139,6 @@ namespace Ranch_Sorting.Controleur
         {
             _bd.AjouterTempsVache(nomEpreuve, nomEquipe, numRound, numVache, tempsVache);
         }
-
         public void ResultatsEquipe(string nomEpreuve, string nomEquipe, int numRound, string nbrVache)
         {
             _bd.ResultatsEquipe(nomEpreuve, nomEquipe, numRound, nbrVache);

@@ -14,6 +14,7 @@ namespace Ranch_Sorting.Vue
     {
         Lobby parent; 
         ListeNomsEquipes listeNomsEquipes;
+        List<Epreuve> epreuves;
         List<Inscription> listePassage;
         Timer timer;
 
@@ -121,7 +122,9 @@ namespace Ranch_Sorting.Vue
         {
             try
             {
-                cmbBoxSelectEpreuve.Items.AddRange(parent.Controleur.GetNomEpreuve().ToArray());
+                List<Epreuve> epreuves = parent.Controleur.GetEpreuves();
+                cmbBoxSelectEpreuve.Items.AddRange(epreuves.GetRound(epreuves));
+                //cmbBoxSelectEpreuve.Items.AddRange(parent.Controleur.GetNomEpreuve().ToArray());
             }
             catch (Exception e)
             {
@@ -143,7 +146,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
 
         ///////////////////////////////////////////////////
         private void btnStart_Click(object sender, EventArgs e)
@@ -187,7 +189,6 @@ namespace Ranch_Sorting.Vue
                 numVache = 0;
             }else numVache++;
         }
-
         private void btnMauvaiseVache_Click(object sender, EventArgs e)
         {
             string nomEpreuve = cmbBoxSelectEpreuve.Text;
@@ -205,12 +206,10 @@ namespace Ranch_Sorting.Vue
             btnMauvaiseVache.Enabled = false;
 
         }
-
         private void btnValidationResultats_Click(object sender, EventArgs e)
         {
             btnEquipeSuivante.Enabled = true;
         }
-
         private void btnEquipeSuivante_Click(object sender, EventArgs e)
         {
             equipeCouranteIndex++;
@@ -254,7 +253,6 @@ namespace Ranch_Sorting.Vue
                 }
             }
         }
-
         private void AfficherEquipeSuivante()
         {
             // Afficher l'équipe suivante dans votre interface utilisateur (par exemple, dans un label)
@@ -274,7 +272,6 @@ namespace Ranch_Sorting.Vue
         {
             btnLancer.Enabled = true;
         }
-
         private void cmbBoxSelectEpreuve_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBoxNumRound.Items.Remove("2");
@@ -282,7 +279,6 @@ namespace Ranch_Sorting.Vue
             MaJComboBoxNbrRound(nomEpreuve);
             cmbBoxNumRound.Enabled = true;
         }
-
         private void GetScore()
         {
             try
@@ -300,12 +296,10 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
         private void btnRetour_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void GetScoreRoundEpreuve()
         {
             try
@@ -344,7 +338,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
         private string GetDateEpreuve(string nomEpreuve)
         {
             string dateEpreuve = "";

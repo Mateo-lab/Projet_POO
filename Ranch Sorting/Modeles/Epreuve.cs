@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ranch_Sorting.Modeles
@@ -71,6 +72,15 @@ namespace Ranch_Sorting.Modeles
             {
                 _numRound = value;
             }
+        }
+        public List<string> GetNomEpreuve(List<string> epreuves)
+        {
+            List<string> listeDesNomDesEpreuves = new List<string>();
+            while (epreuves.Count != 0)
+            {
+                listeDesNomDesEpreuves.Add(epreuves[0]);
+            }
+            return listeDesNomDesEpreuves;
         }
     }
 }

@@ -57,5 +57,10 @@ namespace Ranch_Sorting.Vue
         {
             this.Close();
         }
+
+        private void NouveauLieu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

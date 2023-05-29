@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NouveauLieu));
             this.btnQuitter = new System.Windows.Forms.Button();
             this.btnValider = new System.Windows.Forms.Button();
             this.txtBoxNomLieu = new System.Windows.Forms.TextBox();
@@ -135,8 +136,10 @@
             this.Controls.Add(this.lblNomLieux);
             this.Controls.Add(this.lblProprietaire);
             this.Controls.Add(this.lblAdresse);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NouveauLieu";
-            this.Text = "NouveauLieu";
+            this.Text = "Nouveau lieu";
+            this.Load += new System.EventHandler(this.NouveauLieu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

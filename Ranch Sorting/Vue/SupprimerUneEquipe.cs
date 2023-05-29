@@ -20,11 +20,6 @@ namespace Ranch_Sorting.Vue
             parent = parent_;
         }
 
-        private void SupprimerUneEquipe_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnQuitter_Click(object sender, EventArgs e)
         {
             this.Close();

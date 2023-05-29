@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupprimerUneEquipe));
             this.lblSupprimerEquipe = new System.Windows.Forms.Label();
             this.txtBoxEquipeASupprimer = new System.Windows.Forms.TextBox();
             this.btnQuitter = new System.Windows.Forms.Button();
@@ -85,9 +86,9 @@
             this.Controls.Add(this.btnValider);
             this.Controls.Add(this.txtBoxEquipeASupprimer);
             this.Controls.Add(this.lblSupprimerEquipe);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SupprimerUneEquipe";
-            this.Text = "SupprimerUneEquipe";
-            this.Load += new System.EventHandler(this.SupprimerUneEquipe_Load);
+            this.Text = "Supprimer une équipe";
             this.ResumeLayout(false);
             this.PerformLayout();
 

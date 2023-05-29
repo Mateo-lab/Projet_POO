@@ -8,20 +8,12 @@ namespace Ranch_Sorting.Vue
 {
     public partial class Lobby : Form
     {
-        private Controle controleur; // donnée membre privée pour stocker le contrôleur
-        private int _nbrInscription;
-
+        private Controle controleur; // donnée membre privée pour stocker le contrôleu
+        private string _selectedEpreuve, _dateEpreuve;
         public Lobby()
         {
             InitializeComponent();
         }
-        
-        public int NbrInscription 
-        {
-            get { return _nbrInscription; }
-            set { _nbrInscription = value; }
-        }
-        
         public Controle Controleur  // propriété set Contrôleur pour modifier la donnée membre privée ctrl
         {
             set => controleur = value;
@@ -40,7 +32,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
         public void GetEpreuve()
         {
             try
@@ -51,23 +42,6 @@ namespace Ranch_Sorting.Vue
             {
                 MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
-            }
-        }
-
-
-        public int GetNbrInscription(string nomEpreuve)
-        {
-            try
-            {
-                int nbrEquipe = controleur.GetNbrInscription(nomEpreuve);
-
-                return nbrEquipe;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Erreur : \n" + e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // throw e;   // Q : qu'est-ce que cette instruction produit ?
-                return 0;
             }
         }
         public void GetInscriptions(string nomEpreuve)
@@ -84,22 +58,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-        public string NewIDInscription(int nbrRound, string nomEpreuve, string dateEpreuve, string nomEquipe, int nbrEquipe)
-        {
-
-            // Extraire les initiales de l'épreuve
-            string initialesEpreuve = controleur.GetInitiales(nomEpreuve);
-
-            // Supprimer l'année de la date
-            string dateSansAnnee = dateEpreuve.Substring(0, 5);
-
-            // Concaténer les paramètres et le nombre aléatoire pour créer l'identifiant d'inscription
-            string idInscription = nbrRound + initialesEpreuve + dateSansAnnee.Replace("-", "") + "-" + nomEquipe.Substring(0, 1) + _nbrInscription;
-           
-
-            return idInscription;
-        }
-
         public int GetIdInscription(string nomEpreuve, string nomEquipe)
         {
             return controleur.GetIdInscription(nomEpreuve, nomEquipe);
@@ -120,7 +78,6 @@ namespace Ranch_Sorting.Vue
                 // throw e;   // Q : qu'est-ce que cette instruction produit ?
             }
         }
-
         private void Lobby_Load(object sender, EventArgs e)
         {
             // lobby load represente le chargement de la page
@@ -211,8 +168,6 @@ namespace Ranch_Sorting.Vue
             }
 
         }
-
-        
         private void btnInscription_Click(object sender, EventArgs e)
         {
             //Cette fonction va ajouter une inscription dans la table Inscription et  mettre à jour la table Equipe
@@ -220,13 +175,11 @@ namespace Ranch_Sorting.Vue
             {
                 int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
 
-                string nomEpreuve = txtBoxNomEpreuve.Text;
-                string dateEpreuve = dateTimePicker.Value.ToString("d-MM-yy");
                 string nomEquipe = txtBoxInscription.Text;
                 string dateInscription = DateTime.Now.ToString("d-MM-yy");
                 bool payé = checkBoxPayé.CheckState == CheckState.Checked ? true : false; // si la case est cochée, payé = true, sinon payé = false 
                 
-                if (Controleur.CheckInscription(nomEpreuve, nomEquipe))
+                if (Controleur.CheckInscription(_selectedEpreuve, nomEquipe))
                 {
 
                     txtBoxInscription.Clear();
@@ -235,8 +188,8 @@ namespace Ranch_Sorting.Vue
                 }
                 else
                 {
-                    Controleur.AjouterInscriptionEtEquipeScore(nomEpreuve, dateEpreuve, nomEquipe, dateInscription, payé, nbrRound, 1, "", "", "", "", "", "", "", "", "", "", "");
-                    GetInscriptions(nomEpreuve);
+                    Controleur.AjouterInscriptionEtEquipeScore(_selectedEpreuve, _dateEpreuve, nomEquipe, dateInscription, payé, nbrRound, 1, "", "", "", "", "", "", "", "", "", "", "");
+                    GetInscriptions(_selectedEpreuve);
                     DialogResult dr = MessageBox.Show("L'equipe inscrite", "Inscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtBoxInscription.Clear();
                 }
@@ -251,21 +204,19 @@ namespace Ranch_Sorting.Vue
             checkBoxPayé.CheckState = CheckState.Unchecked;
             
         }
-
         private void btnDesinscrire_Click(object sender, EventArgs e)
         {
             try
             {
-                string nomEpreuve = txtBoxNomEpreuve.Text;
                 string dateEpreuve = dateTimePicker.Value.ToString("d-MM-yy");
                 string nomEquipe = txtBoxInscription.Text;
                 string dateInscription = DateTime.Now.ToString("d-MM-yy");
-                int idInscritption = GetIdInscription(nomEpreuve, nomEquipe);
+                int idInscritption = GetIdInscription(_selectedEpreuve, nomEquipe);
 
 
                 Controleur.SupprimerInscriptionDansScore(idInscritption);
                 Controleur.SupprimerUneInscription(idInscritption);
-                GetInscriptions(nomEpreuve);
+                GetInscriptions(_selectedEpreuve);
                 txtBoxInscription.Clear();
             }
             catch (Exception exc)
@@ -277,18 +228,17 @@ namespace Ranch_Sorting.Vue
             DialogResult dr = MessageBox.Show("L'equipe désinscrite", "Désinscrite", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
         }
-
         private void btnCreerEpreuve_Click(object sender, EventArgs e)
         {
             try
             {
                 //Epreuve.Nom
-                string nomEpreuve = txtBoxNomEpreuve.Text;
-                string dateEpreuve = dateTimePicker.Value.ToString("d-M-yyy");
+                _selectedEpreuve = txtBoxNomEpreuve.Text;
+                _dateEpreuve = dateTimePicker.Value.ToString("d-MM-yy");
                 string nomLieu = cmbBoxLieu.Text;
                 int nbrRound = Convert.ToInt32(numericUpDownNbrRound.Value);
 
-                Controleur.CreerEpreuve(nomEpreuve, dateEpreuve, nomLieu,nbrRound);
+                Controleur.CreerEpreuve(_selectedEpreuve, _dateEpreuve, nomLieu,nbrRound);
 
                 txtBoxNomEpreuve.Enabled = false;
                 dateTimePicker.Enabled = false;
@@ -315,7 +265,6 @@ namespace Ranch_Sorting.Vue
             
 
         }
-
         private void btnCreeUneNouvelleEpreuve_Click(object sender, EventArgs e)
         {
             lblNomEpreuve.Visible = true;
@@ -334,7 +283,6 @@ namespace Ranch_Sorting.Vue
             btnCreeUneNouvelleEpreuve.Visible=false;
 
         }
-
         private void btnRetour_Click(object sender, EventArgs e)
         {
             lblNomEpreuve.Visible = false;
@@ -350,7 +298,7 @@ namespace Ranch_Sorting.Vue
             btnNouveauLieu.Visible = false;
             btnSupprimerUnLieu.Visible = false;
             btnRetour.Visible = false;
-            btnListeInscrit.Visible = false;
+            lblObtienListeInscrit.Visible = false;
             txtBoxInscription.Enabled = false;
             checkBoxPayé.Enabled = false;
             btnInscription.Enabled = false;
@@ -365,15 +313,11 @@ namespace Ranch_Sorting.Vue
             dataGridViewListeEpreuve.DataSource = "";
             dataGridViewEquipeInscrite.DataSource = "";
         }
-
         private void btnSelectionEpreeuveExistante_Click(object sender, EventArgs e)
         {
             GetEpreuve();   
             dataGridViewListeEpreuve.Visible = true;
-            btnListeInscrit.Visible = true;
-            lblNomEpreuve.Visible = true;
-            txtBoxNomEpreuve.Visible = true;
-            btnListeInscrit.Visible = true;
+            lblObtienListeInscrit.Visible = true;
             btnRetour.Visible = true;
             txtBoxInscription.Enabled = true;
             checkBoxPayé.Enabled = true;
@@ -408,5 +352,29 @@ namespace Ranch_Sorting.Vue
             
         }
 
+        private void dataGridViewListeEpreuve_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                _selectedEpreuve = dataGridViewListeEpreuve.CurrentRow.Cells[0].Value.ToString();
+                _dateEpreuve = dataGridViewListeEpreuve.CurrentRow.Cells[1].Value.ToString();
+                GetInscriptions(_selectedEpreuve);
+
+                txtBoxInscription.Enabled = true;
+                checkBoxPayé.Enabled = true;
+                btnInscription.Enabled = true;
+                btnDesinscrire.Enabled = true;
+            }
+
+            catch (Exception exc)
+            {
+                MessageBox.Show("Erreur : \n" + exc.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                txtBoxInscription.Enabled = false;
+                checkBoxPayé.Enabled = false;
+                btnInscription.Enabled = false;
+                btnDesinscrire.Enabled = false;
+            }
+        }
     }
 }

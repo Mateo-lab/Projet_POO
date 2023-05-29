@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NouvelleEquipe));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -106,7 +107,7 @@
             // 
             this.txtBoxNomPremierCavalier.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNomPremierCavalier.Location = new System.Drawing.Point(256, 119);
-            this.txtBoxNomPremierCavalier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxNomPremierCavalier.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomPremierCavalier.Name = "txtBoxNomPremierCavalier";
             this.txtBoxNomPremierCavalier.Size = new System.Drawing.Size(145, 27);
             this.txtBoxNomPremierCavalier.TabIndex = 5;
@@ -116,7 +117,7 @@
             // 
             this.txtBoxNomPremierCheval.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNomPremierCheval.Location = new System.Drawing.Point(672, 119);
-            this.txtBoxNomPremierCheval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxNomPremierCheval.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomPremierCheval.Name = "txtBoxNomPremierCheval";
             this.txtBoxNomPremierCheval.Size = new System.Drawing.Size(145, 27);
             this.txtBoxNomPremierCheval.TabIndex = 6;
@@ -126,7 +127,7 @@
             // 
             this.txtBoxNomDeuxiemeCavalier.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNomDeuxiemeCavalier.Location = new System.Drawing.Point(256, 198);
-            this.txtBoxNomDeuxiemeCavalier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxNomDeuxiemeCavalier.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomDeuxiemeCavalier.Name = "txtBoxNomDeuxiemeCavalier";
             this.txtBoxNomDeuxiemeCavalier.Size = new System.Drawing.Size(145, 27);
             this.txtBoxNomDeuxiemeCavalier.TabIndex = 7;
@@ -136,7 +137,7 @@
             // 
             this.txtBoxNomDeuxiemeCheval.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNomDeuxiemeCheval.Location = new System.Drawing.Point(672, 196);
-            this.txtBoxNomDeuxiemeCheval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxNomDeuxiemeCheval.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomDeuxiemeCheval.Name = "txtBoxNomDeuxiemeCheval";
             this.txtBoxNomDeuxiemeCheval.Size = new System.Drawing.Size(145, 27);
             this.txtBoxNomDeuxiemeCheval.TabIndex = 8;
@@ -146,7 +147,7 @@
             // 
             this.txtBoxNomEquipe.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNomEquipe.Location = new System.Drawing.Point(485, 48);
-            this.txtBoxNomEquipe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxNomEquipe.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxNomEquipe.Name = "txtBoxNomEquipe";
             this.txtBoxNomEquipe.Size = new System.Drawing.Size(145, 27);
             this.txtBoxNomEquipe.TabIndex = 9;
@@ -156,7 +157,7 @@
             // 
             this.btnValider.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.btnValider.Location = new System.Drawing.Point(145, 280);
-            this.btnValider.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnValider.Margin = new System.Windows.Forms.Padding(2);
             this.btnValider.Name = "btnValider";
             this.btnValider.Size = new System.Drawing.Size(175, 52);
             this.btnValider.TabIndex = 10;
@@ -168,7 +169,7 @@
             // 
             this.btnQuitter.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.btnQuitter.Location = new System.Drawing.Point(542, 280);
-            this.btnQuitter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnQuitter.Margin = new System.Windows.Forms.Padding(2);
             this.btnQuitter.Name = "btnQuitter";
             this.btnQuitter.Size = new System.Drawing.Size(175, 52);
             this.btnQuitter.TabIndex = 11;
@@ -193,9 +194,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NouvelleEquipe";
-            this.Text = "NouvelleEquipe";
+            this.Text = "Nouvelle équipe";
             this.ResumeLayout(false);
             this.PerformLayout();
 
